@@ -1,0 +1,8 @@
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/NeuralNetViewer.dir
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/edit_cache.dir
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/rebuild_cache.dir
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/list_install_components.dir
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/install.dir
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/install/local.dir
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/NeuralNetViewer_autogen_timestamp_deps.dir
+Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/NeuralNetViewer_autogen.dir
