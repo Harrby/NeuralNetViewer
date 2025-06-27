@@ -8,57 +8,8 @@
 	[
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/CMakeLists.txt",
 		"Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/.qtc/package-manager/auto-setup.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeDetermineSystem.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeSystem.cmake.in",
 		"Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/3.24.2/CMakeSystem.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeNinjaFindMake.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeDetermineCXXCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeDetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-Determine-CXX.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeDetermineCompilerId.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCompilerIdDetection.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/ADSP-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/ARMCC-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/ARMClang-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/AppleClang-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Borland-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Cray-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Embarcadero-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Fujitsu-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GHS-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/HP-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/IAR-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Intel-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/MSVC-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/NVHPC-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/NVIDIA-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/PGI-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/PathScale-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/SCO-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/TI-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/Watcom-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/XL-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeFindBinUtils.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCXXCompiler.cmake.in",
 		"Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake",
@@ -72,24 +23,9 @@
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-MSVC-CXX.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Platform/Windows-MSVC.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeDetermineRCCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeRCCompiler.cmake.in",
 		"Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/3.24.2/CMakeRCCompiler.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeRCInformation.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeTestRCCompiler.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeTestCXXCompiler.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeDetermineCompilerABI.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeParseImplicitIncludeInfo.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeParseImplicitLinkInfo.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeParseLibraryArchitecture.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeTestCompilerCommon.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCXXCompilerABI.cpp",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeDetermineCompileFeatures.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/Internal/FeatureTesting.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CMakeCXXCompiler.cmake.in",
-		"Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6/Qt6ConfigVersion.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6/Qt6Config.cmake",
@@ -142,10 +78,6 @@
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CheckLibraryExists.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CheckIncludeFileCXX.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CheckCXXSourceCompiles.cmake",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CheckFunctionExists.c",
-		"Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx",
-		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/CheckFunctionExists.c",
-		"Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake",
 		"Z:/qtcreator/Tools/CMake_64/share/cmake-3.24/Modules/FindPackageMessage.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6/Qt6ConfigVersion.cmake",
@@ -445,7 +377,8 @@
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-debug.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-relwithdebinfo.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake",
-		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6WidgetsVersionlessAliasTargets.cmake"
+		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6WidgetsVersionlessAliasTargets.cmake",
+		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/fonts.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "Z:/learningqt/NeuralNetViewer/NeuralNetViewer",
 	"DEP_FILE" : "Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/NeuralNetViewer_autogen/deps",
@@ -453,9 +386,51 @@
 	"HEADERS" : 
 	[
 		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.h",
+			"MU",
+			"EWIEGA46WW/moc_combobox.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.h",
+			"MU",
+			"EWIEGA46WW/moc_globaloptionswidget.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layernoptions.h",
+			"MU",
+			"EWIEGA46WW/moc_layernoptions.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.h",
+			"MU",
+			"EWIEGA46WW/moc_lineedit.cpp",
+			null
+		],
+		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/slider.h",
+			"MU",
+			"EWIEGA46WW/moc_slider.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuecomboboxwidget.h",
+			"MU",
+			"EWIEGA46WW/moc_valuecomboboxwidget.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuesliderwidget.h",
+			"MU",
+			"EWIEGA46WW/moc_valuesliderwidget.cpp",
 			null
 		]
 	],
@@ -514,9 +489,44 @@
 	"SETTINGS_FILE" : "Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/NeuralNetViewer_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layernoptions.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.cpp",
+			"MU",
+			null
+		],
 		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp", "MU", null ],
 		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/slider.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuecomboboxwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuesliderwidget.cpp",
 			"MU",
 			null
 		]
