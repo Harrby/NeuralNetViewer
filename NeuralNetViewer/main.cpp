@@ -1,5 +1,4 @@
 
-#include "layernoptions.h"
 #include "slider.h"
 #include <QApplication>
 #include <QWidget>
@@ -8,6 +7,8 @@
 #include "combobox.h"
 #include "valuecomboboxwidget.h"
 #include "globaloptionswidget.h"
+#include "checkbox.h"
+#include "layeroptions.h"
 
 
 int main(int argc, char *argv[])
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
     app.setFont(inter);
 
     //ValueSliderWidget *slider = new ValueSliderWidget("neurons", 0.00001, 1000, Slider::Logarithmic, 1000, nullptr);
-    GlobalOptionsWidget *vcbw = new GlobalOptionsWidget;
+    LayerOptions *vcbw = new LayerOptions;
 
     vcbw->show();
     return app.exec();

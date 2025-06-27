@@ -18,8 +18,6 @@ set(PROJECT_SOURCES
         mainwindow.h
         slider.h
         slider.cpp
-        layernoptions.h
-        layernoptions.cpp
         valuesliderwidget.h
         valuesliderwidget.cpp
         lineedit.h
@@ -30,6 +28,10 @@ set(PROJECT_SOURCES
         valuecomboboxwidget.cpp
         globaloptionswidget.h
         globaloptionswidget.cpp
+        checkbox.h
+        checkbox.cpp
+        layeroptions.h
+        layeroptions.cpp
 
 )
 

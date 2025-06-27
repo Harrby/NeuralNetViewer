@@ -1,12 +1,14 @@
 NeuralNetViewer_autogen/timestamp: \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/CMakeLists.txt \
+  Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.cpp \
+  Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.h \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.cpp \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.h \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/fonts.qrc \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.cpp \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.h \
-  Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layernoptions.cpp \
-  Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layernoptions.h \
+  Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.cpp \
+  Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.h \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.cpp \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.h \
   Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp \
@@ -216,8 +218,10 @@ NeuralNetViewer_autogen/timestamp: \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtGui/qvectornd.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtGui/qwindowdefs.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtGui/qwindowdefs_win.h \
+  Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QCheckBox \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QComboBox \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QFrame \
+  Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QGridLayout \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QLabel \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QLineEdit \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QMainWindow \
@@ -229,9 +233,14 @@ NeuralNetViewer_autogen/timestamp: \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractitemdelegate.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractslider.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractspinbox.h \
+  Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qboxlayout.h \
+  Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qcheckbox.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qcombobox.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qframe.h \
+  Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qgridlayout.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qlabel.h \
+  Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qlayout.h \
+  Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qlayoutitem.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qlineedit.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qmainwindow.h \
   Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qpushbutton.h \

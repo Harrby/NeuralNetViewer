@@ -33,5 +33,8 @@ ValueSliderWidget::ValueSliderWidget(const QString &labelText,double min_value, 
             });
     m_lineEdit->setText(QString::number(m_slider->realValue()));
 
+    connect(m_lineEdit,   &LineEdit::editingFinished,
+            m_slider,   [this](double))
+
 }
 

@@ -386,6 +386,12 @@
 	"HEADERS" : 
 	[
 		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.h",
+			"MU",
+			"EWIEGA46WW/moc_checkbox.cpp",
+			null
+		],
+		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.h",
 			"MU",
 			"EWIEGA46WW/moc_combobox.cpp",
@@ -398,9 +404,9 @@
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layernoptions.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.h",
 			"MU",
-			"EWIEGA46WW/moc_layernoptions.cpp",
+			"EWIEGA46WW/moc_layeroptions.cpp",
 			null
 		],
 		[
@@ -490,6 +496,11 @@
 	"SOURCES" : 
 	[
 		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.cpp",
+			"MU",
+			null
+		],
+		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.cpp",
 			"MU",
 			null
@@ -500,7 +511,7 @@
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layernoptions.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.cpp",
 			"MU",
 			null
 		],

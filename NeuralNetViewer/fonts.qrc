@@ -6,5 +6,6 @@
 
 <qresource prefix="/images">
     <file>images/dropdownarrow.png</file>
+    <file>images/checkbox_tick.png</file>
   </qresource>
 </RCC>

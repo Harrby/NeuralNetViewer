@@ -14,9 +14,11 @@ public:
     GlobalOptionsWidget(QWidget *parent=nullptr);
 
 private:
-    ValueComboBoxWidget *m_cb_optimiser, *m_cb_loss_function;
-    ValueSliderWidget *m_s_learning_rate, *m_s_epochs;
-    QLabel *m_title;
+    ValueComboBoxWidget* m_cb_optimiser;
+    ValueComboBoxWidget* m_cb_loss_function;
+    ValueSliderWidget* m_s_learning_rate;
+    ValueSliderWidget* m_s_epochs;
+    QLabel* m_title;
 
 };
 
