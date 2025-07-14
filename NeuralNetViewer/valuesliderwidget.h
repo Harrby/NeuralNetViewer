@@ -14,6 +14,9 @@ class ValueSliderWidget : public QFrame
 public:
     ValueSliderWidget(const QString &labelText = QString(), double min_value=0, double max_value=100, Slider::Scale=Slider::Linear, int steps=100, QWidget *parent=nullptr);
 private:
+    void onLineEditEditingFinished();
+    double m_min;
+    double m_max;
     Slider* m_slider;
     LineEdit* m_lineEdit;
     QLabel* m_label;
