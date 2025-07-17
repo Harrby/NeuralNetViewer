@@ -12,31 +12,55 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        slider.h
-        slider.cpp
-        valuesliderwidget.h
-        valuesliderwidget.cpp
-        lineedit.h
-        lineedit.cpp
-        combobox.h
-        combobox.cpp
-        valuecomboboxwidget.h
-        valuecomboboxwidget.cpp
-        globaloptionswidget.h
-        globaloptionswidget.cpp
-        checkbox.h
-        checkbox.cpp
-        layeroptions.h
-        layeroptions.cpp
+
+        Widgets/mainwindow.cpp
+        Widgets/mainwindow.h
+        Widgets/valuesliderwidget.h
+        Widgets/valuesliderwidget.cpp
+        Widgets/valuecomboboxwidget.h
+        Widgets/valuecomboboxwidget.cpp
+        Widgets/globaloptionswidget.h
+        Widgets/globaloptionswidget.cpp
+        Widgets/layeroptions.h
+        Widgets/layeroptions.cpp
+
+        Widgets/BaseWidgets/slider.h
+        Widgets/BaseWidgets/slider.cpp
+
+        Widgets/BaseWidgets/checkbox.h
+        Widgets/BaseWidgets/checkbox.cpp
+
+        Widgets/BaseWidgets/lineedit.h
+        Widgets/BaseWidgets/lineedit.cpp
+        Widgets/BaseWidgets/combobox.h
+        Widgets/BaseWidgets/combobox.cpp
+
+        Widgets/BaseWidgets/iconbutton.h
+        Widgets/BaseWidgets/iconbutton.cpp
+
+        configParameterDataStructs/neuralnetoptionsdata.h
+        configParameterDataStructs/neuralnetoptionsdata.cpp
+        configParameterDataStructs/neuralnetlayerdata.h
+        configParameterDataStructs/neuralnetlayerdata.cpp
+        Widgets/layerscrollarea.h
+        Widgets/layerscrollarea.cpp
+        Widgets/buttonsframe.h
+        Widgets/buttonsframe.cpp
+        Widgets/networkconfigwidget.h
+        Widgets/networkconfigwidget.cpp
+
+        Widgets/mainwidget.h
+        Widgets/mainwidget.cpp
+
+
 
 )
 
 qt_add_resources(RESOURCES_RCC
-    fonts.qrc
+    resources.qrc
 )
 
 
@@ -46,6 +70,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         ${RESOURCES_RCC}
     )
+
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/BaseWidgets)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/configParameterDataStructs)
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET NeuralNetViewer APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

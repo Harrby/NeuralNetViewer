@@ -378,7 +378,7 @@
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-relwithdebinfo.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake",
 		"Z:/qtcreator/6.9.1/msvc2022_64/lib/cmake/Qt6Widgets/Qt6WidgetsVersionlessAliasTargets.cmake",
-		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/fonts.qrc"
+		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/resources.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "Z:/learningqt/NeuralNetViewer/NeuralNetViewer",
 	"DEP_FILE" : "Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/NeuralNetViewer_autogen/deps",
@@ -386,57 +386,99 @@
 	"HEADERS" : 
 	[
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/checkbox.h",
 			"MU",
-			"EWIEGA46WW/moc_checkbox.cpp",
+			"K2C3BTQ2UP/moc_checkbox.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/combobox.h",
 			"MU",
-			"EWIEGA46WW/moc_combobox.cpp",
+			"K2C3BTQ2UP/moc_combobox.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/iconbutton.h",
 			"MU",
-			"EWIEGA46WW/moc_globaloptionswidget.cpp",
+			"K2C3BTQ2UP/moc_iconbutton.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/lineedit.h",
 			"MU",
-			"EWIEGA46WW/moc_layeroptions.cpp",
+			"K2C3BTQ2UP/moc_lineedit.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/slider.h",
 			"MU",
-			"EWIEGA46WW/moc_lineedit.cpp",
+			"K2C3BTQ2UP/moc_slider.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mainwindow.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/buttonsframe.h",
 			"MU",
-			"EWIEGA46WW/moc_mainwindow.cpp",
+			"WHF3XMZT5M/moc_buttonsframe.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/slider.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/globaloptionswidget.h",
 			"MU",
-			"EWIEGA46WW/moc_slider.cpp",
+			"WHF3XMZT5M/moc_globaloptionswidget.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuecomboboxwidget.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layeroptions.h",
 			"MU",
-			"EWIEGA46WW/moc_valuecomboboxwidget.cpp",
+			"WHF3XMZT5M/moc_layeroptions.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuesliderwidget.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layerscrollarea.h",
 			"MU",
-			"EWIEGA46WW/moc_valuesliderwidget.cpp",
+			"WHF3XMZT5M/moc_layerscrollarea.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwidget.h",
+			"MU",
+			"WHF3XMZT5M/moc_mainwidget.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwindow.h",
+			"MU",
+			"WHF3XMZT5M/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/networkconfigwidget.h",
+			"MU",
+			"WHF3XMZT5M/moc_networkconfigwidget.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuecomboboxwidget.h",
+			"MU",
+			"WHF3XMZT5M/moc_valuecomboboxwidget.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuesliderwidget.h",
+			"MU",
+			"WHF3XMZT5M/moc_valuesliderwidget.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.h",
+			"MU",
+			"IAMAOEVCJ6/moc_neuralnetlayerdata.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetoptionsdata.h",
+			"MU",
+			"IAMAOEVCJ6/moc_neuralnetoptionsdata.cpp",
 			null
 		]
 	],
@@ -464,6 +506,9 @@
 	],
 	"MOC_INCLUDES" : 
 	[
+		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets",
+		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets",
+		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs",
 		"Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore",
 		"Z:/qtcreator/6.9.1/msvc2022_64/include",
 		"Z:/qtcreator/6.9.1/msvc2022_64/mkspecs/win32-msvc",
@@ -496,51 +541,86 @@
 	"SOURCES" : 
 	[
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/checkbox.cpp",
 			"MU",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/combobox.cpp",
 			"MU",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/iconbutton.cpp",
 			"MU",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/lineedit.cpp",
 			"MU",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.cpp",
-			"MU",
-			null
-		],
-		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp", "MU", null ],
-		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mainwindow.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/slider.cpp",
 			"MU",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/slider.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/buttonsframe.cpp",
 			"MU",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuecomboboxwidget.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/globaloptionswidget.cpp",
 			"MU",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuesliderwidget.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layeroptions.cpp",
 			"MU",
 			null
-		]
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layerscrollarea.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/networkconfigwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuecomboboxwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuesliderwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetoptionsdata.cpp",
+			"MU",
+			null
+		],
+		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

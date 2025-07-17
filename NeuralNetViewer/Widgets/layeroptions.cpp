@@ -1,0 +1,94 @@
+
+#include "layeroptions.h"
+
+LayerOptions::LayerOptions(const NeuralNetLayerData& parameters, int id, QWidget *parent)
+    : QFrame(parent),
+    m_title(new QLabel(QString("Layer %1").arg(id+1), this)),
+    m_checkbox(new CheckBox(this)),
+    m_cb_activation_function(new ValueComboBoxWidget(QString("Activation Function"), QStringList{"ReLu", "Leaky ReLU", "Tanh", "Sigmoid"}, this)),
+    m_cb_weight_initialisation(new ValueComboBoxWidget(QString("Weight Initialisation"), QStringList{"He", "Xavier", "Normal"}, this)),
+    m_s_neurons(new ValueSliderWidget(QString("Neurons"), 2, 256, Slider::Linear, 254, this)),
+    m_s_dropout_rate(new ValueSliderWidget(QString("Dropout Rate"), 0, 1, Slider::Linear, 1000, this)),
+    m_s_l1_regularisation(new ValueSliderWidget(QString("L1 Regularisation"), 1e-7, 0.01, Slider::Logarithmic, 1000, this)),
+    m_s_l2_regularisation(new ValueSliderWidget(QString("L2 Regularisation"), 1e-6, 0.1, Slider::Logarithmic, 1000, this))
+{
+    setAllParameters(parameters);
+    setStyleSheet(".LayerOptions{background-color: #302B2B;"
+                  "border: 1px solid #2A2626;"
+                  "border-radius: 4px;}");
+
+    m_title->setStyleSheet("color: #ffffff;");
+
+
+    QHBoxLayout *h_layout = new QHBoxLayout;
+    h_layout->addWidget(m_checkbox);
+    h_layout->addWidget(m_title);
+
+
+    QGridLayout *grid_layout = new QGridLayout;
+    grid_layout->addWidget(m_s_neurons, 0, 0);
+    grid_layout->addWidget(m_s_dropout_rate, 0, 1);
+    grid_layout->addWidget(m_cb_activation_function, 1, 0);
+    grid_layout->addWidget(m_s_l1_regularisation, 1, 1);
+    grid_layout->addWidget(m_cb_weight_initialisation, 2, 0);
+    grid_layout->addWidget(m_s_l2_regularisation, 2, 1);
+    grid_layout->setVerticalSpacing(2);
+    grid_layout->setHorizontalSpacing(18);
+
+    QVBoxLayout *main_layout = new QVBoxLayout(this);
+    main_layout->addLayout(h_layout);
+    main_layout->addLayout(grid_layout);
+}
+
+void LayerOptions::setAllParameters(const NeuralNetLayerData& parameters){
+    setActive(parameters.active);
+    setNeurons(parameters.neurons);
+    setDropoutRate(parameters.dropout_rate);
+    setActivationFunction(parameters.activation_function);
+    setWeightInit(parameters.weight_initialisation);
+    setL1Regularisation(parameters.l1_regularisation);
+    setL2Regularisation(parameters.l2_regularisation);
+
+}
+
+void LayerOptions::setActive(bool active){
+    m_checkbox->setChecked(active);
+}
+
+void LayerOptions::setNeurons(int neurons){
+    m_s_neurons->setValue(static_cast<double>(neurons));
+}
+
+void LayerOptions::setDropoutRate(double dropout_rate){
+    m_s_dropout_rate->setValue(dropout_rate);
+
+}
+void LayerOptions::setActivationFunction(QString activation_function){
+    m_cb_activation_function->setValue(activation_function);
+}
+
+void LayerOptions::setWeightInit(QString weight_init){
+    m_cb_weight_initialisation->setValue(weight_init);
+
+}
+void LayerOptions::setL1Regularisation(double l1_regularisation){
+    m_s_l1_regularisation->setValue(l1_regularisation);
+
+}
+void LayerOptions::setL2Regularisation(double l2_regularisation){
+    m_s_l2_regularisation->setValue(l2_regularisation);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

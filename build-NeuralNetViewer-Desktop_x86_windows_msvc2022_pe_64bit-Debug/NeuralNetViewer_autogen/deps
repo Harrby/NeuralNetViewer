@@ -1,25 +1,39 @@
 NeuralNetViewer_autogen/timestamp: \
 	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/CMakeLists.txt \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/checkbox.h \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/combobox.h \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/fonts.qrc \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/globaloptionswidget.h \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layeroptions.h \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/lineedit.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/checkbox.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/checkbox.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/combobox.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/combobox.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/iconbutton.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/iconbutton.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/lineedit.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/lineedit.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/slider.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/slider.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/buttonsframe.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/buttonsframe.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/globaloptionswidget.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/globaloptionswidget.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layeroptions.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layeroptions.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layerscrollarea.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/layerscrollarea.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwidget.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwidget.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwindow.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/mainwindow.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/networkconfigwidget.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/networkconfigwidget.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuecomboboxwidget.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuecomboboxwidget.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuesliderwidget.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/valuesliderwidget.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetoptionsdata.cpp \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetoptionsdata.h \
 	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mainwindow.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mainwindow.h \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/slider.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/slider.h \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuecomboboxwidget.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuecomboboxwidget.h \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuesliderwidget.cpp \
-	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/valuesliderwidget.h \
+	Z:/learningqt/NeuralNetViewer/NeuralNetViewer/resources.qrc \
 	Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/.qtc/package-manager/auto-setup.cmake \
 	Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake \
 	Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/3.24.2/CMakeRCCompiler.cmake \
@@ -30,6 +44,8 @@ NeuralNetViewer_autogen/timestamp: \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/QRect \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/QSize \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/QSizeF \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/QString \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/QVector \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/q17memory.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/q20functional.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/q20iterator.h \
@@ -166,6 +182,7 @@ NeuralNetViewer_autogen/timestamp: \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/qutf8stringview.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/qvariant.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/qvarlengtharray.h \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/qvector.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/qversiontagging.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/qxptype_traits.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore/qyieldcpu.h \
@@ -222,15 +239,20 @@ NeuralNetViewer_autogen/timestamp: \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QComboBox \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QFrame \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QGridLayout \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QHBoxLayout \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QLabel \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QLineEdit \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QMainWindow \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QPushButton \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QScrollArea \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QSlider \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QSplitter \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QStyle \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QStyleOptionSlider \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/QWidget \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractbutton.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractitemdelegate.h \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractscrollarea.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractslider.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qabstractspinbox.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qboxlayout.h \
@@ -245,8 +267,10 @@ NeuralNetViewer_autogen/timestamp: \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qmainwindow.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qpushbutton.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qrubberband.h \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qscrollarea.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qsizepolicy.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qslider.h \
+	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qsplitter.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qstyle.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qstyleoption.h \
 	Z:/qtcreator/6.9.1/msvc2022_64/include/QtWidgets/qtabbar.h \

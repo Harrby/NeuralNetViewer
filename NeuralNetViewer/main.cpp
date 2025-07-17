@@ -9,6 +9,10 @@
 #include "globaloptionswidget.h"
 #include "checkbox.h"
 #include "layeroptions.h"
+#include "iconbutton.h"
+#include "layerscrollarea.h"
+#include "networkconfigwidget.h"
+#include "mainwindow.h"
 
 
 int main(int argc, char *argv[])
@@ -21,7 +25,9 @@ int main(int argc, char *argv[])
     app.setFont(inter);
 
     //ValueSliderWidget *slider = new ValueSliderWidget("neurons", 0.00001, 1000, Slider::Logarithmic, 1000, nullptr);
-    LayerOptions *vcbw = new LayerOptions;
+    //IconButton *vcbw = new IconButton(QString(":/images/images/plus.png"),{"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 500, 500);
+
+    MainWindow *vcbw = new MainWindow();
 
     vcbw->show();
     return app.exec();
