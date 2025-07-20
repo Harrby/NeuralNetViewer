@@ -3,8 +3,9 @@
 
 NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     : QObject(parent),
+    batch_size(10),
     optimiser(QString("SGD")),
-    loss_function(QString("CCE")),
+    loss_function(LossFunctionType::CategoricalCrossEntropy),
     learning_rate(0.1),
     epochs(200),
     layers({NeuralNetLayerData(), NeuralNetLayerData()})
@@ -25,8 +26,12 @@ void NeuralNetOptionsData::removeLayer(){
 }
 
 // GETTER METHODS
-QString NeuralNetOptionsData::getLossFunction(){
+LossFunctionType NeuralNetOptionsData::getLossFunction(){
     return loss_function;
+}
+
+int NeuralNetOptionsData::getBatchSize(){
+    return batch_size;
 }
 
 QString NeuralNetOptionsData::getOptimiser(){
@@ -41,6 +46,10 @@ int NeuralNetOptionsData::getEpochs(){
     return epochs;
 }
 
+int NeuralNetOptionsData::getLenLayers(){
+    return layers.length();
+};
+
 // GETTER METHOD - PER LAYER
 NeuralNetLayerData NeuralNetOptionsData::getLayerData(int index){
     return layers.at(index);
@@ -54,11 +63,11 @@ int NeuralNetOptionsData::getLayerNeurons(int index){
     return layers.at(index).neurons;
 }
 
-QString NeuralNetOptionsData::getLayerActivationFunction(int index){
+ActivationFunctionType NeuralNetOptionsData::getLayerActivationFunction(int index){
     return layers.at(index).activation_function;
 }
 
-QString NeuralNetOptionsData::getLayerWeightInit(int index){
+WeightInitialisationType NeuralNetOptionsData::getLayerWeightInit(int index){
     return layers.at(index).weight_initialisation;
 }
 
@@ -75,7 +84,7 @@ double NeuralNetOptionsData::getLayerL2Regularisation(int index){
 };
 
 // SETTER METHODS
-void NeuralNetOptionsData::setLossFunction(QString new_loss_function){
+void NeuralNetOptionsData::setLossFunction(LossFunctionType new_loss_function){
     loss_function = new_loss_function;
 }
 
@@ -99,11 +108,11 @@ void NeuralNetOptionsData::setLayerNeurons(int index, int neurons){
     layers[index].neurons = neurons;
 }
 
-void NeuralNetOptionsData::setLayerActivationFunction(int index, QString activation_function){
+void NeuralNetOptionsData::setLayerActivationFunction(int index, ActivationFunctionType activation_function){
     layers[index].activation_function = activation_function;
 }
 
-void NeuralNetOptionsData::setLayerWeightInit(int index, QString weight_init){
+void NeuralNetOptionsData::setLayerWeightInit(int index, WeightInitialisationType weight_init){
     layers[index].weight_initialisation = weight_init;
 }
 void NeuralNetOptionsData::setLayerDropoutRate(int index, double dropout_rate){

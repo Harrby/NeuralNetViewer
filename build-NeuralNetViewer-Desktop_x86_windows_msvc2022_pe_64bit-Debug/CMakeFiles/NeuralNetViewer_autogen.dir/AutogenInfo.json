@@ -470,6 +470,12 @@
 			null
 		],
 		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/activation.h",
+			"MU",
+			"EWIEGA46WW/moc_activation.cpp",
+			null
+		],
+		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.h",
 			"MU",
 			"IAMAOEVCJ6/moc_neuralnetlayerdata.cpp",
@@ -479,6 +485,30 @@
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetoptionsdata.h",
 			"MU",
 			"IAMAOEVCJ6/moc_neuralnetoptionsdata.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/datasetcontainer.h",
+			"MU",
+			"EWIEGA46WW/moc_datasetcontainer.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layer.h",
+			"MU",
+			"EWIEGA46WW/moc_layer.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/loss.h",
+			"MU",
+			"EWIEGA46WW/moc_loss.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/neuralnetwork.h",
+			"MU",
+			"EWIEGA46WW/moc_neuralnetwork.cpp",
 			null
 		]
 	],
@@ -509,6 +539,7 @@
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets",
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets",
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs",
+		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/eigen-3.4.0",
 		"Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore",
 		"Z:/qtcreator/6.9.1/msvc2022_64/include",
 		"Z:/qtcreator/6.9.1/msvc2022_64/mkspecs/win32-msvc",
@@ -611,6 +642,11 @@
 			null
 		],
 		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/activation.cpp",
+			"MU",
+			null
+		],
+		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.cpp",
 			"MU",
 			null
@@ -620,7 +656,19 @@
 			"MU",
 			null
 		],
-		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp", "MU", null ]
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/datasetcontainer.cpp",
+			"MU",
+			null
+		],
+		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layer.cpp", "MU", null ],
+		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/loss.cpp", "MU", null ],
+		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp", "MU", null ],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/neuralnetwork.cpp",
+			"MU",
+			null
+		]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

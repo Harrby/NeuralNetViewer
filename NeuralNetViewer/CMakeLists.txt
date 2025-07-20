@@ -55,7 +55,14 @@ set(PROJECT_SOURCES
         Widgets/mainwidget.h
         Widgets/mainwidget.cpp
 
+        layer.h layer.cpp
 
+        datasetcontainer.h datasetcontainer.cpp
+        activation.h activation.cpp
+
+        loss.h loss.cpp
+
+        neuralnetwork.h neuralnetwork.cpp
 
 )
 
@@ -74,6 +81,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/BaseWidgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/configParameterDataStructs)
+    include_directories(${CMAKE_SOURCE_DIR}/eigen-3.4.0)
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET NeuralNetViewer APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
