@@ -11,8 +11,8 @@ MainWidget::MainWidget(QWidget *parent)
     QWidget* empty_space_container = new QWidget(m_splitter);
     empty_space_container->setStyleSheet("background-color: rgb(78, 78, 78); ");
 
-    m_splitter->addWidget(empty_space_container);
     m_splitter->addWidget(m_network_config_widget);
+    m_splitter->addWidget(empty_space_container);
 
     m_splitter->setStretchFactor(0, 5);
     m_splitter->setStretchFactor(1, 1);

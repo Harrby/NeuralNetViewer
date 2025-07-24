@@ -44,7 +44,7 @@ Slider::Slider(Qt::Orientation orientation, double rmin, double rmax,
     QSlider::handle:horizontal {
         width: 10px;
         height: 18px;
-        background: #d9d9d9;
+        background: #1FA1E3;
         border: 0px solid #3498db;
         border-radius: 2px;
         margin: -7px 0; /* center handle vertically */

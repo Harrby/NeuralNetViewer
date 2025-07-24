@@ -23,6 +23,10 @@ private:
     LineEdit* m_lineEdit;
     QLabel* m_label;
 
+signals:
+    void valueChanged(double);
+
+
 };
 
 #endif // VALUESLIDERWIDGET_H

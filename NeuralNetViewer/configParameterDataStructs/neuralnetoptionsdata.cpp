@@ -4,7 +4,7 @@
 NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     : QObject(parent),
     batch_size(10),
-    optimiser(QString("SGD")),
+    optimiser(OptimiserType::SGD),
     loss_function(LossFunctionType::CategoricalCrossEntropy),
     learning_rate(0.1),
     epochs(200),
@@ -34,7 +34,7 @@ int NeuralNetOptionsData::getBatchSize(){
     return batch_size;
 }
 
-QString NeuralNetOptionsData::getOptimiser(){
+OptimiserType NeuralNetOptionsData::getOptimiser(){
     return optimiser;
 }
 
@@ -88,7 +88,7 @@ void NeuralNetOptionsData::setLossFunction(LossFunctionType new_loss_function){
     loss_function = new_loss_function;
 }
 
-void NeuralNetOptionsData::setOptimiser(QString new_optimiser){
+void NeuralNetOptionsData::setOptimiser(OptimiserType new_optimiser){
     optimiser = new_optimiser;
 }
 

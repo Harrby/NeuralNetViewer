@@ -386,6 +386,36 @@
 	"HEADERS" : 
 	[
 		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/activation.h",
+			"MU",
+			"NWQXQFJDJ4/moc_activation.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/layer.h",
+			"MU",
+			"NWQXQFJDJ4/moc_layer.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/loss.h",
+			"MU",
+			"NWQXQFJDJ4/moc_loss.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/neuralnetwork.h",
+			"MU",
+			"NWQXQFJDJ4/moc_neuralnetwork.cpp",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/optimiser.h",
+			"MU",
+			"NWQXQFJDJ4/moc_optimiser.cpp",
+			null
+		],
+		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/checkbox.h",
 			"MU",
 			"K2C3BTQ2UP/moc_checkbox.cpp",
@@ -470,12 +500,6 @@
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/activation.h",
-			"MU",
-			"EWIEGA46WW/moc_activation.cpp",
-			null
-		],
-		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.h",
 			"MU",
 			"IAMAOEVCJ6/moc_neuralnetlayerdata.cpp",
@@ -494,21 +518,15 @@
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layer.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/drawarea.h",
 			"MU",
-			"EWIEGA46WW/moc_layer.cpp",
+			"EWIEGA46WW/moc_drawarea.cpp",
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/loss.h",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mnistinputwidget.h",
 			"MU",
-			"EWIEGA46WW/moc_loss.cpp",
-			null
-		],
-		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/neuralnetwork.h",
-			"MU",
-			"EWIEGA46WW/moc_neuralnetwork.cpp",
+			"EWIEGA46WW/moc_mnistinputwidget.cpp",
 			null
 		]
 	],
@@ -539,6 +557,7 @@
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets",
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets",
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs",
+		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork",
 		"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/eigen-3.4.0",
 		"Z:/qtcreator/6.9.1/msvc2022_64/include/QtCore",
 		"Z:/qtcreator/6.9.1/msvc2022_64/include",
@@ -571,6 +590,31 @@
 	"SETTINGS_FILE" : "Z:/learningqt/NeuralNetViewer/build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/CMakeFiles/NeuralNetViewer_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/activation.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/layer.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/loss.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/neuralnetwork.cpp",
+			"MU",
+			null
+		],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/NeuralNetwork/optimiser.cpp",
+			"MU",
+			null
+		],
 		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/Widgets/BaseWidgets/checkbox.cpp",
 			"MU",
@@ -642,11 +686,6 @@
 			null
 		],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/activation.cpp",
-			"MU",
-			null
-		],
-		[
 			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/configParameterDataStructs/neuralnetlayerdata.cpp",
 			"MU",
 			null
@@ -661,11 +700,14 @@
 			"MU",
 			null
 		],
-		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/layer.cpp", "MU", null ],
-		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/loss.cpp", "MU", null ],
+		[
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/drawarea.cpp",
+			"MU",
+			null
+		],
 		[ "Z:/learningqt/NeuralNetViewer/NeuralNetViewer/main.cpp", "MU", null ],
 		[
-			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/neuralnetwork.cpp",
+			"Z:/learningqt/NeuralNetViewer/NeuralNetViewer/mnistinputwidget.cpp",
 			"MU",
 			null
 		]

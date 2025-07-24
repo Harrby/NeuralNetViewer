@@ -1,18 +1,10 @@
 
-#include "slider.h"
 #include <QApplication>
 #include <QWidget>
-#include "valuesliderwidget.h"
 #include <QFontDatabase>
-#include "combobox.h"
-#include "valuecomboboxwidget.h"
-#include "globaloptionswidget.h"
-#include "checkbox.h"
-#include "layeroptions.h"
-#include "iconbutton.h"
-#include "layerscrollarea.h"
-#include "networkconfigwidget.h"
-#include "mainwindow.h"
+
+#include "drawarea.h"
+#include "mnistinputwidget.h"
 
 
 int main(int argc, char *argv[])
@@ -27,8 +19,10 @@ int main(int argc, char *argv[])
     //ValueSliderWidget *slider = new ValueSliderWidget("neurons", 0.00001, 1000, Slider::Logarithmic, 1000, nullptr);
     //IconButton *vcbw = new IconButton(QString(":/images/images/plus.png"),{"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 500, 500);
 
-    MainWindow *vcbw = new MainWindow();
+    //MainWindow *vcbw = new MainWindow();
 
-    vcbw->show();
+    MNISTInputWidget *da = new MNISTInputWidget();
+
+    da->show();
     return app.exec();
 }

@@ -20,8 +20,8 @@ public:
     void setActive(bool active);
     void setNeurons(int neurons);
     void setDropoutRate(double dropout_rate);
-    void setActivationFunction(QString activation_function);
-    void setWeightInit(QString weight_init);
+    void setActivationFunction(ActivationFunctionType activation_function);
+    void setWeightInit(WeightInitialisationType weight_init);
     void setL1Regularisation(double l1_regularisation);
     void setL2Regularisation(double l2_regularisation);
 

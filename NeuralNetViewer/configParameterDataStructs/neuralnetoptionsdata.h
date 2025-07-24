@@ -32,6 +32,30 @@ inline LossFunctionType fromString(const QString& s)
 
 }
 
+enum class OptimiserType{
+    SGD
+};
+
+namespace OptimiserUtils {
+
+// enum → QString
+inline QString toString(OptimiserType t)
+{
+    switch (t) {
+    case OptimiserType::SGD:        return "SGD";
+    }
+    return "Unknown";
+}
+
+// QString → enum
+inline OptimiserType fromString(const QString& s)
+{
+    if (s == "SGD")        return OptimiserType::SGD;
+    throw std::invalid_argument("Invalid activation function: " + s.toStdString());
+}
+
+}
+
 
 class NeuralNetOptionsData : public QObject
 {
@@ -53,7 +77,7 @@ public:
     double getLayerL2Regularisation(int index);
 
     int getBatchSize();
-    QString getOptimiser();
+    OptimiserType getOptimiser();
     LossFunctionType getLossFunction();
     double getLearningRate();
     int getEpochs();
@@ -67,14 +91,14 @@ public:
     void setLayerL2Regularisation(int index, double l2_regularisation);
 
 
-    void setOptimiser(QString new_optimiser);
+    void setOptimiser(OptimiserType new_optimiser);
     void setLossFunction(LossFunctionType new_loss_function);
     void setLearningRate(double new_learning_rate);
     void setEpochs(int new_epochs);
 
 private:
     int batch_size;
-    QString optimiser;
+    OptimiserType optimiser;
     LossFunctionType loss_function;
     double learning_rate;
     int     epochs;

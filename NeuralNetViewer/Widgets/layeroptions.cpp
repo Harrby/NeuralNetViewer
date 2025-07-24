@@ -63,12 +63,14 @@ void LayerOptions::setDropoutRate(double dropout_rate){
     m_s_dropout_rate->setValue(dropout_rate);
 
 }
-void LayerOptions::setActivationFunction(QString activation_function){
-    m_cb_activation_function->setValue(activation_function);
+void LayerOptions::setActivationFunction(ActivationFunctionType activation_function){
+
+    m_cb_activation_function->setValue(ActivationFnUtils::toString(activation_function));
 }
 
-void LayerOptions::setWeightInit(QString weight_init){
-    m_cb_weight_initialisation->setValue(weight_init);
+void LayerOptions::setWeightInit(WeightInitialisationType weight_init){
+
+    m_cb_weight_initialisation->setValue(WeightInitUtils::toString(weight_init));
 
 }
 void LayerOptions::setL1Regularisation(double l1_regularisation){

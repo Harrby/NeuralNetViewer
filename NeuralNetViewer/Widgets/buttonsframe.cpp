@@ -4,7 +4,7 @@
 ButtonsFrame::ButtonsFrame(QWidget* parent)
     : QFrame(parent),
     m_add_button(new IconButton(":/images/images/plus.png", {"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 60, 60, this)),
-    m_remove_button(new IconButton(":images/images/minus.png", {"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 60, 60, this))
+    m_remove_button(new IconButton(":/images/images/minus.png", {"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 60, 60, this))
 {
 
     setFixedHeight(50);

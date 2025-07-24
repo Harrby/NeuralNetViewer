@@ -10,14 +10,15 @@
     <file>images/plus.png</file>
     <file>images/bin.png</file>
     <file>images/minus.png</file>
+    <file>images/cross.png</file>
   </qresource>
 
 
 <qresource prefix="/datasets">
-    <file>datasets/train-images-idx3-ubyte.gz</file>
-    <file>datasets/train-labels-idx1-ubyte.gz</file>
-    <file>datasets/t10k-images-idx3-ubyte.gz</file>
-    <file>datasets/t10k-labels-idx1-ubyte</file>
+    <file>datasets/MNIST/train-images-idx3-ubyte.gz</file>
+    <file>datasets/MNIST/train-labels-idx1-ubyte.gz</file>
+    <file>datasets/MNIST/t10k-images-idx3-ubyte.gz</file>
+    <file>datasets/MNIST/t10k-labels-idx1-ubyte.gz</file>
 
 
 </qresource>

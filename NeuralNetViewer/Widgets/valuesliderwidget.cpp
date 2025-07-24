@@ -38,6 +38,7 @@ ValueSliderWidget::ValueSliderWidget(const QString &labelText,
     lay_v->addLayout(lay_h);
     lay_v->setContentsMargins(2, 2, 2, 2);
 
+    // Internal Connections
     connect(m_slider,    &Slider::realValueChanged,
             m_lineEdit,  [this](double v){
                 m_lineEdit->setText(QString::number(v));
@@ -50,6 +51,14 @@ ValueSliderWidget::ValueSliderWidget(const QString &labelText,
                 m_slider->setRealValue(m_lineEdit->text().toDouble());
             });
 
+    // External connections
+    connect(m_slider, &Slider::realValueChanged, this, [this](double v) {
+        emit valueChanged(v);  // or do something else
+        });
+
+    connect(m_lineEdit, &QLineEdit::editingFinished, this, [this] {
+        emit valueChanged(m_lineEdit->text().toDouble());  // or do something else
+        });
 
 }
 

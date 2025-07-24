@@ -7,6 +7,7 @@
 #include "networkconfigwidget.h"
 #include <QSplitter>
 #include "neuralnetoptionsdata.h"
+#include "
 
 
 class MainWidget : public QWidget
