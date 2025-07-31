@@ -18,6 +18,15 @@ void NeuralNetwork::initialise_layers(){
 
 void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels){
     int num_samples = inputs.rows();
+    std::vector<int> perm(num_samples);
+    std::iota(perm.begin(), perm.end(), 0);           // 0,1,2,…,N-1
+
+    if (m_network_parameters.isShuffleEnabled()) {
+        static thread_local std::mt19937 rng{std::random_device{}()};
+        std::shuffle(perm.begin(), perm.end(), rng);
+    }
+
+
     int batch_size = m_network_parameters.getBatchSize();
     float lr = m_network_parameters.getLearningRate();
 
@@ -31,13 +40,13 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
 
 
             for (int j=0; j < actual_batch_size; ++j){
-                Eigen::VectorXf activation = inputs.row(i+j);
+                Eigen::VectorXf activation = inputs.row(perm[i+j]);
 
                 for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer){
                     activation = m_layers.at(layer)->forward(activation);
                 }
 
-                int true_class = labels(i + j);
+                int true_class = labels(perm[i + j]);
                 float loss = m_loss_function.forward(activation, true_class);
 
                 Eigen::VectorXf gradients = m_loss_function.backward(activation, true_class);

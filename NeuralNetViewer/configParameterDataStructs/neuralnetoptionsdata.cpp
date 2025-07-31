@@ -4,6 +4,9 @@
 NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     : QObject(parent),
     batch_size(10),
+    shuffle_data(true),
+    use_validation_set(true),
+    validation_split(0.2),
     optimiser(OptimiserType::SGD),
     loss_function(LossFunctionType::CategoricalCrossEntropy),
     learning_rate(0.1),
@@ -26,13 +29,25 @@ void NeuralNetOptionsData::removeLayer(){
 }
 
 // GETTER METHODS
-LossFunctionType NeuralNetOptionsData::getLossFunction(){
-    return loss_function;
-}
 
 int NeuralNetOptionsData::getBatchSize(){
     return batch_size;
 }
+
+bool NeuralNetOptionsData::isShuffleEnabled(){
+    return shuffle_data;
+}
+bool NeuralNetOptionsData::isValidationEnabled(){
+    return use_validation_set;
+}
+double NeuralNetOptionsData::getValidationSplit(){
+    return validation_split;
+}
+
+LossFunctionType NeuralNetOptionsData::getLossFunction(){
+    return loss_function;
+}
+
 
 OptimiserType NeuralNetOptionsData::getOptimiser(){
     return optimiser;
@@ -84,6 +99,19 @@ double NeuralNetOptionsData::getLayerL2Regularisation(int index){
 };
 
 // SETTER METHODS
+void NeuralNetOptionsData::setBatchSize(int batch_size){
+    this->batch_size = batch_size;
+}
+void NeuralNetOptionsData::setShuffleEnabled(bool shuffle){
+    shuffle_data = shuffle;
+}
+void NeuralNetOptionsData::setValidationEnabled(bool validation){
+    use_validation_set = validation;
+}
+void NeuralNetOptionsData::setValidationSplit(double validation_split){
+    this->validation_split = validation_split;
+}
+
 void NeuralNetOptionsData::setLossFunction(LossFunctionType new_loss_function){
     loss_function = new_loss_function;
 }

@@ -77,6 +77,9 @@ public:
     double getLayerL2Regularisation(int index);
 
     int getBatchSize();
+    bool isShuffleEnabled();
+    bool isValidationEnabled();
+    double getValidationSplit();
     OptimiserType getOptimiser();
     LossFunctionType getLossFunction();
     double getLearningRate();
@@ -90,7 +93,10 @@ public:
     void setLayerL1Regularisation(int index, double l1_regularisation);
     void setLayerL2Regularisation(int index, double l2_regularisation);
 
-
+    void setBatchSize(int batch_size);
+    void setShuffleEnabled(bool shuffle);
+    void setValidationEnabled(bool validation);
+    void setValidationSplit(double validation_split);
     void setOptimiser(OptimiserType new_optimiser);
     void setLossFunction(LossFunctionType new_loss_function);
     void setLearningRate(double new_learning_rate);
@@ -98,6 +104,10 @@ public:
 
 private:
     int batch_size;
+    bool shuffle_data;
+    bool use_validation_set;
+    double validation_split;
+
     OptimiserType optimiser;
     LossFunctionType loss_function;
     double learning_rate;

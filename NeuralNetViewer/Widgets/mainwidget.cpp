@@ -40,6 +40,11 @@ MainWidget::MainWidget(QWidget *parent)
     connect(m_network_config_widget, &NetworkConfigWidget::l1RegularisationChanged, m_network_options, &NeuralNetOptionsData::setLayerL1Regularisation);
     connect(m_network_config_widget, &NetworkConfigWidget::l2RegularisationChanged, m_network_options, &NeuralNetOptionsData::setLayerL2Regularisation);
 
+    connect(m_train_widget, &TrainWidget::batchSizeChanged, m_network_options, &NeuralNetOptionsData::setBatchSize);
+    connect(m_train_widget, &TrainWidget::shuffleDataChanged, m_network_options, &NeuralNetOptionsData::setShuffleEnabled);
+    connect(m_train_widget, &TrainWidget::useValidationSetChanged, m_network_options, &NeuralNetOptionsData::setValidationEnabled);
+    connect(m_train_widget, &TrainWidget::validationSplitChanged, m_network_options, &NeuralNetOptionsData::setValidationSplit);
+
 
 
 

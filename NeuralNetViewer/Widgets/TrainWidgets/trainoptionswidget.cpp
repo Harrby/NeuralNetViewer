@@ -40,5 +40,12 @@ TrainOptionsWidget::TrainOptionsWidget(QWidget* parent)
     main_layout->addLayout(dataset_layout);
     main_layout->addLayout(options_layout);
 
+    connect(m_batch_size_slider, &ValueSliderWidget::valueChanged, this,
+            [this](double batch_size){
+                emit batchSizeChanged(static_cast<int>(batch_size));
+            });
+    connect(m_shuffle_data_checkbox, &ValueCheckboxWidget::checked, this, &TrainOptionsWidget::shuffleDataChanged);
+    connect(m_validation_set_checkbox, &ValueCheckboxWidget::checked, this, &TrainOptionsWidget::useValidationSetChanged);
+    connect(m_validation_split_slider, &ValueSliderWidget::valueChanged, this, &TrainOptionsWidget::validationSplitChanged);
 }
 

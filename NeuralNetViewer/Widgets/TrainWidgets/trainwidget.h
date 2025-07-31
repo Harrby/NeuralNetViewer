@@ -21,6 +21,12 @@ private:
     IconButton* m_cancel_button;
     TrainStatusWidget* m_status_widget;
 
+signals:
+    void batchSizeChanged(int);
+    void shuffleDataChanged(bool);
+    void useValidationSetChanged(bool);
+    void validationSplitChanged(double);
+
 
 };
 

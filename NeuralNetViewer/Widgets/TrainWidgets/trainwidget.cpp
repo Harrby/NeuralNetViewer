@@ -28,5 +28,10 @@ TrainWidget::TrainWidget(QWidget* parent)
     main_v_layout->addWidget(m_options_widget);
     main_v_layout->addLayout(main_h_layout);
     main_v_layout->addWidget(m_status_widget);
+
+    connect(m_options_widget, &TrainOptionsWidget::batchSizeChanged, this, &TrainWidget::batchSizeChanged);
+    connect(m_options_widget, &TrainOptionsWidget::shuffleDataChanged, this, &TrainWidget::shuffleDataChanged);
+    connect(m_options_widget, &TrainOptionsWidget::useValidationSetChanged, this, &TrainWidget::useValidationSetChanged);
+    connect(m_options_widget, &TrainOptionsWidget::validationSplitChanged, this, &TrainWidget::validationSplitChanged);
 }
 

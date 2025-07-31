@@ -23,6 +23,12 @@ private:
     ValueCheckboxWidget* m_validation_set_checkbox;
     ValueSliderWidget* m_validation_split_slider;
 
+signals:
+    void batchSizeChanged(int);
+    void shuffleDataChanged(bool);
+    void useValidationSetChanged(bool);
+    void validationSplitChanged(double);
+
 
 };
 
