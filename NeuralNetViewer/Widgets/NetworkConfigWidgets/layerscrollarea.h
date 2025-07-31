@@ -21,6 +21,15 @@ private:
     QVector<LayerOptions*> layer_option_widgets;
     QVBoxLayout* main_layout;
     int next_free_index;
+
+signals:
+    void activeChanged(int, bool);
+    void neuronsChanged(int, int);
+    void dropoutRateChanged(int, double);
+    void activationFunctionChanged(int, ActivationFunctionType);
+    void weightInitChanged(int, WeightInitialisationType);
+    void l1RegularisationChanged(int, double);
+    void l2RegularisationChanged(int, double);
 };
 
 #endif // LAYERSCROLLAREA_H

@@ -1,0 +1,20 @@
+
+#ifndef LOGWIDGET_H
+#define LOGWIDGET_H
+
+#include <QFrame>
+#include <QTextEdit>
+
+
+
+class LogWidget : public QTextEdit
+{
+    Q_OBJECT
+public:
+    LogWidget(QWidget* parent = nullptr);
+    void add_log_message(QString message);
+    void add_training_log_message(int epoch, int total_epochs, float training_loss, float validation_loss, float accuracy, float eta);
+    void add_sample_log_message(int sample, int predicted, int actual);
+};
+
+#endif // LOGWIDGET_H

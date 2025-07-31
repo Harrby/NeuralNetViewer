@@ -4,6 +4,7 @@
 #include<QFrame>
 #include"valuecomboboxwidget.h"
 #include"valuesliderwidget.h"
+#include "neuralnetoptionsdata.h"
 
 
 
@@ -19,6 +20,13 @@ private:
     ValueSliderWidget* m_s_learning_rate;
     ValueSliderWidget* m_s_epochs;
     QLabel* m_title;
+    void optimiser_changed(QString optimiser_txt);
+
+signals:
+    void optimiserChanged(OptimiserType optimiser);
+    void lossFunctionChanged(LossFunctionType loss_function);
+    void learningRateChanged(double learning_rate);
+    void epochsChanged(int epochs);
 
 };
 

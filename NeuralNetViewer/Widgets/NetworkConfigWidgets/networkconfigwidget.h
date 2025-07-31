@@ -6,6 +6,7 @@
 #include "globaloptionswidget.h"
 #include "buttonsframe.h"
 #include "layerscrollarea.h"
+#include "neuralnetoptionsdata.h"
 
 
 
@@ -26,6 +27,19 @@ private:
 signals:
     void addLayerButtonClicked();
     void removeLayerButtonClicked();
+
+    void optimiserChanged(OptimiserType optimiser);
+    void lossFunctionChanged(LossFunctionType loss_function);
+    void learningRateChanged(float learning_rate);
+    void epochsChanged(int epochs);
+
+    void activeChanged(int, bool);
+    void neuronsChanged(int, int);
+    void dropoutRateChanged(int, double);
+    void activationFunctionChanged(int, ActivationFunctionType);
+    void weightInitChanged(int, WeightInitialisationType);
+    void l1RegularisationChanged(int, double);
+    void l2RegularisationChanged(int, double);
 };
 
 #endif // NETWORKCONFIGWIDGET_H

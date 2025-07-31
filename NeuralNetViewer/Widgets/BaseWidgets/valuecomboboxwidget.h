@@ -18,6 +18,9 @@ private:
     ComboBox* m_combobox;
     QLabel* m_label;
 
+signals:
+    void valueChanged(QString);
+
 };
 
 #endif // VALUECOMBOBOXWIDGET_H

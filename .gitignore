@@ -1,0 +1,33 @@
+# Build folders
+/build/
+/bin/
+/obj/
+
+# Compiled object files
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+build-NeuralNetViewer-Desktop_x86/
+
+build-NeuralNetViewer-Desktop_x86_windows_msvc2022_pe_64bit-Debug/
+*.pdb
+
+# VSCode or CLion settings (optional)
+.vscode/
+.idea/
+*.user
+
+# OS files
+.DS_Store
+Thumbs.db

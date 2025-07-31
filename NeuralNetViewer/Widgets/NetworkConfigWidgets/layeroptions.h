@@ -26,6 +26,7 @@ public:
     void setL2Regularisation(double l2_regularisation);
 
 private:
+    int m_id;
     QLabel* m_title;
     CheckBox* m_checkbox;
     ValueComboBoxWidget* m_cb_activation_function;
@@ -34,6 +35,17 @@ private:
     ValueSliderWidget* m_s_dropout_rate;
     ValueSliderWidget* m_s_l1_regularisation;
     ValueSliderWidget* m_s_l2_regularisation;
+
+signals:
+    void activeChanged(int, bool);
+    void neuronsChanged(int, int);
+    void dropoutRateChanged(int, double);
+    void activationFunctionChanged(int, ActivationFunctionType);
+    void weightInitChanged(int, WeightInitialisationType);
+    void l1RegularisationChanged(int, double);
+    void l2RegularisationChanged(int, double);
+
+
 
 };
 

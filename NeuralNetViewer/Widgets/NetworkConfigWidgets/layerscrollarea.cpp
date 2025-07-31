@@ -25,6 +25,7 @@ LayerScrollArea::LayerScrollArea(QWidget* parent)
 
     this->setWidget(container);
 
+
 }
 
 void LayerScrollArea::initialiseLayerOptionsWidgets(const NeuralNetLayerData& parameters){
@@ -42,6 +43,14 @@ void LayerScrollArea::addLayerOptionsWidget(const NeuralNetLayerData& parameters
     main_layout->addWidget(w);
     next_free_index++;
     w->setVisible(true);
+
+    connect(w, &LayerOptions::activeChanged, this, &LayerScrollArea::activeChanged);
+    connect(w, &LayerOptions::neuronsChanged, this, &LayerScrollArea::neuronsChanged);
+    connect(w, &LayerOptions::dropoutRateChanged, this, &LayerScrollArea::dropoutRateChanged);
+    connect(w, &LayerOptions::activationFunctionChanged, this, &LayerScrollArea::activationFunctionChanged);
+    connect(w, &LayerOptions::weightInitChanged, this, &LayerScrollArea::weightInitChanged);
+    connect(w, &LayerOptions::l1RegularisationChanged, this, &LayerScrollArea::l1RegularisationChanged);
+    connect(w, &LayerOptions::l2RegularisationChanged, this, &LayerScrollArea::l2RegularisationChanged);
 
 }
 

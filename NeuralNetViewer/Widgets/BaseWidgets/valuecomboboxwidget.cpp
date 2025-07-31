@@ -19,6 +19,8 @@ ValueComboBoxWidget::ValueComboBoxWidget(const QString &labelText, const QString
     v_layout->addWidget(m_combobox);
     v_layout->setContentsMargins(2, 2, 2, 2);
 
+    connect(m_combobox, &ComboBox::currentTextChanged, this, &ValueComboBoxWidget::valueChanged);
+
 }
 
 void ValueComboBoxWidget::setValue(QString new_value){

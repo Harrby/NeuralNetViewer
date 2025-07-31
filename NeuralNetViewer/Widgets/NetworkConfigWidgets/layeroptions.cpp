@@ -3,6 +3,7 @@
 
 LayerOptions::LayerOptions(const NeuralNetLayerData& parameters, int id, QWidget *parent)
     : QFrame(parent),
+    m_id(id),
     m_title(new QLabel(QString("Layer %1").arg(id+1), this)),
     m_checkbox(new CheckBox(this)),
     m_cb_activation_function(new ValueComboBoxWidget(QString("Activation Function"), QStringList{"ReLu", "Leaky ReLU", "Tanh", "Sigmoid"}, this)),
@@ -38,6 +39,45 @@ LayerOptions::LayerOptions(const NeuralNetLayerData& parameters, int id, QWidget
     QVBoxLayout *main_layout = new QVBoxLayout(this);
     main_layout->addLayout(h_layout);
     main_layout->addLayout(grid_layout);
+
+
+    connect(m_checkbox, &CheckBox::clicked, this,
+            [this](bool active){
+                emit activeChanged(m_id, active);
+            });
+
+    connect(m_s_neurons, &ValueSliderWidget::valueChanged, this,
+            [this](double neurons){
+                emit neuronsChanged(m_id, static_cast<int>(neurons));
+            });
+
+    connect(m_s_dropout_rate, &ValueSliderWidget::valueChanged, this,
+            [this](double dropout_rate){
+                emit dropoutRateChanged(m_id, dropout_rate);
+            });
+
+    connect(m_cb_activation_function, &ValueComboBoxWidget::valueChanged, this,
+            [this](const QString& activation_txt){
+                emit activationFunctionChanged(m_id, ActivationFnUtils::fromString(activation_txt));
+            });
+
+    connect(m_cb_weight_initialisation, &ValueComboBoxWidget::valueChanged, this,
+            [this](const QString& weight_init_txt){
+                emit weightInitChanged(m_id, WeightInitUtils::fromString(weight_init_txt));
+            });
+
+    connect(m_s_l1_regularisation, &ValueSliderWidget::valueChanged, this,
+            [this](double l1_regularisation){
+                emit l1RegularisationChanged(m_id, l1_regularisation);
+            });
+
+    connect(m_s_l2_regularisation, &ValueSliderWidget::valueChanged, this,
+            [this](double l2_regularisation){
+                emit l2RegularisationChanged(m_id, l2_regularisation);
+            });
+
+
+
 }
 
 void LayerOptions::setAllParameters(const NeuralNetLayerData& parameters){

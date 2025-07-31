@@ -3,8 +3,8 @@
 #include <QWidget>
 #include <QFontDatabase>
 
-#include "drawarea.h"
-#include "mnistinputwidget.h"
+
+#include "mainwindow.h"
 
 
 int main(int argc, char *argv[])
@@ -13,16 +13,16 @@ int main(int argc, char *argv[])
 
     int id = QFontDatabase::addApplicationFont(":/fonts/Inter/Inter-VariableFont_opsz,wght.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).value(0);
-    QFont inter(family, 16);
+    QFont inter(family, 14);
     app.setFont(inter);
 
     //ValueSliderWidget *slider = new ValueSliderWidget("neurons", 0.00001, 1000, Slider::Logarithmic, 1000, nullptr);
     //IconButton *vcbw = new IconButton(QString(":/images/images/plus.png"),{"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 500, 500);
 
-    //MainWindow *vcbw = new MainWindow();
+    MainWindow *vcbw = new MainWindow();
 
-    MNISTInputWidget *da = new MNISTInputWidget();
+    //TrainWidget *da = new TrainWidget();
 
-    da->show();
+    vcbw->show();
     return app.exec();
 }

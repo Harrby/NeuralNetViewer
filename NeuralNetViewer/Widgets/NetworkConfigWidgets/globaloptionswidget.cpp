@@ -29,6 +29,21 @@ GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
     main_layout->addWidget(m_title);
     main_layout->addLayout(grid_layout);
 
+    connect(m_cb_optimiser, &ValueComboBoxWidget::valueChanged, this,
+            [this](const QString& optimiser_txt){
+                emit optimiserChanged(OptimiserUtils::fromString(optimiser_txt));
+            });
+
+    connect(m_cb_loss_function, &ValueComboBoxWidget::valueChanged, this,
+            [this](const QString& loss_txt){
+                emit lossFunctionChanged(LossFnUtils::fromString(loss_txt));
+            });
+
+    connect(m_s_learning_rate, &ValueSliderWidget::valueChanged, this, &GlobalOptionsWidget::learningRateChanged);
+    connect(m_s_epochs, &ValueSliderWidget::valueChanged, this, [this](double epochs){
+        emit epochsChanged(static_cast<int>(epochs));
+    });
 
 }
+
 

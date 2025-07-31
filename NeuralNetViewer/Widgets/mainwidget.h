@@ -7,7 +7,7 @@
 #include "networkconfigwidget.h"
 #include <QSplitter>
 #include "neuralnetoptionsdata.h"
-#include "
+#include "trainwidget.h"
 
 
 class MainWidget : public QWidget
@@ -19,6 +19,7 @@ public:
 private:
     QSplitter* m_splitter;
     NetworkConfigWidget* m_network_config_widget;
+    TrainWidget* m_train_widget;
     NeuralNetOptionsData* m_network_options;
     void onAddLayerRequest();
     void onRemoveLayerRequest();
