@@ -5,7 +5,8 @@ MainWidget::MainWidget(QWidget *parent)
     m_splitter(new QSplitter(Qt::Horizontal, this)),
     m_network_config_widget(new NetworkConfigWidget(m_splitter)),
     m_train_widget(new TrainWidget(m_splitter)),
-    m_network_options(new NeuralNetOptionsData(this))
+    m_network_options(new NeuralNetOptionsData(this)),
+    m_neural_network(new NeuralNetwork(*m_network_options, this))
 {
 
 
@@ -44,6 +45,10 @@ MainWidget::MainWidget(QWidget *parent)
     connect(m_train_widget, &TrainWidget::shuffleDataChanged, m_network_options, &NeuralNetOptionsData::setShuffleEnabled);
     connect(m_train_widget, &TrainWidget::useValidationSetChanged, m_network_options, &NeuralNetOptionsData::setValidationEnabled);
     connect(m_train_widget, &TrainWidget::validationSplitChanged, m_network_options, &NeuralNetOptionsData::setValidationSplit);
+    connect(m_train_widget, &TrainWidget::trainButtonClicked, this, &MainWidget::train);
+
+
+    connect(m_neural_network, &NeuralNetwork::epochDataChanged, m_train_widget, &TrainWidget::setEpochTrainingData);
 
 
 
@@ -59,4 +64,8 @@ void MainWidget::onAddLayerRequest(){
 void MainWidget::onRemoveLayerRequest(){
     m_network_options->removeLayer();
     m_network_config_widget->removeLayerWidget();
+}
+
+void MainWidget::trainNeuralNetwork(){
+
 }

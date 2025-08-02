@@ -3,7 +3,7 @@
 #define ACTIVATION_H
 
 #include <Eigen/Dense>
-# include <neuralnetlayerdata.h>
+#include "activation_utils.h"
 
 
 class ActivationFunction {

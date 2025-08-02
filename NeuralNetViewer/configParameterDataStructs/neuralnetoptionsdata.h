@@ -6,55 +6,8 @@
 #include <QVector>
 #include <QObject>
 #include "neuralnetlayerdata.h"
-
-
-enum class LossFunctionType{
-    CategoricalCrossEntropy
-};
-
-namespace LossFnUtils {
-
-// enum → QString
-inline QString toString(LossFunctionType t)
-{
-    switch (t) {
-    case LossFunctionType::CategoricalCrossEntropy:        return "Categorical Cross Entropy";
-    }
-    return "Unknown";
-}
-
-// QString → enum
-inline LossFunctionType fromString(const QString& s)
-{
-    if (s == "Categorical Cross Entropy")        return LossFunctionType::CategoricalCrossEntropy;
-    throw std::invalid_argument("Invalid activation function: " + s.toStdString());
-}
-
-}
-
-enum class OptimiserType{
-    SGD
-};
-
-namespace OptimiserUtils {
-
-// enum → QString
-inline QString toString(OptimiserType t)
-{
-    switch (t) {
-    case OptimiserType::SGD:        return "SGD";
-    }
-    return "Unknown";
-}
-
-// QString → enum
-inline OptimiserType fromString(const QString& s)
-{
-    if (s == "SGD")        return OptimiserType::SGD;
-    throw std::invalid_argument("Invalid activation function: " + s.toStdString());
-}
-
-}
+#include "optimiser_utils.h"
+#include "loss_utils.h"
 
 
 class NeuralNetOptionsData : public QObject

@@ -89,10 +89,14 @@ void GraphWidget::reset_view(){
 
 void GraphWidget::update_training_loss_data(int epoch,  float training_loss){
     m_plot->graph(0)->addData(epoch, training_loss);
-    m_plot->replot();
+
 }
 void GraphWidget::update_validation_loss_data(int epoch, float validation_loss){
     m_plot->graph(1)->addData(epoch, validation_loss);
+
+}
+
+void GraphWidget::replot(){
     m_plot->replot();
 }
 

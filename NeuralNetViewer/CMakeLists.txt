@@ -55,14 +55,21 @@ set(PROJECT_SOURCES
 
         NeuralNetwork/layer.h NeuralNetwork/layer.cpp
 
-        datasetcontainer.h datasetcontainer.cpp
-        NeuralNetwork/activation.h NeuralNetwork/activation.cpp
+        dataset_classes/datasetcontainer.h dataset_classes/datasetcontainer.cpp
+        dataset_classes/datasettype.h
 
-        NeuralNetwork/loss.h NeuralNetwork/loss.cpp
+        NeuralNetwork/activation/activation.h NeuralNetwork/activation/activation.cpp
+        NeuralNetwork/activation/activation_utils.h
+
+        NeuralNetwork/loss/loss.h NeuralNetwork/loss/loss.cpp
+        NeuralNetwork/loss/loss_utils.h
 
         NeuralNetwork/neuralnetwork.h NeuralNetwork/neuralnetwork.cpp
 
-        NeuralNetwork/optimiser.h NeuralNetwork/optimiser.cpp
+        NeuralNetwork/optimiser/optimiser.h NeuralNetwork/optimiser/optimiser.cpp
+        NeuralNetwork/optimiser/optimiser_utils.h
+        NeuralNetwork/initialisation/initialisation_utils.h
+
 
         mnistinputwidget.h mnistinputwidget.cpp
 
@@ -73,6 +80,10 @@ set(PROJECT_SOURCES
         Widgets/TrainWidgets/trainstatuswidget.h Widgets/TrainWidgets/trainstatuswidget.cpp
         Widgets/TrainWidgets/graphwidget.h Widgets/TrainWidgets/graphwidget.cpp
         Widgets/TrainWidgets/trainingstatsframe.h Widgets/TrainWidgets/trainingstatsframe.cpp
+
+        metrics/epochstats.h
+
+        metrics/metrics.h
 
 
 
@@ -94,8 +105,16 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/BaseWidgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/configParameterDataStructs)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/activation)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/initialisation)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/loss)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/optimiser)
+
+
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/TrainWidgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/NetworkConfigWidgets)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/metrics)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/dataset_classes)
     target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/qcustomplot/qcustomplot.cpp)
     include_directories(${CMAKE_SOURCE_DIR}/eigen-3.4.0)
     include_directories(${CMAKE_SOURCE_DIR}/qcustomplot)

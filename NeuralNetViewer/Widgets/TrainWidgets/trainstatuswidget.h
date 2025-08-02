@@ -8,6 +8,7 @@
 #include "graphwidget.h"
 #include <QLabel>
 #include "logwidget.h"
+#include "epochstats.h"
 
 
 
@@ -16,6 +17,7 @@ class TrainStatusWidget : public QFrame
     Q_OBJECT
 public:
     TrainStatusWidget(QWidget* parent = nullptr);
+    void setEpochTrainingData(const EpochStats& epoch_stats);
 
 private:
     QLabel* m_title_label;

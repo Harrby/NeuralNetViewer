@@ -33,5 +33,13 @@ TrainWidget::TrainWidget(QWidget* parent)
     connect(m_options_widget, &TrainOptionsWidget::shuffleDataChanged, this, &TrainWidget::shuffleDataChanged);
     connect(m_options_widget, &TrainOptionsWidget::useValidationSetChanged, this, &TrainWidget::useValidationSetChanged);
     connect(m_options_widget, &TrainOptionsWidget::validationSplitChanged, this, &TrainWidget::validationSplitChanged);
+
+    connect(m_train_button, &IconButton::clicked, this, &TrainWidget::trainButtonClicked);
+    connect(m_cancel_button, &IconButton::clicked, this, &TrainWidget::cancelButtonClicked);
+}
+
+
+void TrainWidget::setEpochTrainingData(const EpochStats& epoch_stats){
+    m_status_widget->setEpochTrainingData(epoch_stats);
 }
 

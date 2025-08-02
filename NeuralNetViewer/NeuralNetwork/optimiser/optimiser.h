@@ -2,8 +2,7 @@
 #ifndef OPTIMISER_H
 #define OPTIMISER_H
 #include <Eigen/Dense>
-#include "neuralnetoptionsdata.h"
-
+#include "optimiser_utils.h"
 
 class Optimiser
 {

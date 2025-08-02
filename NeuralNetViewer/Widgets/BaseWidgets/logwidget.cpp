@@ -14,8 +14,10 @@ void LogWidget::add_log_message(QString message){
 
 
 
-void LogWidget::add_training_log_message(int epoch, int total_epochs,  float training_loss, float validation_loss, float accuracy, float eta){
-    accuracy *= 100;
+void LogWidget::add_training_log_message(int epoch, int total_epochs, float training_loss, float validation_loss, float training_accuracy,
+                                         float validation_accuracy, float eta){
+    training_accuracy *= 100;
+    validation_accuracy += 100;
 
     int totalSeconds = static_cast<int>(eta);
     int minutes = totalSeconds / 60;
@@ -28,12 +30,13 @@ void LogWidget::add_training_log_message(int epoch, int total_epochs,  float tra
         eta_text = QString("ETA: %1s").arg(seconds);
 
 
-    QString message = QString("Epoch: %1/%2 - training loss: %3 - validation loss: %4 - acc: %5% - ETA %6")
+    QString message = QString("Epoch: %1/%2 - training loss: %3 - validation loss: %4 - training acc: %5% - validation acc: %6% - ETA %7")
                           .arg(epoch)
                           .arg(total_epochs)
                           .arg(training_loss, 0, 'f', 2)
                           .arg(validation_loss, 0, 'f', 2)
-                          .arg(accuracy, 0, 'f', 2)
+                          .arg(training_accuracy, 0, 'f', 2)
+                          .arg(validation_accuracy, 0, 'f', 2)
                           .arg(eta_text);
     append(message);
 }

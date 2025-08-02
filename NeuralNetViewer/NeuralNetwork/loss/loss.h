@@ -3,7 +3,7 @@
 #define LOSS_H
 
 #include <Eigen/Dense>
-#include "neuralnetoptionsdata.h"
+#include "loss_utils.h"
 
 
 class LossFunction {
