@@ -19,6 +19,7 @@ public:
     double dropout_rate = 0.0;
     double l1_regularisation = 0.0;
     double l2_regularisation = 0.0;
+
 };
 
 

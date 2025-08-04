@@ -11,8 +11,17 @@ NeuralNetwork::NeuralNetwork(NeuralNetOptionsData& network_parameters,  QObject*
 }
 
 void NeuralNetwork::initialise_layers(){
+
+
+
+    m_layers.clear();
     for (int i=0; i < m_network_parameters.getLenLayers(); i++){
-        m_layers.push_back(std::make_unique<Layer>(i, m_network_parameters.getLayerData(i)));
+        int input_size = (i == 0) ? m_network_parameters.getInputSize() : m_network_parameters.getLayerData(i-1).neurons;
+        if (i == m_network_parameters.getLenLayers()-1){
+            m_network_parameters.getLayerData(i-1).setActivationFunction(ActivationFunctionType::Identity);
+        }
+
+        m_layers.push_back(std::make_unique<Layer>(input_size, m_network_parameters.getLayerData(i)));
     }
 
 }
@@ -68,30 +77,26 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
         int num_batches   = 0;
         for (int i=0; i<num_samples; i += batch_size){
             int actual_batch_size = std::min(batch_size, num_samples - i);
-
-
             for (std::unique_ptr<Layer>& layer : m_layers){
                 layer->zeroGradients();
             }
-
             int correct_preds = 0;
             float batch_training_loss = 0.0f;
-
-
             for (int j=0; j < actual_batch_size; ++j){
-                Eigen::VectorXf activation = train_X.row(perm[i+j]);
+                Eigen::VectorXf activation = train_X.row(i+j);
 
+                // forward pass
                 for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer){
                     activation = m_layers.at(layer)->forward(activation);
                 }
 
-                int true_class = train_y(perm[i + j]);
+                int true_class = train_y(i + j);
                 float loss = m_loss_function.forward(activation, true_class);
                 batch_training_loss += loss;
 
+                //Accuracy
                 Eigen::Index predicted_class;
                 activation.maxCoeff(&predicted_class);
-
                 if (predicted_class == true_class)
                     ++correct_preds;
 
@@ -102,22 +107,24 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
                     gradients = m_layers.at(l)->backward(gradients, Accumulate);
                 }
 
-                if (use_val){
-                    Metrics val_metrics = validate(X_val, y_val);
-                    total_validation_loss += val_metrics.loss;
-                    total_validation_correct +=val_metrics.total_correct;
-                    total_validation_seen += y_val.rows();
-                }
-                ++num_batches;
 
-                batch_training_loss /= actual_batch_size;
-                total_training_loss += batch_training_loss;
-                total_training_seen += actual_batch_size;
-
-                total_training_correct += correct_preds;
 
 
             }
+
+            if (use_val){
+                Metrics val_metrics = validate(X_val, y_val);
+                total_validation_loss += val_metrics.loss;
+                total_validation_correct +=val_metrics.total_correct;
+                total_validation_seen += y_val.rows();
+            }
+            ++num_batches;
+
+            batch_training_loss /= actual_batch_size;
+            total_training_loss += batch_training_loss;
+            total_training_seen += actual_batch_size;
+
+            total_training_correct += correct_preds;
 
             for (std::unique_ptr<Layer>& layer: m_layers){
                 layer->scaleGradients(1.0f / actual_batch_size);
@@ -128,15 +135,16 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
                 m_optimiser.update(layer->getBiases(), layer->getBiasGradients(), lr);
             }
 
-            float avg_validation_loss = total_validation_loss / num_batches;
-            float avg_validation_accuracy = static_cast<float>(total_validation_correct) / total_validation_seen;
-            float avg_training_loss = total_training_loss / num_batches;
-            float avg_training_accuracy = static_cast<float>(total_training_correct) / total_training_seen;
 
-            EpochStats stats{epoch,  m_network_parameters.getEpochs(), avg_training_loss, avg_validation_loss, avg_training_accuracy, avg_validation_accuracy, 0.0f};
-
-            emit epochDataChanged(stats);
         }
+        float avg_validation_loss = total_validation_loss / num_batches;
+        float avg_validation_accuracy = static_cast<float>(total_validation_correct) / total_validation_seen;
+        float avg_training_loss = total_training_loss / num_batches;
+        float avg_training_accuracy = static_cast<float>(total_training_correct) / total_training_seen;
+
+        EpochStats stats{epoch,  m_network_parameters.getEpochs(), avg_training_loss, avg_validation_loss, avg_training_accuracy, avg_validation_accuracy, 0.0f};
+
+        emit epochDataChanged(stats);
 
     }
 }

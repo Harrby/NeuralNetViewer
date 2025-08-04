@@ -19,7 +19,9 @@ public:
     int addLayer();
     void removeLayer();
 
-    NeuralNetLayerData getLayerData(int index);
+    NeuralNetLayerData& getLayerData(int index);
+    const NeuralNetLayerData& getLayerData(int index) const;
+
     int getLenLayers();
     bool isLayerActive(int index);
     int getLayerNeurons(int index);
@@ -33,6 +35,7 @@ public:
     bool isShuffleEnabled();
     bool isValidationEnabled();
     double getValidationSplit();
+    int getInputSize();
     OptimiserType getOptimiser();
     LossFunctionType getLossFunction();
     double getLearningRate();
@@ -50,6 +53,7 @@ public:
     void setShuffleEnabled(bool shuffle);
     void setValidationEnabled(bool validation);
     void setValidationSplit(double validation_split);
+    void setInputSize(int input_size);
     void setOptimiser(OptimiserType new_optimiser);
     void setLossFunction(LossFunctionType new_loss_function);
     void setLearningRate(double new_learning_rate);
@@ -60,6 +64,7 @@ private:
     bool shuffle_data;
     bool use_validation_set;
     double validation_split;
+    int input_size=784;
 
     OptimiserType optimiser;
     LossFunctionType loss_function;

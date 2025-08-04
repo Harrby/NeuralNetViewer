@@ -15,10 +15,10 @@
 
 
 <qresource prefix="/datasets">
-    <file>datasets/MNIST/train-images-idx3-ubyte.gz</file>
-    <file>datasets/MNIST/train-labels-idx1-ubyte.gz</file>
-    <file>datasets/MNIST/t10k-images-idx3-ubyte.gz</file>
-    <file>datasets/MNIST/t10k-labels-idx1-ubyte.gz</file>
+    <file>datasets/MNIST/train-images-idx3-ubyte</file>
+    <file>datasets/MNIST/train-labels-idx1-ubyte</file>
+    <file>datasets/MNIST/t10k-images-idx3-ubyte</file>
+    <file>datasets/MNIST/t10k-labels-idx1-ubyte</file>
 
 
 </qresource>

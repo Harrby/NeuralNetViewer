@@ -69,6 +69,7 @@ set(PROJECT_SOURCES
         NeuralNetwork/optimiser/optimiser.h NeuralNetwork/optimiser/optimiser.cpp
         NeuralNetwork/optimiser/optimiser_utils.h
         NeuralNetwork/initialisation/initialisation_utils.h
+        NeuralNetwork/initialisation/initialisation.h NeuralNetwork/initialisation/initialisation.cpp
 
 
         mnistinputwidget.h mnistinputwidget.cpp

@@ -44,6 +44,10 @@ double NeuralNetOptionsData::getValidationSplit(){
     return validation_split;
 }
 
+int NeuralNetOptionsData::getInputSize(){
+    return input_size;
+}
+
 LossFunctionType NeuralNetOptionsData::getLossFunction(){
     return loss_function;
 }
@@ -66,8 +70,12 @@ int NeuralNetOptionsData::getLenLayers(){
 };
 
 // GETTER METHOD - PER LAYER
-NeuralNetLayerData NeuralNetOptionsData::getLayerData(int index){
-    return layers.at(index);
+NeuralNetLayerData& NeuralNetOptionsData::getLayerData(int index) {
+    return layers[index]; // or layers.at(index)
+}
+
+const NeuralNetLayerData& NeuralNetOptionsData::getLayerData(int index) const {
+    return layers[index];
 }
 
 bool NeuralNetOptionsData::isLayerActive(int index){
@@ -110,6 +118,10 @@ void NeuralNetOptionsData::setValidationEnabled(bool validation){
 }
 void NeuralNetOptionsData::setValidationSplit(double validation_split){
     this->validation_split = validation_split;
+}
+
+void NeuralNetOptionsData::setInputSize(int input_size){
+    this->input_size = input_size;
 }
 
 void NeuralNetOptionsData::setLossFunction(LossFunctionType new_loss_function){

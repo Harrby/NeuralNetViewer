@@ -43,4 +43,6 @@ inline ActivationFunctionType fromString(const QString& s)
 }
 
 }
+
+
 #endif // ACTIVATION_UTILS_H

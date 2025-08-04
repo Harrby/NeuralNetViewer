@@ -6,6 +6,8 @@
 #include <Eigen/Dense>
 #include <random>
 #include <activation.h>
+#include "initialisation.h"
+#include <QDebug>
 
 class Layer
 {
@@ -31,6 +33,8 @@ private:
 
     Eigen::MatrixXf initialise_weights();
     Eigen::VectorXf initialise_biases();
+    Eigen::MatrixXf initialise_weight_gradients();
+    Eigen::VectorXf initialise_bias_gradients();
 
     Eigen::VectorXf m_inputs;
     Eigen::MatrixXf m_weights;

@@ -6,9 +6,10 @@ MainWidget::MainWidget(QWidget *parent)
     m_network_config_widget(new NetworkConfigWidget(m_splitter)),
     m_train_widget(new TrainWidget(m_splitter)),
     m_network_options(new NeuralNetOptionsData(this)),
-    m_neural_network(new NeuralNetwork(*m_network_options, this))
+    m_neural_network(new NeuralNetwork(*m_network_options, this)),
+    m_dataset_container(new DataSetContainer())
 {
-
+    m_dataset_container->loadMNSITDataSet();
 
     QWidget* empty_space_container = new QWidget(m_splitter);
     empty_space_container->setStyleSheet("background-color: rgb(78, 78, 78); ");
@@ -45,7 +46,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(m_train_widget, &TrainWidget::shuffleDataChanged, m_network_options, &NeuralNetOptionsData::setShuffleEnabled);
     connect(m_train_widget, &TrainWidget::useValidationSetChanged, m_network_options, &NeuralNetOptionsData::setValidationEnabled);
     connect(m_train_widget, &TrainWidget::validationSplitChanged, m_network_options, &NeuralNetOptionsData::setValidationSplit);
-    connect(m_train_widget, &TrainWidget::trainButtonClicked, this, &MainWidget::train);
+    connect(m_train_widget, &TrainWidget::trainButtonClicked, this, &MainWidget::trainNeuralNetwork);
 
 
     connect(m_neural_network, &NeuralNetwork::epochDataChanged, m_train_widget, &TrainWidget::setEpochTrainingData);
@@ -67,5 +68,8 @@ void MainWidget::onRemoveLayerRequest(){
 }
 
 void MainWidget::trainNeuralNetwork(){
+    m_neural_network->initialise_layers(); // recreates layers as m_parameters command.
+
+    m_neural_network->train(m_dataset_container->m_training_features, m_dataset_container->m_training_labels);
 
 }

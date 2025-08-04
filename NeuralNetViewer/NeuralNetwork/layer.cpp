@@ -14,20 +14,9 @@ Layer::Layer(int input_size, const NeuralNetLayerData& parameters)
 
 Eigen::MatrixXf Layer::initialise_weights(){
 
-    // He init
-    Eigen::MatrixXf weights(m_parameters.neurons, m_input_size);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::normal_distribution<float> dist(0.0f, std::sqrt(2.0f / m_input_size));  // m = fan_in
-
-    for (int i=0; i < weights.rows(); ++i){
-        for (int j=0; j < weights.cols(); ++j){
-            weights(i, j) = dist(gen);
-        }
-    }
-
-    return weights;
-
+   return get_weight_init(m_parameters.weight_initialisation,
+                           m_input_size,
+                           m_parameters.neurons);
 }
 
 Eigen::VectorXf Layer::initialise_biases(){

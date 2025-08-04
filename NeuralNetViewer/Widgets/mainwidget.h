@@ -9,6 +9,7 @@
 #include "neuralnetoptionsdata.h"
 #include "trainwidget.h"
 #include "neuralnetwork.h"
+#include "datasetcontainer.h"
 
 
 class MainWidget : public QWidget
@@ -23,8 +24,10 @@ private:
     TrainWidget* m_train_widget;
     NeuralNetOptionsData* m_network_options;
     NeuralNetwork* m_neural_network;
+    DataSetContainer* m_dataset_container;
     void onAddLayerRequest();
     void onRemoveLayerRequest();
+    void trainNeuralNetwork();
 
 signals:
 
