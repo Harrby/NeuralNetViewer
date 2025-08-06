@@ -25,3 +25,7 @@ bool ValueCheckboxWidget::get_state(){
     return m_checkbox->isChecked();
 }
 
+void ValueCheckboxWidget::set_state(bool state){
+    m_checkbox->setChecked(state);
+}
+

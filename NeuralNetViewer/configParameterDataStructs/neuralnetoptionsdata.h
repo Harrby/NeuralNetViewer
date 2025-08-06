@@ -8,6 +8,8 @@
 #include "neuralnetlayerdata.h"
 #include "optimiser_utils.h"
 #include "loss_utils.h"
+#include "initialisation_utils.h"
+#include "activation_utils.h"
 
 
 class NeuralNetOptionsData : public QObject
@@ -19,10 +21,9 @@ public:
     int addLayer();
     void removeLayer();
 
-    NeuralNetLayerData& getLayerData(int index);
-    const NeuralNetLayerData& getLayerData(int index) const;
+    NeuralNetLayerData getLayerData(int index) const;
 
-    int getLenLayers();
+    int getLenLayers() const;
     bool isLayerActive(int index);
     int getLayerNeurons(int index);
     ActivationFunctionType getLayerActivationFunction(int index);
@@ -31,15 +32,15 @@ public:
     double getLayerL1Regularisation(int index);
     double getLayerL2Regularisation(int index);
 
-    int getBatchSize();
-    bool isShuffleEnabled();
-    bool isValidationEnabled();
-    double getValidationSplit();
-    int getInputSize();
-    OptimiserType getOptimiser();
-    LossFunctionType getLossFunction();
-    double getLearningRate();
-    int getEpochs();
+    int getBatchSize() const;
+    bool isShuffleEnabled() const;
+    bool isValidationEnabled() const;
+    double getValidationSplit() const;
+    int getInputSize() const;
+    OptimiserType getOptimiser() const;
+    LossFunctionType getLossFunction() const;
+    double getLearningRate() const;
+    int getEpochs() const;
 
     void setLayerActive(int index, bool active);
     void setLayerNeurons(int index, int neurons);
@@ -70,7 +71,8 @@ private:
     LossFunctionType loss_function;
     double learning_rate;
     int     epochs;
-    QVector<NeuralNetLayerData> layers;
+    std::vector<std::unique_ptr<NeuralNetLayerData>> layers;
+    std::vector<ActivationFunctionType> activation_functions;
 };
 
 #endif // NEURALNETOPTIONSDATA_H

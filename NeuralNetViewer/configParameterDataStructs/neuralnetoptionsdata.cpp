@@ -11,99 +11,99 @@ NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     loss_function(LossFunctionType::CategoricalCrossEntropy),
     learning_rate(0.1),
     epochs(200),
-    layers({NeuralNetLayerData(), NeuralNetLayerData()})
+    activation_functions {
+            ActivationFunctionType::ReLU,
+            ActivationFunctionType::Identity
+    }
+
 
 {
-
+    layers.push_back(std::make_unique<NeuralNetLayerData>());
+    layers.push_back(std::make_unique<NeuralNetLayerData>());
 }
 
 int NeuralNetOptionsData::addLayer(){
-    layers.append(NeuralNetLayerData());
-    return layers.size()-1;
+    layers.push_back(std::make_unique<NeuralNetLayerData>());
+    return static_cast<int>(layers.size() - 1);
 }
 
 void NeuralNetOptionsData::removeLayer(){
-    if (!layers.isEmpty()){
-        layers.removeLast();
+    if (!layers.empty()){
+        layers.pop_back();
     }
 }
 
 // GETTER METHODS
 
-int NeuralNetOptionsData::getBatchSize(){
+int NeuralNetOptionsData::getBatchSize() const{
     return batch_size;
 }
 
-bool NeuralNetOptionsData::isShuffleEnabled(){
+bool NeuralNetOptionsData::isShuffleEnabled() const{
     return shuffle_data;
 }
-bool NeuralNetOptionsData::isValidationEnabled(){
+bool NeuralNetOptionsData::isValidationEnabled() const{
     return use_validation_set;
 }
-double NeuralNetOptionsData::getValidationSplit(){
+double NeuralNetOptionsData::getValidationSplit() const{
     return validation_split;
 }
 
-int NeuralNetOptionsData::getInputSize(){
+int NeuralNetOptionsData::getInputSize() const{
     return input_size;
 }
 
-LossFunctionType NeuralNetOptionsData::getLossFunction(){
+LossFunctionType NeuralNetOptionsData::getLossFunction() const{
     return loss_function;
 }
 
 
-OptimiserType NeuralNetOptionsData::getOptimiser(){
+OptimiserType NeuralNetOptionsData::getOptimiser() const{
     return optimiser;
 }
 
-double NeuralNetOptionsData::getLearningRate(){
+double NeuralNetOptionsData::getLearningRate() const{
     return learning_rate;
 }
 
-int NeuralNetOptionsData::getEpochs(){
+int NeuralNetOptionsData::getEpochs() const{
     return epochs;
 }
 
-int NeuralNetOptionsData::getLenLayers(){
-    return layers.length();
+int NeuralNetOptionsData::getLenLayers() const{
+    return static_cast<int>(layers.size());
 };
 
 // GETTER METHOD - PER LAYER
-NeuralNetLayerData& NeuralNetOptionsData::getLayerData(int index) {
-    return layers[index]; // or layers.at(index)
+NeuralNetLayerData NeuralNetOptionsData::getLayerData(int index) const{
+     return *(layers.at(index)); // or layers.at(index)
 }
 
-const NeuralNetLayerData& NeuralNetOptionsData::getLayerData(int index) const {
-    return layers[index];
-}
+
 
 bool NeuralNetOptionsData::isLayerActive(int index){
-    return layers.at(index).active;
+    return layers.at(index)->active;
 }
 
 int NeuralNetOptionsData::getLayerNeurons(int index){
-    return layers.at(index).neurons;
+    return layers.at(index)->neurons;
 }
 
 ActivationFunctionType NeuralNetOptionsData::getLayerActivationFunction(int index){
-    return layers.at(index).activation_function;
+    return layers.at(index)->activation_function;
 }
 
-WeightInitialisationType NeuralNetOptionsData::getLayerWeightInit(int index){
-    return layers.at(index).weight_initialisation;
-}
 
 double NeuralNetOptionsData::getLayerDropoutRate(int index){
-    return layers.at(index).dropout_rate;
+    return layers.at(index)->dropout_rate;
 };
 
 double NeuralNetOptionsData::getLayerL1Regularisation(int index){
-    return layers.at(index).l1_regularisation;
+    return layers.at(index)->l1_regularisation;
 };
 
 double NeuralNetOptionsData::getLayerL2Regularisation(int index){
-    return layers.at(index).l2_regularisation;
+    return layers.at(index)->l2_regularisation;
 };
 
 // SETTER METHODS
@@ -142,26 +142,26 @@ void NeuralNetOptionsData:: setEpochs(int new_epochs){
 
 //SETTER METHODS - PER LAYER
 void NeuralNetOptionsData::setLayerActive(int index, bool active){
-    layers[index].active = active;
+    layers[index]->active = active;
 }
 void NeuralNetOptionsData::setLayerNeurons(int index, int neurons){
-    layers[index].neurons = neurons;
+    layers[index]->neurons = neurons;
 }
 
 void NeuralNetOptionsData::setLayerActivationFunction(int index, ActivationFunctionType activation_function){
-    layers[index].activation_function = activation_function;
+    layers[index]->activation_function = activation_function;
 }
 
 void NeuralNetOptionsData::setLayerWeightInit(int index, WeightInitialisationType weight_init){
-    layers[index].weight_initialisation = weight_init;
+    layers[index]->weight_initialisation = weight_init;
 }
 void NeuralNetOptionsData::setLayerDropoutRate(int index, double dropout_rate){
-    layers[index].dropout_rate = dropout_rate;
+    layers[index]->dropout_rate = dropout_rate;
 }
 
 void NeuralNetOptionsData::setLayerL1Regularisation(int index, double l1_regularisation){
-    layers[index].l1_regularisation = l1_regularisation;
+    layers[index]->l1_regularisation = l1_regularisation;
 }
 void NeuralNetOptionsData::setLayerL2Regularisation(int index, double l2_regularisation){
-    layers[index].l2_regularisation = l2_regularisation;
+    layers[index]->l2_regularisation = l2_regularisation;
 }

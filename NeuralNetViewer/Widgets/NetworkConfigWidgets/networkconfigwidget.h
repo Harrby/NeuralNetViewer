@@ -15,8 +15,9 @@ class NetworkConfigWidget : public QFrame
     Q_OBJECT
 public:
     NetworkConfigWidget(QWidget* parent=nullptr);
-    void addLayerWidget(const NeuralNetLayerData &parameters);
+    void addLayerWidget(const NeuralNetLayerData& parameters);
     void removeLayerWidget();
+    void initialiseUI(const NeuralNetOptionsData& parameters);
 
 private:
     GlobalOptionsWidget* m_global_options_widget;

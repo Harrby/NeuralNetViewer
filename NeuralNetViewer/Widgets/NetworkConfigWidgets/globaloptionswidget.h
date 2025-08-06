@@ -4,15 +4,15 @@
 #include<QFrame>
 #include"valuecomboboxwidget.h"
 #include"valuesliderwidget.h"
-#include "neuralnetoptionsdata.h"
-
-
+#include "optimiser_utils.h"
+#include "loss_utils.h"
 
 class GlobalOptionsWidget : public QFrame
 {
     Q_OBJECT
 public:
     GlobalOptionsWidget(QWidget *parent=nullptr);
+    void initialiseUIParameters(OptimiserType optimiser, LossFunctionType loss_function, double learning_rate, int epochs);
 
 private:
     ValueComboBoxWidget* m_cb_optimiser;

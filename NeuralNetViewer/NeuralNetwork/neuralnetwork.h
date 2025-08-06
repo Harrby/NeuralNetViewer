@@ -9,6 +9,7 @@
 #include <QObject>
 #include "epochstats.h"
 #include "metrics.h"
+#include <atomic>
 
 class NeuralNetwork : public QObject
 {
@@ -16,15 +17,22 @@ class NeuralNetwork : public QObject
 
 public:
     NeuralNetwork(NeuralNetOptionsData& network_parameters, QObject* parent = nullptr);
-    void initialise_layers();
+    void initialise_network();
     void train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels);
     int predict(const Eigen::VectorXf& inputs);
-    Metrics validate(const Eigen::MatrixXf& inputs, Eigen::VectorXi& labels) const;
+    Metrics validate(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const;
+
+    void requestCancel();
+    bool isCancelled() const;
+    void resetCancel();
+
 private:
     NeuralNetOptionsData& m_network_parameters;
     std::vector<std::unique_ptr<Layer>> m_layers;
+    std::vector<std::unique_ptr<ActivationFunction>> m_activation_functions;
     const LossFunction& m_loss_function;
     const Optimiser& m_optimiser;
+    std::atomic<bool> m_cancel_requested { false };
 
 signals:
     void epochDataChanged(EpochStats);

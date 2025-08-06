@@ -7,6 +7,7 @@
 #include "valuesliderwidget.h"
 #include <QGridLayout>
 #include "neuralnetlayerdata.h"
+#include "initialisation_utils.h"
 
 
 class LayerOptions : public QFrame

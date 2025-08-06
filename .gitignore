@@ -3,6 +3,9 @@
 /bin/
 /obj/
 
+
+/build-NeuralNetViewer-Desktop_Qt_6_9_1_MSVC2022_64bit-Release/
+
 # Compiled object files
 *.o
 *.obj

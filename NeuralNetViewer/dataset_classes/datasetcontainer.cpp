@@ -30,9 +30,14 @@ Eigen::MatrixXf load_mnist_images_eigen(const QString& resourcePath) {
         uint32_t num_cols   = read_be_uint32(stream);
         uint32_t image_size = num_rows * num_cols;
 
-        Eigen::MatrixXf images(num_images, image_size);
+
         QByteArray buffer = file.readAll();
-        const uchar* raw = reinterpret_cast<const uchar*>(buffer.constData() + 16); // skip header
+        const auto expected_img_bytes = num_images * image_size;
+        if (buffer.size() < static_cast<qint64>(expected_img_bytes))
+            throw std::runtime_error("MNIST image file truncated");
+        //const uchar* raw = reinterpret_cast<const uchar*>(buffer.constData() + 16); // skip header
+        const uchar* raw = reinterpret_cast<const uchar*>(buffer.constData());
+        Eigen::MatrixXf images(num_images, image_size);
 
         for (uint32_t i = 0; i < num_images; ++i) {
             for (uint32_t j = 0; j < image_size; ++j) {
@@ -62,7 +67,10 @@ Eigen::VectorXi load_mnist_labels_eigen(const QString& resourcePath) {
 
         Eigen::VectorXi labels(num_labels);
         QByteArray buffer = file.readAll();
-        const uchar* raw = reinterpret_cast<const uchar*>(buffer.constData() + 8); // skip header
+        if (buffer.size() < static_cast<qint64>(num_labels))
+            throw std::runtime_error("MNIST label file truncated");
+
+        const uchar* raw = reinterpret_cast<const uchar*>(buffer.constData()); // skip header
 
         for (uint32_t i = 0; i < num_labels; ++i) {
             labels(i) = static_cast<int>(raw[i]);

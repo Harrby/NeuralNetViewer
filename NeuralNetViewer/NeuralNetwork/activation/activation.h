@@ -8,28 +8,30 @@
 
 class ActivationFunction {
 public:
-    virtual Eigen::VectorXf forward (const Eigen::VectorXf& x) const = 0;
-    virtual Eigen::VectorXf backward(const Eigen::VectorXf& dOut,
-                                     const Eigen::VectorXf& cached) const = 0;
+    virtual Eigen::VectorXf forward (const Eigen::VectorXf& x) = 0;
+    virtual Eigen::VectorXf backward(const Eigen::VectorXf& dOut) = 0;
     virtual ~ActivationFunction() = default;
+
+protected:
+    Eigen::VectorXf m_output;
 };
 
 class ReLU : public ActivationFunction {
 public:
-    Eigen::VectorXf forward(const Eigen::VectorXf& input) const override;
-    Eigen::VectorXf backward(const Eigen::VectorXf& dvalues, const Eigen::VectorXf& inputs) const override;
+    Eigen::VectorXf forward(const Eigen::VectorXf& input)  override;
+    Eigen::VectorXf backward(const Eigen::VectorXf& dvalues)  override;
 };
 
 
 class Identity : public ActivationFunction {
 public:
-    Eigen::VectorXf forward(const Eigen::VectorXf& input) const override;
-    Eigen::VectorXf backward(const Eigen::VectorXf& dvalues, const Eigen::VectorXf& inputs) const override;
+    Eigen::VectorXf forward(const Eigen::VectorXf& input)  override;
+    Eigen::VectorXf backward(const Eigen::VectorXf& dvalues)  override;
 };
 
 
 // OTHERS NOT IMPLEMENTED YET
-const ActivationFunction& get_activation(ActivationFunctionType type);
+std::unique_ptr<ActivationFunction> get_activation(ActivationFunctionType type);
 
 
 #endif // ACTIVATION_H

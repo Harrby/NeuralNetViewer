@@ -15,6 +15,7 @@ class ValueCheckboxWidget : public QFrame
 public:
     ValueCheckboxWidget(QString title_text = "", QWidget* parent = nullptr);
     bool get_state();
+    void set_state(bool state);
 
 private:
     CheckBox* m_checkbox;

@@ -45,3 +45,8 @@ void NetworkConfigWidget::removeLayerWidget(){
     m_layer_scroll_area->removeLayerOptionsWidget();
 }
 
+void NetworkConfigWidget::initialiseUI(const NeuralNetOptionsData& parameters){
+    m_global_options_widget->initialiseUIParameters(parameters.getOptimiser(), parameters.getLossFunction(), parameters.getLearningRate(), parameters.getEpochs());
+    m_layer_scroll_area->initialiseLayerOptionsWidgets(parameters);
+};
+

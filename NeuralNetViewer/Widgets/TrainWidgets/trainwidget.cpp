@@ -43,3 +43,6 @@ void TrainWidget::setEpochTrainingData(const EpochStats& epoch_stats){
     m_status_widget->setEpochTrainingData(epoch_stats);
 }
 
+void TrainWidget::initialiseUIParameters(int batch_size, bool shuffle_data, bool use_validation_set, double valdiation_split){
+    m_options_widget->initialiseParameters(batch_size, shuffle_data, use_validation_set, valdiation_split);
+}

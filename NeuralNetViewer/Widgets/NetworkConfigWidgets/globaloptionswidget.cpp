@@ -46,4 +46,11 @@ GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
 
 }
 
+void GlobalOptionsWidget::initialiseUIParameters(OptimiserType optimiser, LossFunctionType loss_function, double learning_rate, int epochs){
+    m_cb_optimiser->setValue(OptimiserUtils::toString(optimiser));
+    m_cb_loss_function->setValue(LossFnUtils::toString(loss_function));
+    m_s_learning_rate->setValue(learning_rate);
+    m_s_epochs->setValue(epochs);
+};
+
 

@@ -35,13 +35,16 @@ private:
     Eigen::VectorXf initialise_biases();
     Eigen::MatrixXf initialise_weight_gradients();
     Eigen::VectorXf initialise_bias_gradients();
+    Eigen::MatrixXf initialise_grad_weights();
+    Eigen::VectorXf initialise_grad_biases();
 
-    Eigen::VectorXf m_inputs;
+
+    Eigen::VectorXf m_input;
+    Eigen::VectorXf m_output;
     Eigen::MatrixXf m_weights;
     Eigen::VectorXf m_biases;
     Eigen::MatrixXf m_dweights;
     Eigen::VectorXf m_dbiases;
-    const ActivationFunction& m_activation;
 
 
 

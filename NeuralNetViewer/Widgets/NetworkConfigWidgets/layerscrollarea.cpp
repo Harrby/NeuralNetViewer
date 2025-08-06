@@ -28,10 +28,11 @@ LayerScrollArea::LayerScrollArea(QWidget* parent)
 
 }
 
-void LayerScrollArea::initialiseLayerOptionsWidgets(const NeuralNetLayerData& parameters){
+void LayerScrollArea::initialiseLayerOptionsWidgets(const NeuralNetOptionsData& parameters){
     // just inits two widgets with same parameters.
-    addLayerOptionsWidget(parameters);
-    addLayerOptionsWidget(parameters);
+    for (int i=0 ; i < parameters.getLenLayers(); i++){
+        addLayerOptionsWidget(parameters.getLayerData(i));
+    }
 
 }
 

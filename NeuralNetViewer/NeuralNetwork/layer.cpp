@@ -6,7 +6,8 @@ Layer::Layer(int input_size, const NeuralNetLayerData& parameters)
     m_parameters(parameters),
     m_weights(initialise_weights()),
     m_biases(initialise_biases()),
-    m_activation(get_activation(parameters.activation_function))
+    m_dweights(initialise_grad_weights()),
+    m_dbiases(initialise_grad_biases())
 
 {
 
@@ -23,26 +24,38 @@ Eigen::VectorXf Layer::initialise_biases(){
     return Eigen::VectorXf::Zero(m_parameters.neurons);
     }
 
+Eigen::MatrixXf Layer::initialise_grad_weights(){
+
+    return Eigen::MatrixXf::Zero(m_parameters.neurons, m_input_size);
+}
+
+Eigen::VectorXf Layer::initialise_grad_biases(){
+    return Eigen::VectorXf::Zero(m_parameters.neurons);
+}
+
 
 
 Eigen::VectorXf Layer::forward(const Eigen::VectorXf& inputs){
-    m_inputs = inputs;
-    Eigen::VectorXf output = m_weights * inputs + m_biases;
-    return m_activation.forward(output);
+    m_input = inputs;
+    m_output = m_weights * inputs + m_biases;
+    return m_output;
 }
 
-Eigen::VectorXf Layer::backward(const Eigen::VectorXf& grad_from_next_layer, bool accumulate){
-    Eigen::VectorXf adjusted_dvalues = m_activation.backward(grad_from_next_layer, m_inputs);
+Eigen::VectorXf Layer::backward(const Eigen::VectorXf& grad_output, bool accumulate){
+    Eigen::MatrixXf grad_W = grad_output * m_input.transpose();
+    Eigen::VectorXf grad_b = grad_output;
+
+
     if (accumulate){
-        m_dweights += m_inputs * adjusted_dvalues.transpose();
-        m_dbiases += adjusted_dvalues;
+        m_dweights += grad_W;
+        m_dbiases += grad_b;
     } else{
-    m_dweights = m_inputs * adjusted_dvalues.transpose();
-    m_dbiases = adjusted_dvalues;
+    m_dweights = grad_W;
+    m_dbiases = grad_b;
     }
 
-    Eigen::VectorXf dinputs = m_weights * adjusted_dvalues;
-    return dinputs;
+    Eigen::VectorXf grad_input = m_weights.transpose() * grad_output;
+    return grad_input;
 }
 
 void Layer::scaleGradients(float factor){

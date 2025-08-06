@@ -17,7 +17,7 @@ void LogWidget::add_log_message(QString message){
 void LogWidget::add_training_log_message(int epoch, int total_epochs, float training_loss, float validation_loss, float training_accuracy,
                                          float validation_accuracy, float eta){
     training_accuracy *= 100;
-    validation_accuracy += 100;
+    validation_accuracy *= 100;
 
     int totalSeconds = static_cast<int>(eta);
     int minutes = totalSeconds / 60;
@@ -53,4 +53,6 @@ void LogWidget::add_sample_log_message(int sample, int predicted, int actual){
                           .arg(predicted)
                           .arg(actual)
                           .arg(correct_text);
+
+    append(message);
 }

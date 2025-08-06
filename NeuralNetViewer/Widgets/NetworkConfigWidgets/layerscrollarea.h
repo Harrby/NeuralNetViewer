@@ -6,13 +6,14 @@
 #include <QScrollArea>
 #include <QVector>
 #include "layeroptions.h"
+#include "neuralnetoptionsdata.h"
 
 class LayerScrollArea : public QScrollArea
 {
     Q_OBJECT
 public:
     LayerScrollArea(QWidget *parent=nullptr);
-    void initialiseLayerOptionsWidgets(const NeuralNetLayerData& parameters);
+    void initialiseLayerOptionsWidgets(const NeuralNetOptionsData& parameters);
     void addLayerOptionsWidget(const NeuralNetLayerData& parameters);
     void removeLayerOptionsWidget();
 

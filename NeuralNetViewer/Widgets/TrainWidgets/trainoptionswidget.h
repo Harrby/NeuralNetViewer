@@ -13,6 +13,7 @@ class TrainOptionsWidget : public QFrame
     Q_OBJECT
 public:
     TrainOptionsWidget(QWidget* parent = nullptr);
+    void initialiseParameters(int batch_size, bool shuffle_data, bool use_validation_set, double validation_split);
 
 
 private:

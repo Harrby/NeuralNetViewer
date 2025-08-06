@@ -1,6 +1,8 @@
 
 #ifndef EPOCHSTATS_H
 #define EPOCHSTATS_H
+#include <QDebug>
+
 struct EpochStats {
     int epoch;
     int total_epochs;
@@ -10,4 +12,6 @@ struct EpochStats {
     float validation_accuracy;
     float eta;
 };
+QDebug operator<<(QDebug dbg, const EpochStats& stats);
+
 #endif // EPOCHSTATS_H

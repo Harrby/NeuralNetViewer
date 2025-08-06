@@ -10,6 +10,7 @@ MainWidget::MainWidget(QWidget *parent)
     m_dataset_container(new DataSetContainer())
 {
     m_dataset_container->loadMNSITDataSet();
+    initialiseUI();
 
     QWidget* empty_space_container = new QWidget(m_splitter);
     empty_space_container->setStyleSheet("background-color: rgb(78, 78, 78); ");
@@ -47,6 +48,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(m_train_widget, &TrainWidget::useValidationSetChanged, m_network_options, &NeuralNetOptionsData::setValidationEnabled);
     connect(m_train_widget, &TrainWidget::validationSplitChanged, m_network_options, &NeuralNetOptionsData::setValidationSplit);
     connect(m_train_widget, &TrainWidget::trainButtonClicked, this, &MainWidget::trainNeuralNetwork);
+    connect(m_train_widget, &TrainWidget::cancelButtonClicked, m_neural_network, &NeuralNetwork::requestCancel);
 
 
     connect(m_neural_network, &NeuralNetwork::epochDataChanged, m_train_widget, &TrainWidget::setEpochTrainingData);
@@ -68,8 +70,22 @@ void MainWidget::onRemoveLayerRequest(){
 }
 
 void MainWidget::trainNeuralNetwork(){
-    m_neural_network->initialise_layers(); // recreates layers as m_parameters command.
+    qDebug() << " started training";
+    QThread* thread = new QThread(this);
+    NeuralNetworkTrainer* trainer = new NeuralNetworkTrainer(m_neural_network, m_dataset_container->m_training_features, m_dataset_container->m_training_labels);
+    trainer->moveToThread(thread);
 
-    m_neural_network->train(m_dataset_container->m_training_features, m_dataset_container->m_training_labels);
+    connect(thread, &QThread::started, trainer, &NeuralNetworkTrainer::run);
+    connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+    connect(trainer, &NeuralNetworkTrainer::finished, thread, &QThread::quit);
+    connect(trainer, &NeuralNetworkTrainer::finished, trainer, &QObject::deleteLater);
 
+    thread->start();
+
+}
+
+void MainWidget::initialiseUI(){
+    m_network_config_widget->initialiseUI(m_network_options);
+    m_train_widget->initialiseUIParameters(m_network_options->getBatchSize(), m_network_options->isShuffleEnabled(),
+                                           m_network_options->isValidationEnabled(), m_network_options->getValidationSplit());
 }

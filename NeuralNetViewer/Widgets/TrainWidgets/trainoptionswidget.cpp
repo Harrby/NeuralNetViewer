@@ -8,7 +8,7 @@ TrainOptionsWidget::TrainOptionsWidget(QWidget* parent)
     m_batch_size_slider(new ValueSliderWidget(QString("Batch Size"), 1, 256, Slider::Linear, 255, this)),
     m_shuffle_data_checkbox(new ValueCheckboxWidget(QString("Shuffle Data"), this)),
     m_validation_set_checkbox(new ValueCheckboxWidget(QString("Use Validation Set"), this)),
-    m_validation_split_slider(new ValueSliderWidget(QString("Validation Split"), 0, 100, Slider::Linear, 100, this))
+    m_validation_split_slider(new ValueSliderWidget(QString("Validation Split"), 0, 1, Slider::Linear, 100, this))
 
 {
     setStyleSheet(".TrainOptionsWidget{background-color: #302B2B; border: 1px solid #2A2626; border-radius: 4px;}");
@@ -47,5 +47,12 @@ TrainOptionsWidget::TrainOptionsWidget(QWidget* parent)
     connect(m_shuffle_data_checkbox, &ValueCheckboxWidget::checked, this, &TrainOptionsWidget::shuffleDataChanged);
     connect(m_validation_set_checkbox, &ValueCheckboxWidget::checked, this, &TrainOptionsWidget::useValidationSetChanged);
     connect(m_validation_split_slider, &ValueSliderWidget::valueChanged, this, &TrainOptionsWidget::validationSplitChanged);
+}
+
+void TrainOptionsWidget::initialiseParameters(int batch_size, bool shuffle_data, bool use_validation_set, double validation_split){
+    m_batch_size_slider->setValue(static_cast<double>(batch_size));
+    m_shuffle_data_checkbox->set_state(shuffle_data);
+    m_validation_set_checkbox->set_state(use_validation_set);
+    m_validation_split_slider->setValue(validation_split);
 }
 

@@ -3,33 +3,37 @@
 
 
 
-Eigen::VectorXf ReLU::forward(const Eigen::VectorXf& input) const{
-    return input.unaryExpr([](float x) { return std::max(0.0f, x); });
+Eigen::VectorXf ReLU::forward(const Eigen::VectorXf& x){
+
+    m_output = x.cwiseMax(0.0f);
+    return m_output;;
 }
 
-Eigen::VectorXf ReLU::backward(const Eigen::VectorXf& dvalues, const Eigen::VectorXf& inputs) const{
-    return dvalues.cwiseProduct(inputs.unaryExpr([](float v){ return v > 0.0f ? 1.0f : 0.0f; }));
+Eigen::VectorXf ReLU::backward(const Eigen::VectorXf& dvalues) {
+    Eigen::VectorXf grad = (m_output.array() > 0).cast<float>();
+    return grad.array() * dvalues.array();
 }
 
 
 
-Eigen::VectorXf Identity::forward(const Eigen::VectorXf& input) const {
-    return input.unaryExpr([](float x) { return x; });
+Eigen::VectorXf Identity::forward(const Eigen::VectorXf& input)  {
+    m_output = input.unaryExpr([](float x) { return x; });
+    return m_output;
 }
 
-Eigen::VectorXf Identity::backward(const Eigen::VectorXf& dvalues, const Eigen::VectorXf& inputs) const {
+Eigen::VectorXf Identity::backward(const Eigen::VectorXf& dvalues)  {
     return dvalues;
 }
 
-const ActivationFunction& get_activation(ActivationFunctionType type)
+std::unique_ptr<ActivationFunction> get_activation(ActivationFunctionType type)
 {
     switch (type) {
-    case ActivationFunctionType::ReLU:        {static ReLU relu;        return relu;}
-    case ActivationFunctionType::LeakyReLU:   {static Identity leaky;  return leaky;}
-    case ActivationFunctionType::Identity:    {static Identity id;      return id;}
-    case ActivationFunctionType::Sigmoid:     {static Identity sig;      return sig;}
-    case ActivationFunctionType::Tanh:        {static Identity tanh;        return tanh;}
-    case ActivationFunctionType::Softmax:     {static Identity sm;       return sm;}
+    case ActivationFunctionType::ReLU:        return std::make_unique<ReLU>();
+    case ActivationFunctionType::LeakyReLU:   return std::make_unique<Identity>();
+    case ActivationFunctionType::Identity:    return std::make_unique<Identity>();
+    case ActivationFunctionType::Sigmoid:     return std::make_unique<Identity>();
+    case ActivationFunctionType::Tanh:        return std::make_unique<Identity>();
+    case ActivationFunctionType::Softmax:     return std::make_unique<Identity>();
     default: throw std::runtime_error("Unsupported activation");
     }
 }

@@ -36,8 +36,6 @@ GraphWidget::GraphWidget(QWidget* parent)
         QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables
         );
 
-    set_dummy_data();
-
     m_plot->xAxis->setLabelColor(Qt::white);
     m_plot->yAxis->setLabelColor(Qt::white);
     m_plot->xAxis->setTickLabelColor(Qt::white);

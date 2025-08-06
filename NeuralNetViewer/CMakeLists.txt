@@ -83,8 +83,11 @@ set(PROJECT_SOURCES
         Widgets/TrainWidgets/trainingstatsframe.h Widgets/TrainWidgets/trainingstatsframe.cpp
 
         metrics/epochstats.h
+        metrics/epochstats.cpp
 
         metrics/metrics.h
+        threads/neuralnetworktrainer.h threads/neuralnetworktrainer.cpp
+
 
 
 
@@ -116,6 +119,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/NetworkConfigWidgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/metrics)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/dataset_classes)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/threads)
     target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/qcustomplot/qcustomplot.cpp)
     include_directories(${CMAKE_SOURCE_DIR}/eigen-3.4.0)
     include_directories(${CMAKE_SOURCE_DIR}/qcustomplot)
