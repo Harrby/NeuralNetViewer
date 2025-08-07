@@ -122,6 +122,15 @@ void LayerOptions::setL2Regularisation(double l2_regularisation){
 
 }
 
+void LayerOptions::setAsFinalLayer(bool final){
+    setNeurons(10);
+    m_s_neurons->setInteractive(!final);
+    m_s_dropout_rate->setVisible(!final);
+    m_cb_activation_function->setVisible(!final);
+
+
+}
+
 
 
 

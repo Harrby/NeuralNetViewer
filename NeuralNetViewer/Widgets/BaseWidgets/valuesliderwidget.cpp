@@ -67,5 +67,10 @@ void ValueSliderWidget::setValue(double value){
     m_lineEdit->setText(QString::number(value));
 }
 
+void ValueSliderWidget::setInteractive(bool interactive){
+    m_slider->setEnabled(interactive);
+    m_lineEdit->setEnabled(interactive);
+}
+
 
 

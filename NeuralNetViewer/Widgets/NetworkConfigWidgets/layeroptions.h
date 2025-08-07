@@ -25,6 +25,7 @@ public:
     void setWeightInit(WeightInitialisationType weight_init);
     void setL1Regularisation(double l1_regularisation);
     void setL2Regularisation(double l2_regularisation);
+    void setAsFinalLayer(bool final);
 
 private:
     int m_id;
