@@ -14,8 +14,8 @@ class Layer
 public:
     Layer(int input_size, const NeuralNetLayerData& parameters);
 
-    Eigen::VectorXf forward(const Eigen::VectorXf& inputs);
-    Eigen::VectorXf backward(const Eigen::VectorXf& grad_from_next_layer, bool accumulate);
+    Eigen::MatrixXf forward(const Eigen::MatrixXf& inputs);
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& grad_from_next_layer, bool accumulate);
 
     Eigen::MatrixXf& getWeights();
     const Eigen::MatrixXf& getWeights() const;
@@ -39,8 +39,8 @@ private:
     Eigen::VectorXf initialise_grad_biases();
 
 
-    Eigen::VectorXf m_input;
-    Eigen::VectorXf m_output;
+    Eigen::MatrixXf m_inputs;
+    Eigen::VectorXf m_outputs;
     Eigen::MatrixXf m_weights;
     Eigen::VectorXf m_biases;
     Eigen::MatrixXf m_dweights;

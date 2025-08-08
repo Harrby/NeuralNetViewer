@@ -8,25 +8,25 @@
 
 class ActivationFunction {
 public:
-    virtual Eigen::VectorXf forward (const Eigen::VectorXf& x) = 0;
-    virtual Eigen::VectorXf backward(const Eigen::VectorXf& dOut) = 0;
+    virtual Eigen::MatrixXf forward (const Eigen::MatrixXf& x) = 0;
+    virtual Eigen::MatrixXf backward(const Eigen::MatrixXf& dOut) = 0;
     virtual ~ActivationFunction() = default;
 
 protected:
-    Eigen::VectorXf m_output;
+    Eigen::MatrixXf m_output;
 };
 
 class ReLU : public ActivationFunction {
 public:
-    Eigen::VectorXf forward(const Eigen::VectorXf& input)  override;
-    Eigen::VectorXf backward(const Eigen::VectorXf& dvalues)  override;
+    Eigen::MatrixXf forward(const Eigen::MatrixXf& input)  override;
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
 };
 
 
 class Identity : public ActivationFunction {
 public:
-    Eigen::VectorXf forward(const Eigen::VectorXf& input)  override;
-    Eigen::VectorXf backward(const Eigen::VectorXf& dvalues)  override;
+    Eigen::MatrixXf forward(const Eigen::MatrixXf& input)  override;
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
 };
 
 

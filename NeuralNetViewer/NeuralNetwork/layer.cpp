@@ -35,15 +35,15 @@ Eigen::VectorXf Layer::initialise_grad_biases(){
 
 
 
-Eigen::VectorXf Layer::forward(const Eigen::VectorXf& inputs){
-    m_input = inputs;
-    m_output = m_weights * inputs + m_biases;
-    return m_output;
+Eigen::MatrixXf Layer::forward(const Eigen::MatrixXf& batch_inputs){
+    m_inputs = batch_inputs;
+    m_outputs = batch_inputs * m_weights.transpose() + m_biases.transpose();
+    return m_outputs;
 }
 
-Eigen::VectorXf Layer::backward(const Eigen::VectorXf& grad_output, bool accumulate){
-    Eigen::MatrixXf grad_W = grad_output * m_input.transpose();
-    Eigen::VectorXf grad_b = grad_output;
+Eigen::MatrixXf Layer::backward(const Eigen::MatrixXf& grad_output, bool accumulate){
+    Eigen::MatrixXf grad_W = grad_output.transpose() * m_inputs;
+    Eigen::VectorXf grad_b = grad_output.colwise().sum().transpose();
 
 
     if (accumulate){
@@ -54,7 +54,7 @@ Eigen::VectorXf Layer::backward(const Eigen::VectorXf& grad_output, bool accumul
     m_dbiases = grad_b;
     }
 
-    Eigen::VectorXf grad_input = m_weights.transpose() * grad_output;
+    Eigen::VectorXf grad_input = grad_output * m_weights;
     return grad_input;
 }
 

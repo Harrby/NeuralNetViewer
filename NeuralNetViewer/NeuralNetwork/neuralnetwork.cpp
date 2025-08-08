@@ -97,6 +97,24 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
             }
             int correct_preds = 0;
             float batch_training_loss = 0.0f;
+
+            // x is shape (batch_size, input_size)
+            Eigen::MatrixXf x = train_X.block(i, 0, actual_batch_size, m_network_parameters.getInputSize());
+
+            // forward pass
+            for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer){
+                x = m_layers.at(layer)->forward(x);
+                x = m_activation_functions.at(layer)->forward(x);
+            }
+
+            Eigen::VectorXi true_classes = train_y.segment(i, actual_batch_size);
+            Eigen::VectorXf batch_losses =  m_loss_function.forward(x, true_classes);
+
+
+
+
+
+
             for (int j=0; j < actual_batch_size; ++j){
                 Eigen::VectorXf x = train_X.row(i+j).transpose();
 
@@ -201,11 +219,6 @@ Metrics NeuralNetwork::validate(const Eigen::MatrixXf& inputs, const Eigen::Vect
             x = m_activation_functions[i]->forward(x);
             // pass is inference-mode safe
         }
-        /*qDebug() << "x: " << x.size();
-        qDebug() << "n" << n;
-        qDebug() << "labels size" << labels.size();
-        qDebug() << "labels(n)" << labels(n);
-        qDebug() << "loss function returned" << m_loss_function.forward(x, labels(n));*/
         m.loss += m_loss_function.forward(x, labels(n));
 
         Eigen::Index pred;

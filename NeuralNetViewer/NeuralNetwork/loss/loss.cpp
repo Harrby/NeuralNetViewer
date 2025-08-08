@@ -2,13 +2,13 @@
 #include "loss.h"
 
 
-float CategoricalCrossEntropyLoss::forward(const Eigen::VectorXf& logits, int true_class) const{
-    Eigen::VectorXf shifted = logits.array() - logits.maxCoeff();
+float CategoricalCrossEntropyLoss::forward(const Eigen::MatrixXf& logits, Eigen::VectorXf& true_classes) const{
+    Eigen::MatrixXf shifted = logits.rowwise() - logits.rowwise().maxCoeff();
     float log_sum_exp = std::log(shifted.array().exp().sum());
     return -shifted(true_class) + log_sum_exp;
 }
 
-Eigen::VectorXf CategoricalCrossEntropyLoss::backward(const Eigen::VectorXf& logits, int true_class) const{
+Eigen::MatrixXf CategoricalCrossEntropyLoss::backward(const Eigen::MatrixXf& logits, Eigen::VectorXf& true_classes) const{
     Eigen::VectorXf shifted = logits.array() - logits.maxCoeff();
     Eigen::VectorXf softmax = shifted.array().exp();
     softmax /= softmax.sum();

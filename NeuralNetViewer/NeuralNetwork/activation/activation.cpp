@@ -3,25 +3,25 @@
 
 
 
-Eigen::VectorXf ReLU::forward(const Eigen::VectorXf& x){
+Eigen::MatrixXf ReLU::forward(const Eigen::MatrixXf& x){
 
     m_output = x.cwiseMax(0.0f);
     return m_output;;
 }
 
-Eigen::VectorXf ReLU::backward(const Eigen::VectorXf& dvalues) {
-    Eigen::VectorXf grad = (m_output.array() > 0).cast<float>();
+Eigen::MatrixXf ReLU::backward(const Eigen::MatrixXf& dvalues) {
+    Eigen::MatrixXf grad = (m_output.array() > 0).cast<float>();
     return grad.array() * dvalues.array();
 }
 
 
 
-Eigen::VectorXf Identity::forward(const Eigen::VectorXf& input)  {
+Eigen::MatrixXf Identity::forward(const Eigen::MatrixXf& input)  {
     m_output = input.unaryExpr([](float x) { return x; });
     return m_output;
 }
 
-Eigen::VectorXf Identity::backward(const Eigen::VectorXf& dvalues)  {
+Eigen::MatrixXf Identity::backward(const Eigen::MatrixXf& dvalues)  {
     return dvalues;
 }
 
