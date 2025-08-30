@@ -8,12 +8,14 @@
 
 class ActivationFunction {
 public:
+
     virtual Eigen::MatrixXf forward (const Eigen::MatrixXf& x) = 0;
     virtual Eigen::MatrixXf backward(const Eigen::MatrixXf& dOut) = 0;
     virtual ~ActivationFunction() = default;
 
 protected:
-    Eigen::MatrixXf m_output;
+    Eigen::MatrixXf m_outputs;
+    Eigen::MatrixXf m_inputs;
 };
 
 class ReLU : public ActivationFunction {

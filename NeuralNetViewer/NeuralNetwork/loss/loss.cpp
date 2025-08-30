@@ -1,18 +1,36 @@
 
 #include "loss.h"
 
+Eigen::VectorXf CategoricalCrossEntropyLoss::forward(const Eigen::MatrixXf& logits, const Eigen::VectorXi& true_classes) const{
+    Eigen::VectorXf rowMax = logits.rowwise().maxCoeff();
+    Eigen::MatrixXf shifted = logits.colwise() - rowMax;
 
-float CategoricalCrossEntropyLoss::forward(const Eigen::MatrixXf& logits, Eigen::VectorXf& true_classes) const{
-    Eigen::MatrixXf shifted = logits.rowwise() - logits.rowwise().maxCoeff();
-    float log_sum_exp = std::log(shifted.array().exp().sum());
-    return -shifted(true_class) + log_sum_exp;
+    Eigen::VectorXf log_sum_exp = shifted.array().exp().rowwise().sum().log();
+
+    Eigen::VectorXf picked(shifted.rows());
+    for (int i = 0; i < shifted.rows(); ++i) {
+        picked(i) = shifted(i, (int)true_classes(i));
+    }
+
+    Eigen::VectorXf losses = -picked + log_sum_exp;
+    return losses;
 }
 
-Eigen::MatrixXf CategoricalCrossEntropyLoss::backward(const Eigen::MatrixXf& logits, Eigen::VectorXf& true_classes) const{
-    Eigen::VectorXf shifted = logits.array() - logits.maxCoeff();
-    Eigen::VectorXf softmax = shifted.array().exp();
-    softmax /= softmax.sum();
-    softmax(true_class) -= 1.0f;  // ∇(softmax + CCE)
+Eigen::MatrixXf CategoricalCrossEntropyLoss::backward(const Eigen::MatrixXf& logits, const Eigen::VectorXi& true_classes) const {
+    Eigen::VectorXf rowMax = logits.rowwise().maxCoeff();
+    //qDebug() << logits.rows();
+    //qDebug() << logits.cols();
+    //qDebug() << rowMax.rows();
+    //qDebug() << rowMax.cols();
+
+    Eigen::MatrixXf shifted = logits.colwise() - rowMax;
+
+    Eigen::MatrixXf softmax = shifted.array().exp();
+    softmax = softmax.array().colwise() / softmax.rowwise().sum().array();
+
+    for (int i = 0; i < shifted.rows(); ++i) {
+        softmax(i, true_classes(i)) -= 1.0f;
+    }
     return softmax;
 }
 

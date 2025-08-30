@@ -40,7 +40,7 @@ private:
 
 
     Eigen::MatrixXf m_inputs;
-    Eigen::VectorXf m_outputs;
+    Eigen::MatrixXf m_outputs;
     Eigen::MatrixXf m_weights;
     Eigen::VectorXf m_biases;
     Eigen::MatrixXf m_dweights;

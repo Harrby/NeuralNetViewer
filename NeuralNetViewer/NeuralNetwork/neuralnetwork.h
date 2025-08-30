@@ -10,6 +10,8 @@
 #include "epochstats.h"
 #include "metrics.h"
 #include <atomic>
+#include <utility>
+#include <chrono>
 
 class NeuralNetwork : public QObject
 {
@@ -20,7 +22,7 @@ public:
     void initialise_network();
     void train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels);
     int predict(const Eigen::VectorXf& inputs);
-    Metrics validate(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const;
+    std::pair<Metrics, Eigen::MatrixXf> forward(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const;
 
     void requestCancel();
     bool isCancelled() const;

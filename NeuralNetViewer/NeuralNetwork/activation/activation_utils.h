@@ -3,6 +3,7 @@
 #define ACTIVATION_UTILS_H
 #include <QString>
 #include <stdexcept>
+#include <QDebug>
 
 //Activation Function enums
 enum class ActivationFunctionType {

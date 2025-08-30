@@ -4,24 +4,36 @@
 
 
 Eigen::MatrixXf ReLU::forward(const Eigen::MatrixXf& x){
-
-    m_output = x.cwiseMax(0.0f);
-    return m_output;;
+    m_inputs = x;
+    m_outputs = x.cwiseMax(0.0f);
+    return m_outputs;
 }
 
 Eigen::MatrixXf ReLU::backward(const Eigen::MatrixXf& dvalues) {
-    Eigen::MatrixXf grad = (m_output.array() > 0).cast<float>();
-    return grad.array() * dvalues.array();
+    //qDebug() << "dvalues shape:" << dvalues.rows() << "x" << dvalues.cols();
+    //qDebug() << "m_inputs shape:" << m_inputs.rows() << "x" << m_inputs.cols();
+
+    // Check if shapes match
+    if (dvalues.rows() != m_inputs.rows() || dvalues.cols() != m_inputs.cols()) {
+        //qDebug() << "Shape mismatch error!";
+        // Handle the error appropriately
+    }
+
+    Eigen::MatrixXf dinputs = dvalues.array() * (m_inputs.array() > 0.0f).cast<float>();
+    return dinputs;
 }
 
 
 
 Eigen::MatrixXf Identity::forward(const Eigen::MatrixXf& input)  {
-    m_output = input.unaryExpr([](float x) { return x; });
-    return m_output;
+    m_outputs = input.unaryExpr([](float x) { return x; });
+    //qDebug() << "saved m outputs in identity as" << m_outputs.rows() << m_outputs.cols();
+
+    return m_outputs;
 }
 
 Eigen::MatrixXf Identity::backward(const Eigen::MatrixXf& dvalues)  {
+    //qDebug() << "called id backward";
     return dvalues;
 }
 

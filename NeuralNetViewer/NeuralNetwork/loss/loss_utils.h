@@ -3,6 +3,7 @@
 #define LOSS_UTILS_H
 #include <QString>
 #include <stdexcept>
+#include <QDebug>
 
 enum class LossFunctionType{
     CategoricalCrossEntropy

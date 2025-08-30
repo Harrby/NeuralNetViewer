@@ -4,7 +4,7 @@
 
 struct Metrics {
     float loss;
-    float accuracy;
+    int correct;
 };
 
 #endif // METRICS_H

@@ -37,6 +37,7 @@ void NeuralNetwork::initialise_network(){
 void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels){
     qDebug() << "inputs.rows() =" << inputs.rows();
     qDebug() << "labels.size() =" << labels.size();
+    std::chrono::duration<double> elapsed{0};
     int num_samples = inputs.rows();
     std::vector<int> perm(num_samples);
     std::iota(perm.begin(), perm.end(), 0);           // 0,1,2,…,N-1
@@ -80,6 +81,7 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
     float lr = m_network_parameters.getLearningRate();
 
     for (int epoch=0; epoch < m_network_parameters.getEpochs(); ++epoch){
+        auto start  = std::chrono::high_resolution_clock::now();
         qDebug() << "epoch:" << epoch;
         int total_training_correct = 0;
         float total_training_loss = 0.0f;
@@ -95,65 +97,32 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
             for (std::unique_ptr<Layer>& layer : m_layers){
                 layer->zeroGradients();
             }
-            int correct_preds = 0;
-            float batch_training_loss = 0.0f;
+
+            //qDebug() << "network initialised as:" << m_layers[0]->getWeights().rows() << m_layers[1]->getWeights().rows();
 
             // x is shape (batch_size, input_size)
             Eigen::MatrixXf x = train_X.block(i, 0, actual_batch_size, m_network_parameters.getInputSize());
-
-            // forward pass
-            for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer){
-                x = m_layers.at(layer)->forward(x);
-                x = m_activation_functions.at(layer)->forward(x);
-            }
-
             Eigen::VectorXi true_classes = train_y.segment(i, actual_batch_size);
-            Eigen::VectorXf batch_losses =  m_loss_function.forward(x, true_classes);
+            // forward pass + loss +correct_preds calculation
+            //qDebug() << "x size is" << x.rows() << x.cols();
+            auto result = forward(x, true_classes);
+            Metrics training_metrics = result.first;
+            x = result.second;
 
 
+            total_training_seen += actual_batch_size;
+            total_training_correct += training_metrics.correct;
+            total_training_loss += training_metrics.loss;
 
-
-
-
-            for (int j=0; j < actual_batch_size; ++j){
-                Eigen::VectorXf x = train_X.row(i+j).transpose();
-
-                // forward pass
-                for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer){
-                    x = m_layers.at(layer)->forward(x);
-                    x = m_activation_functions.at(layer)->forward(x);
-                }
-                int true_class = train_y(i + j);
-                float loss = m_loss_function.forward(x, true_class);
-                batch_training_loss += loss;
-
-                //Accuracy
-                Eigen::Index predicted_class;
-                x.maxCoeff(&predicted_class);
-                if (predicted_class == true_class)
-                    ++correct_preds;
-
-
-                Eigen::VectorXf gradients = m_loss_function.backward(x, true_class);
-                for (int l=m_network_parameters.getLenLayers()-1; l >= 0; --l){
-                    constexpr bool Accumulate = true;
-                    gradients = m_activation_functions.at(l)->backward(gradients);
-                    gradients = m_layers.at(l)->backward(gradients, Accumulate);
-
-                }
-
-
-
-
+            // backward pass
+            Eigen::MatrixXf gradients = m_loss_function.backward(x, true_classes);
+            for (int layer=m_network_parameters.getLenLayers()-1; layer >= 0; --layer){
+                constexpr bool Accumulate = true;
+                gradients = m_activation_functions.at(layer)->backward(gradients);
+                gradients = m_layers.at(layer)->backward(gradients, Accumulate);
             }
 
             ++num_batches;
-
-            batch_training_loss /= actual_batch_size;
-            total_training_loss += batch_training_loss;
-            total_training_seen += actual_batch_size;
-
-            total_training_correct += correct_preds;
 
             for (std::unique_ptr<Layer>& layer: m_layers){
                 layer->scaleGradients(1.0f / actual_batch_size);
@@ -168,19 +137,29 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
         }
         Metrics val_metrics;
         if (use_val){
-            val_metrics = validate(X_val, y_val);
+            val_metrics = forward(X_val, y_val).first;
+
         } else{
-            val_metrics = {0.f, 0.f};
+            val_metrics = {0.f, 0};
         }
 
 
-        qDebug() << "num batches: " << num_batches;
-        qDebug() << "total training seen" << total_training_seen;
+        //qDebug() << "num batches: " << num_batches;
+        //qDebug() << "total training seen" << total_training_seen;
         float avg_training_loss = total_training_loss / num_batches;
         float avg_training_accuracy = static_cast<float>(total_training_correct) / total_training_seen;
+        float validation_accuracy = static_cast<float>(val_metrics.correct) / X_val.rows();
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed_epoch = end - start;
+        elapsed += elapsed_epoch;
+        double avg_epoch_time = elapsed.count() / (epoch+1);
+        int remaining  = m_network_parameters.getEpochs() - (epoch+1);
+        float eta = avg_epoch_time * remaining;
 
 
-        EpochStats stats{epoch,  m_network_parameters.getEpochs(), avg_training_loss, val_metrics.loss, avg_training_accuracy, val_metrics.accuracy, 0.0f};
+
+
+        EpochStats stats{epoch+1,  m_network_parameters.getEpochs(), avg_training_loss, val_metrics.loss, avg_training_accuracy, validation_accuracy, eta};
 
         qDebug() << stats;
 
@@ -205,29 +184,33 @@ int NeuralNetwork::predict(const Eigen::VectorXf& inputs){
 
 
 
-Metrics NeuralNetwork::validate(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const{
-    Metrics m{0.f, 0.f};
+std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const{
+    Metrics m{0.f, 0};
     int correct = 0;
 
-    qDebug() << "inputs.rows()" << inputs.rows();
-    qDebug() << "labels.rows()" << labels.rows();
-
-    for (int n = 0; n < inputs.rows(); ++n) {
-        Eigen::VectorXf x = inputs.row(n);
-        for (int i=0; i < m_network_parameters.getLenLayers(); i++) {
-            x = m_layers[i]->forward(x);
-            x = m_activation_functions[i]->forward(x);
-            // pass is inference-mode safe
-        }
-        m.loss += m_loss_function.forward(x, labels(n));
-
-        Eigen::Index pred;
-        x.maxCoeff(&pred);
-        if (pred == labels(n)) ++correct;
+    //qDebug() << "inputs.rows()" << inputs.rows();
+    //qDebug() << "labels.rows()" << labels.rows();
+    Eigen::MatrixXf x = inputs;
+    for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer) {
+        x = m_layers[layer]->forward(x);
+        x = m_activation_functions[layer]->forward(x);
+        // pass is inference-mode safe
     }
-    m.loss /= inputs.rows();
-    m.accuracy = static_cast<float>(correct) / static_cast<float>(inputs.rows());
-    return m;
+    Eigen::VectorXf batch_losses = m_loss_function.forward(x, labels);
+    m.loss = batch_losses.sum() / inputs.rows();
+
+    for (int i=0; i < inputs.rows(); ++i){
+        Eigen::Index predicted_class;
+        Eigen::VectorXf row =  x.row(i);
+        row.maxCoeff(&predicted_class);
+
+        if (predicted_class == labels(i)){
+            ++correct;
+        }
+    }
+    qDebug() << "correct are: " << correct;
+    m.correct = correct;
+    return {m, x};
 }
 
 void NeuralNetwork::requestCancel() {

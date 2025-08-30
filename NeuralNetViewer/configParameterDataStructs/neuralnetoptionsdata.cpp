@@ -20,15 +20,22 @@ NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
 {
     layers.push_back(std::make_unique<NeuralNetLayerData>());
     layers.push_back(std::make_unique<NeuralNetLayerData>());
+
+    layers[1]->activation_function = activation_functions[1];
 }
 
 int NeuralNetOptionsData::addLayer(){
-    layers.push_back(std::make_unique<NeuralNetLayerData>());
-    return static_cast<int>(layers.size() - 1);
+    layers.insert(layers.end()-1, std::make_unique<NeuralNetLayerData>());
+    activation_functions.insert(activation_functions.end()-1, layers.at(layers.size()-1)->activation_function);
+
+    int index = static_cast<int>(layers.size() - 2);
+    //layers[index]->activation_function
+
+    return index;
 }
 
 void NeuralNetOptionsData::removeLayer(){
-    if (!layers.empty()){
+    if (layers.size() > 1){
         layers.pop_back();
     }
 }
@@ -90,7 +97,7 @@ int NeuralNetOptionsData::getLayerNeurons(int index){
 }
 
 ActivationFunctionType NeuralNetOptionsData::getLayerActivationFunction(int index){
-    return layers.at(index)->activation_function;
+    return activation_functions[index];
 }
 
 

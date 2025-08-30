@@ -8,15 +8,15 @@
 
 class LossFunction {
 public:
-    virtual float forward(const Eigen::MatrixXf& logits, Eigen::VectorXi& true_classes) const = 0;
-    virtual Eigen::MatrixXf backward(const Eigen::MatrixXf& logits, Eigen::VectorXi& true_classes) const = 0;
+    virtual Eigen::VectorXf forward(const Eigen::MatrixXf& logits, const Eigen::VectorXi& true_classes) const = 0;
+    virtual Eigen::MatrixXf backward(const Eigen::MatrixXf& logits, const Eigen::VectorXi& true_classes) const = 0;
     virtual ~LossFunction() = default;
 };
 
 class CategoricalCrossEntropyLoss : public LossFunction {
 public:
-    float forward(const Eigen::MatrixXf& logits, Eigen::VectorXi& true_classes) const override;
-    Eigen::MatrixXf backward(const Eigen::MatrixXf& logits, Eigen::VectorXi& true_classes) const override;
+    Eigen::VectorXf forward(const Eigen::MatrixXf& logits, const Eigen::VectorXi& true_classes) const override;
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& logits, const Eigen::VectorXi& true_classes) const override;
 };
 
 

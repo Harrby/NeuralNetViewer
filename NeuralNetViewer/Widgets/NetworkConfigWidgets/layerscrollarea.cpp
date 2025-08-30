@@ -32,22 +32,20 @@ void LayerScrollArea::initialiseLayerOptionsWidgets(const NeuralNetOptionsData& 
     // just inits two widgets with same parameters.
     for (int i=0 ; i < parameters.getLenLayers(); i++){
         addLayerOptionsWidget(parameters.getLayerData(i));
+
     }
+    layer_option_widgets.last()->setAsFinalLayer(true);
+
+    next_free_index--;
 
 }
 
 
 void LayerScrollArea::addLayerOptionsWidget(const NeuralNetLayerData& parameters){
     LayerOptions* w = new LayerOptions(parameters, next_free_index, container);
-    if (!layer_option_widgets.isEmpty()) {
-        layer_option_widgets.last()->setAsFinalLayer(false);
-        layer_option_widgets.last()->setNeurons(32);
-    }
-    w->setAsFinalLayer(true);
-
     w->setVisible(false);
-    layer_option_widgets.append(w);
-    main_layout->addWidget(w);
+    layer_option_widgets.insert(next_free_index, w);
+    main_layout->insertWidget(next_free_index, w);
     next_free_index++;
     w->setVisible(true);
 
@@ -80,10 +78,6 @@ void LayerScrollArea::removeLayerOptionsWidget(){
     container->updateGeometry();
     if (QWidget* cw = this->widget())
         cw->adjustSize();
-
-    if (!layer_option_widgets.isEmpty()) {
-        layer_option_widgets.last()->setAsFinalLayer(true);
-    }
 
     container->setUpdatesEnabled(true);
 
