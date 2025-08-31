@@ -5,6 +5,7 @@
 
 
 #include "mainwindow.h"
+#include "mnistinputwidget.h"
 
 
 int main(int argc, char *argv[])
@@ -21,7 +22,7 @@ int main(int argc, char *argv[])
 
     MainWindow *vcbw = new MainWindow();
 
-    //TrainWidget *da = new TrainWidget();
+    //MNISTInputWidget *da = new MNISTInputWidget();
 
     vcbw->show();
     return app.exec();

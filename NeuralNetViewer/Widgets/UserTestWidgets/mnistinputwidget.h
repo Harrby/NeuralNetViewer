@@ -19,9 +19,8 @@ public:
 
 private:
     DrawArea* m_draw_area;
-    QFrame* m_draw_area_frame;
-    QFrame* m_title_frame;
-    QFrame* m_pen_options_frame;
+    ValueSliderWidget* m_pen_width_slider;
+    ValueSliderWidget* m_pen_spread_slider;
     IconButton* m_clear_button;
     IconButton* m_predict_button;
 
