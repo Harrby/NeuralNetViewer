@@ -6,7 +6,7 @@
 #include <QWidget>
 #include <QPainter>
 #include <QMouseEvent>
-
+#include <Eigen/Dense>
 
 class DrawArea : public QWidget
 {
@@ -16,6 +16,8 @@ public:
     bool open_image(const QString& file_name);
     bool save_image(const QString& file_name, const char *file_format);
     void clear();
+
+    Eigen::VectorXf export_input();
 
     void set_pen_width(int w);
     void set_feather(int f);

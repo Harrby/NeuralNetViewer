@@ -5,6 +5,8 @@ MainWidget::MainWidget(QWidget *parent)
     m_splitter(new QSplitter(Qt::Horizontal, this)),
     m_network_config_widget(new NetworkConfigWidget(m_splitter)),
     m_train_widget(new TrainWidget(m_splitter)),
+    m_mnist_user_output_widget(new MNISTUserOutputWidget),
+    m_mnist_user_input_widget(new MNISTInputWidget),
     m_network_options(new NeuralNetOptionsData(this)),
     m_neural_network(new NeuralNetwork(*m_network_options, this)),
     m_dataset_container(new DataSetContainer())
@@ -12,18 +14,25 @@ MainWidget::MainWidget(QWidget *parent)
     m_dataset_container->loadMNSITDataSet();
     initialiseUI();
 
-    QWidget* empty_space_container = new QWidget(m_splitter);
-    empty_space_container->setStyleSheet("background-color: rgb(78, 78, 78); ");
 
-    m_splitter->addWidget(m_network_config_widget);
-    m_splitter->addWidget(m_train_widget);
-    m_splitter->addWidget(empty_space_container);
 
-    m_splitter->setStretchFactor(0, 5);
-    m_splitter->setStretchFactor(1, 1);
+    QHBoxLayout* mnist_user_layout = new QHBoxLayout;
+    mnist_user_layout->addWidget(m_mnist_user_input_widget);
+    mnist_user_layout->addWidget(m_mnist_user_output_widget);
+    mnist_user_layout->setSpacing(0);
+    mnist_user_layout->setContentsMargins(0, 0, 0, 0);
+
+    QVBoxLayout* input_output_layout = new QVBoxLayout;
+    input_output_layout->addStretch(1);
+    input_output_layout->addLayout(mnist_user_layout);
+    input_output_layout->setContentsMargins(0, 0, 0, 0);
+    input_output_layout->setSpacing(0);
+
 
     QHBoxLayout* layout = new QHBoxLayout(this);
-    layout->addWidget(m_splitter);
+    layout->addWidget(m_network_config_widget);
+    layout->addWidget(m_train_widget);
+    layout->addLayout(input_output_layout);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
@@ -50,6 +59,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(m_train_widget, &TrainWidget::trainButtonClicked, this, &MainWidget::trainNeuralNetwork);
     connect(m_train_widget, &TrainWidget::cancelButtonClicked, m_neural_network, &NeuralNetwork::requestCancel);
 
+    connect(m_mnist_user_input_widget, &MNISTInputWidget::PredictionRequest, this, &MainWidget::predictUserInput)
 
     connect(m_neural_network, &NeuralNetwork::epochDataChanged, m_train_widget, &TrainWidget::setEpochTrainingData);
 
@@ -82,6 +92,11 @@ void MainWidget::trainNeuralNetwork(){
 
     thread->start();
 
+}
+
+void MainWidget::predictUserInput(Eigen::VectorXf inputs){
+       // continue here: once user has pressed predict, send the inputs off to the neural net for processing#
+        return;
 }
 
 void MainWidget::initialiseUI(){

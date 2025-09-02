@@ -24,6 +24,11 @@ private:
     IconButton* m_clear_button;
     IconButton* m_predict_button;
 
+    void onPredictButtonClicked();
+
+signals:
+    void PredictionRequest(Eigen::VectorXf input);
+
 };
 
 #endif // MNISTINPUTWIDGET_H

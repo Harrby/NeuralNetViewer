@@ -91,3 +91,24 @@ void DrawArea::set_feather(int f){
 int DrawArea::get_feather() const{
     return feather;
 }
+
+Eigen::VectorXf DrawArea::export_input(){
+
+    const int width = image.width();
+    const int height = image.height();
+    Eigen::VectorXf vec(width * height);
+
+    const uchar* bits = image.bits();
+    int idx = 0;
+
+    for (int y=0; y < height; ++y){
+        const uchar* row = bits + y * image.bytesPerLine();
+        for (int x=0; x< width; ++x){
+            idx++;
+            vec(idx) = static_cast<float>(row[x]) / 255.0f;
+        }
+    }
+
+    return vec;
+
+};

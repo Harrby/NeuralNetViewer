@@ -13,6 +13,8 @@ MNISTInputWidget::MNISTInputWidget(QWidget* parent):
                   "background-color: #4E4E4E;}"
                   );
 
+    setMinimumWidth(360);
+
     QLabel* title_label = new QLabel(QString("User Input"), this);
     title_label->setStyleSheet("color: #ffffff;");
     QHBoxLayout* title_layout = new QHBoxLayout;
@@ -83,8 +85,14 @@ MNISTInputWidget::MNISTInputWidget(QWidget* parent):
 
     connect(m_clear_button, &QPushButton::clicked, m_draw_area, &DrawArea::clear);
 
+    connect(m_predict_button, &QPushButton::clicked, this, &MNISTInputWidget::onPredictButtonClicked);
 
 
 
+
+}
+
+void MNISTInputWidget::onPredictButtonClicked(){
+    emit PredictionRequest(m_draw_area->export_input());
 }
 
