@@ -36,7 +36,6 @@ private:
     void onAddLayerRequest();
     void onRemoveLayerRequest();
     void trainNeuralNetwork();
-    void predictUserInput(Eigen::VectorXf inputs);
     void initialiseUI();
 
 signals:

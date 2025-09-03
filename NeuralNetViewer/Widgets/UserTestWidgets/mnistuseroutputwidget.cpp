@@ -103,12 +103,13 @@ void MNISTUserOutputWidget::setSaliencies(Eigen::VectorXf& saliencies){
     m_saliencies = saliencies;
 };
 
-void MNISTUserOutputWidget::setAttributes(mnistOutputAttributes& attributes){
+void MNISTUserOutputWidget::setAttributes(PredictionResults& attributes){
     m_prediction_label->setText(QString("Prediction: %1").arg(attributes.predictedClass));
+    m_class_label->setText(QString("Class: %1").arg(attributes.predictedClass));
     m_confidence_label->setText(QString("Confidence: %1").arg(attributes.confidence));
     m_entropy_label->setText(QString("Entropy: %1").arg(attributes.entropy));
-    setSaliencies(m_saliencies);
-    m_saliency_map->setMap(m_saliencies);
+    setSaliencies(attributes.saliencies);
+    m_saliency_map->setMap(attributes.saliencies);
 
     m_probabilities_log->add_probabilites_log_message(attributes.probabilities);
 
@@ -116,6 +117,10 @@ void MNISTUserOutputWidget::setAttributes(mnistOutputAttributes& attributes){
 }
 
 void MNISTUserOutputWidget::onSaliencyMapClicked(int x, int y){
+    m_pixel_label->setText(QString("Pixel (%1, %2)").arg(x).arg(y));
+    int index = x + y * m_saliency_map->getGridSize();
+
+    m_saliency_label->setText(QString("Saliency: %1").arg(m_saliencies[index]));
 
 }
 

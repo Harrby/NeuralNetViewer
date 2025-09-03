@@ -57,7 +57,7 @@ void LogWidget::add_sample_log_message(int sample, int predicted, int actual){
     append(message);
 }
 
-void LogWidget::add_probabilites_log_message(std::vector<float>& probabilities){
+void LogWidget::add_probabilites_log_message(Eigen::VectorXf& probabilities){
     for(int i=0; i < probabilities.size(); i++){
         QString message = QString("Class: %1 - %2").arg(i).arg(probabilities[i]);
         append(message);

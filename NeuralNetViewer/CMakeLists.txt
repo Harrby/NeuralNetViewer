@@ -77,7 +77,6 @@ set(PROJECT_SOURCES
 
         Widgets/UserTestWidgets/mnistuseroutputwidget.h Widgets/UserTestWidgets/mnistuseroutputwidget.cpp
         Widgets/UserTestWidgets/saliencymaparea.h Widgets/UserTestWidgets/saliencymaparea.cpp
-        Widgets/UserTestWidgets/MNISTUserOutputAttributes.h
 
         Widgets/TrainWidgets/trainwidget.h Widgets/TrainWidgets/trainwidget.cpp
         Widgets/TrainWidgets/trainoptionswidget.h Widgets/TrainWidgets/trainoptionswidget.cpp
@@ -87,6 +86,7 @@ set(PROJECT_SOURCES
 
         metrics/epochstats.h
         metrics/epochstats.cpp
+        metrics/predictionresults.h
 
         metrics/metrics.h
         threads/neuralnetworktrainer.h threads/neuralnetworktrainer.cpp

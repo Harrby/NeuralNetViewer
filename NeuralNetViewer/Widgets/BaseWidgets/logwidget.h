@@ -4,6 +4,7 @@
 
 #include <QFrame>
 #include <QTextEdit>
+#include <Eigen/Dense>
 
 
 class LogWidget : public QTextEdit
@@ -15,7 +16,7 @@ public:
     void add_training_log_message(int epoch, int total_epochs, float training_loss, float validation_loss, float training_accuracy,
                                   float validation_accuracy, float eta);
     void add_sample_log_message(int sample, int predicted, int actual);
-    void add_probabilites_log_message(std::vector<float>& probabilities);
+    void add_probabilites_log_message(Eigen::VectorXf& probabilities);
 };
 
 #endif // LOGWIDGET_H

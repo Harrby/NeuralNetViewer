@@ -37,6 +37,41 @@ Eigen::MatrixXf Identity::backward(const Eigen::MatrixXf& dvalues)  {
     return dvalues;
 }
 
+
+Eigen::MatrixXf Softmax::forward(const Eigen::MatrixXf& x) {
+    // Save inputs for backward
+    m_inputs = x;
+
+    // For numerical stability: subtract rowwise max
+    Eigen::VectorXf rowMax = x.rowwise().maxCoeff();
+    Eigen::MatrixXf shifted = x.colwise() - rowMax;
+
+    // Exponentiate
+    Eigen::MatrixXf exp_shifted = shifted.array().exp();
+
+    // Normalize rowwise
+    Eigen::VectorXf rowSums = exp_shifted.rowwise().sum();
+    m_outputs = exp_shifted.array().colwise() / rowSums.array();
+
+    return m_outputs;
+}
+
+Eigen::MatrixXf Softmax::backward(const Eigen::MatrixXf& dvalues) {
+    const int B = m_outputs.rows();
+    const int C = m_outputs.cols();
+    Eigen::MatrixXf dinputs(B, C);
+
+    for (int i = 0; i < B; ++i) {
+        // y: Cx1 column vector of probs
+        Eigen::VectorXf y = m_outputs.row(i).transpose();
+        // J = diag(y) - y y^T   (CxC)
+        Eigen::MatrixXf J = y.asDiagonal().toDenseMatrix() - (y * y.transpose());
+        // upstream grad is 1xC row; keep it as row * J -> 1xC row
+        dinputs.row(i) = dvalues.row(i) * J;
+    }
+    return dinputs;
+}
+
 std::unique_ptr<ActivationFunction> get_activation(ActivationFunctionType type)
 {
     switch (type) {

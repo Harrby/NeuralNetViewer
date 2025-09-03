@@ -12,6 +12,7 @@
 #include <atomic>
 #include <utility>
 #include <chrono>
+#include "predictionresults.h"
 
 class NeuralNetwork : public QObject
 {
@@ -38,6 +39,7 @@ private:
 
 signals:
     void epochDataChanged(EpochStats);
+    void predictionFinished(PredictionResults&);
 
 
 };

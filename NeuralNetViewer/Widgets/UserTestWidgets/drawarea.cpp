@@ -104,8 +104,7 @@ Eigen::VectorXf DrawArea::export_input(){
     for (int y=0; y < height; ++y){
         const uchar* row = bits + y * image.bytesPerLine();
         for (int x=0; x< width; ++x){
-            idx++;
-            vec(idx) = static_cast<float>(row[x]) / 255.0f;
+            vec(idx++) = static_cast<float>(row[x]) / 255.0f;
         }
     }
 

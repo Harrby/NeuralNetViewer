@@ -9,7 +9,7 @@
 #include "logwidget.h"
 #include "saliencymaparea.h"
 #include <Eigen/Dense>
-#include "MNISTUserOutputAttributes.h"
+#include "predictionresults.h"
 
 
 class MNISTUserOutputWidget : public QFrame
@@ -18,7 +18,7 @@ class MNISTUserOutputWidget : public QFrame
 public:
     MNISTUserOutputWidget(QWidget* parent = nullptr);
     void setSaliencies(Eigen::VectorXf& saliencies);
-    void setAttributes(mnistOutputAttributes& attributes);
+    void setAttributes(PredictionResults& attributes);
 
 
 private:

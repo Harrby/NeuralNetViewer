@@ -13,6 +13,7 @@ SaliencyMapArea::SaliencyMapArea(QWidget *parent)
 
 void SaliencyMapArea::mousePressEvent(QMouseEvent* event){
     if(event->button() == Qt::LeftButton){
+        qDebug() << "Clicked at " << event->pos().x() << event->pos().y();
 
         GetGridCoords(event->pos().x(), event->pos().y());
     }
@@ -35,12 +36,18 @@ void SaliencyMapArea::GetGridCoords(int x, int y){
     const int gy = y / cell_size;
     if (gx < 0 || gx >= grid_size || gy < 0 || gy >= grid_size)
         return;
+    qDebug() << "emitted clicked at signal";
+    qDebug() << "clicked at:" << gx << gy;
     emit ClickedAt(gx, gy);
 }
 
 void SaliencyMapArea::setMap(const Eigen::VectorXf& saliencies){
+    clear();
     float maxValue = saliencies.maxCoeff();
     float minValue = saliencies.minCoeff();
+
+    qDebug() << "saliencies: min/max value" << minValue << maxValue;
+    qDebug() << "saliencies size" << saliencies.rows() << saliencies.cols();
 
     for (int i =0; i < saliencies.size(); i++){
         int y = i /28;
@@ -55,6 +62,8 @@ void SaliencyMapArea::setMap(const Eigen::VectorXf& saliencies){
         QColor c = jetColor(v);
         image.setPixelColor(x, y, c);
     }
+
+    update();
 
 }
 
@@ -77,3 +86,7 @@ void SaliencyMapArea::clear() {
     image.fill(Qt::black);
     update();
 }
+
+int SaliencyMapArea::getGridSize(){
+    return grid_size;
+};

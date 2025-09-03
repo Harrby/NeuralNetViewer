@@ -31,6 +31,12 @@ public:
     Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
 };
 
+class Softmax : public ActivationFunction {
+public:
+    Eigen::MatrixXf forward(const Eigen::MatrixXf& input)  override;
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
+};
+
 
 // OTHERS NOT IMPLEMENTED YET
 std::unique_ptr<ActivationFunction> get_activation(ActivationFunctionType type);

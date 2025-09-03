@@ -169,15 +169,55 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
 }
 
 int NeuralNetwork::predict(const Eigen::VectorXf& inputs){
-    Eigen::VectorXf activation = inputs;
+    qDebug() << "input is" << inputs.rows() << inputs.cols();
+    Eigen::RowVectorXf x = inputs.transpose();
+    qDebug() << "x is" << x.rows() << x.cols();
     for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer){
-
-        activation = m_layers.at(layer)->forward(activation);
+        x = m_layers.at(layer)->forward(x);
+        x = m_activation_functions.at(layer)->forward(x);
     }
 
-    Eigen::VectorXf::Index max_index;
-    activation.maxCoeff(&max_index);
-    return static_cast<int>(max_index);
+    qDebug() << "x shape is" << x.rows() << x.cols();
+
+    Eigen::VectorXf::Index predicted_class;
+    x.maxCoeff(&predicted_class);
+
+    qDebug() <<" predicted class is" << predicted_class;
+
+
+
+    Softmax softmax = Softmax();
+    x = softmax.forward(x);
+    Eigen::VectorXf probabilities = x;
+    float confidence = x[predicted_class];
+    qDebug() << "confidence is " << confidence;
+
+    float entropy = 0.0f;
+    for (int i=0; i<x.size(); ++i){
+        if(x[i]>0.0f){
+            entropy -= x[i]*std::log(x[i]);
+        }
+    }
+    float normalised_entropy = entropy / std::log(x.size());
+
+    // predicted class is target class
+    Eigen::VectorXf grad_output = Eigen::VectorXf::Zero(x.size());
+    grad_output[predicted_class] = 1.0f;
+
+    Eigen::VectorXf saliency;
+
+    for (int layer=m_network_parameters.getLenLayers()-1; layer >= 0; layer--){
+        x = m_activation_functions.at(layer)->backward(x);
+        x = m_layers.at(layer)->backward(x, /*accumulate*/ false);
+    }
+    saliency = x;
+
+    PredictionResults prediction_results{static_cast<int>(predicted_class), confidence, normalised_entropy, probabilities, saliency};
+    qDebug() << static_cast<int>(predicted_class) << confidence << normalised_entropy ;
+
+    emit predictionFinished(prediction_results);
+
+    return static_cast<int>(predicted_class);
 
 }
 

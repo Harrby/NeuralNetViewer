@@ -59,9 +59,10 @@ MainWidget::MainWidget(QWidget *parent)
     connect(m_train_widget, &TrainWidget::trainButtonClicked, this, &MainWidget::trainNeuralNetwork);
     connect(m_train_widget, &TrainWidget::cancelButtonClicked, m_neural_network, &NeuralNetwork::requestCancel);
 
-    connect(m_mnist_user_input_widget, &MNISTInputWidget::PredictionRequest, this, &MainWidget::predictUserInput)
+    connect(m_mnist_user_input_widget, &MNISTInputWidget::PredictionRequest, m_neural_network, &NeuralNetwork::predict);
 
     connect(m_neural_network, &NeuralNetwork::epochDataChanged, m_train_widget, &TrainWidget::setEpochTrainingData);
+    connect(m_neural_network, &NeuralNetwork::predictionFinished, m_mnist_user_output_widget, &MNISTUserOutputWidget::setAttributes);
 
 
 
@@ -92,11 +93,6 @@ void MainWidget::trainNeuralNetwork(){
 
     thread->start();
 
-}
-
-void MainWidget::predictUserInput(Eigen::VectorXf inputs){
-       // continue here: once user has pressed predict, send the inputs off to the neural net for processing#
-        return;
 }
 
 void MainWidget::initialiseUI(){

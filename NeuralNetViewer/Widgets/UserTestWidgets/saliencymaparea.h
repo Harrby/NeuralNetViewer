@@ -15,6 +15,7 @@ public:
     explicit SaliencyMapArea(QWidget *parent = nullptr);
     void setMap(const Eigen::VectorXf& saliencies);
     void clear();
+    int getGridSize();
 
 protected:
     void mousePressEvent(QMouseEvent* event) override;
