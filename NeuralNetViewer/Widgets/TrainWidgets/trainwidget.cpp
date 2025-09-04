@@ -1,7 +1,7 @@
 
 #include "trainwidget.h"
 #include <array>
-std::array<QString, 3>  ButtonColors = {"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"};
+
 
 TrainWidget::TrainWidget(QWidget* parent)
     : QFrame(parent),

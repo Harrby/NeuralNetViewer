@@ -72,6 +72,9 @@ set(PROJECT_SOURCES
         NeuralNetwork/initialisation/initialisation.h NeuralNetwork/initialisation/initialisation.cpp
 
 
+        Widgets/TestWidgets/testwidget.h Widgets/TestWidgets/testwidget.cpp
+
+
         Widgets/UserTestWidgets/mnistinputwidget.h Widgets/UserTestWidgets/mnistinputwidget.cpp
         Widgets/UserTestWidgets/drawarea.h Widgets/UserTestWidgets/drawarea.cpp
 
@@ -87,6 +90,7 @@ set(PROJECT_SOURCES
         metrics/epochstats.h
         metrics/epochstats.cpp
         metrics/predictionresults.h
+        metrics/teststats.h
 
         metrics/metrics.h
         threads/neuralnetworktrainer.h threads/neuralnetworktrainer.cpp
@@ -121,6 +125,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/TrainWidgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/NetworkConfigWidgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/UserTestWidgets)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/TestWidgets)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/metrics)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/dataset_classes)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/threads)

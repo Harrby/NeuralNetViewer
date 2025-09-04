@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include "mnistinputwidget.h"
 #include "mnistuseroutputwidget.h"
+#include "testwidget.h"
 
 
 int main(int argc, char *argv[])
@@ -21,10 +22,10 @@ int main(int argc, char *argv[])
     //ValueSliderWidget *slider = new ValueSliderWidget("neurons", 0.00001, 1000, Slider::Logarithmic, 1000, nullptr);
     //IconButton *vcbw = new IconButton(QString(":/images/images/plus.png"),{"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 500, 500);
 
-    MainWindow *vcbw = new MainWindow();
+    //MainWindow *vcbw = new MainWindow();
 
-    //MNISTUserOutputWidget *da = new MNISTUserOutputWidget();
+    TestWidget *da = new TestWidget();
 
-    vcbw->show();
+    da->show();
     return app.exec();
 }

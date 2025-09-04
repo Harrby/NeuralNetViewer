@@ -19,10 +19,14 @@ public:
     void initialiseUIParameters(int batch_size, bool shuffle_data, bool use_validation_set, double valdiation_split);
 
 private:
+    std::array<QString, 3>  ButtonColors = {"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"};
+
+
     TrainOptionsWidget* m_options_widget;
     IconButton* m_train_button;
     IconButton* m_cancel_button;
     TrainStatusWidget* m_status_widget;
+
 
     void onTrainButtonClicked();
 
