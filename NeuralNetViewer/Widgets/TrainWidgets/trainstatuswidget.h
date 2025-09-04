@@ -18,6 +18,7 @@ class TrainStatusWidget : public QFrame
 public:
     TrainStatusWidget(QWidget* parent = nullptr);
     void setEpochTrainingData(const EpochStats& epoch_stats);
+    void clearData();
 
 private:
     QLabel* m_title_label;

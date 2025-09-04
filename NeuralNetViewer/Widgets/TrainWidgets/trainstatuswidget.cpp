@@ -48,12 +48,19 @@ TrainStatusWidget::TrainStatusWidget(QWidget* parent)
 void TrainStatusWidget::setEpochTrainingData(const EpochStats& epoch_stats){
     m_status_bar->setProgress(static_cast<float>(epoch_stats.epoch) / static_cast<float>(epoch_stats.total_epochs));
     m_stats_frame->set_epoch_stats(epoch_stats);
+
     m_graph_widget->update_training_loss_data(epoch_stats.epoch, epoch_stats.training_loss);
-    m_graph_widget->update_validation_loss_data(epoch_stats.epoch, epoch_stats.training_loss);
+    m_graph_widget->update_validation_loss_data(epoch_stats.epoch, epoch_stats.validation_loss);
     m_graph_widget->reset_view();
+
     m_log_widget->add_training_log_message(epoch_stats.epoch, epoch_stats.total_epochs, epoch_stats.training_loss,
                                            epoch_stats.validation_loss, epoch_stats.training_accuracy,
                                            epoch_stats.validation_accuracy, epoch_stats.eta);
 
+}
+
+void TrainStatusWidget::clearData(){
+    m_log_widget->clear();
+    m_graph_widget->clear();
 }
 

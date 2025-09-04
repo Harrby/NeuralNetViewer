@@ -86,6 +86,7 @@ void GraphWidget::reset_view(){
 }
 
 void GraphWidget::update_training_loss_data(int epoch,  float training_loss){
+    qDebug() << "plotted training data with " << epoch << training_loss;
     m_plot->graph(0)->addData(epoch, training_loss);
 
 }
@@ -96,5 +97,11 @@ void GraphWidget::update_validation_loss_data(int epoch, float validation_loss){
 
 void GraphWidget::replot(){
     m_plot->replot();
+}
+
+void GraphWidget::clear(){
+    m_plot->graph(0)->data()->clear();
+    m_plot->graph(1)->data()->clear();
+    replot();
 }
 

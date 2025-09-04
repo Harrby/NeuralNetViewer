@@ -24,6 +24,8 @@ private:
     IconButton* m_cancel_button;
     TrainStatusWidget* m_status_widget;
 
+    void onTrainButtonClicked();
+
 signals:
     void batchSizeChanged(int);
     void shuffleDataChanged(bool);

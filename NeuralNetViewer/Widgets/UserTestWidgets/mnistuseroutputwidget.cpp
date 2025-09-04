@@ -110,7 +110,7 @@ void MNISTUserOutputWidget::setAttributes(PredictionResults& attributes){
     m_entropy_label->setText(QString("Entropy: %1").arg(attributes.entropy));
     setSaliencies(attributes.saliencies);
     m_saliency_map->setMap(attributes.saliencies);
-
+    m_probabilities_log->clear();
     m_probabilities_log->add_probabilites_log_message(attributes.probabilities);
 
 

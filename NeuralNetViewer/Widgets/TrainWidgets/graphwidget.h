@@ -15,6 +15,7 @@ public:
     void update_validation_loss_data(int epoch, float validation_loss);
     void reset_view();
     void replot();
+    void clear();
 
 private:
     QCustomPlot* m_plot;
