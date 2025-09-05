@@ -83,6 +83,7 @@ TestWidget::TestWidget(QWidget* parent)
     main_layout->addWidget(data_set_frame);
     main_layout->addLayout(buttons_hor_layout);
     main_layout->addWidget(status_frame);
+    main_layout->setContentsMargins(5, 11, 5, 5);
 
     setLayout(main_layout);
 
@@ -93,7 +94,7 @@ TestWidget::TestWidget(QWidget* parent)
 
 }
 
-void TestWidget::setStatusData(TestStats& test_stats){
+void TestWidget::setStatusData(TestStatusStats& test_stats){
     m_sample_label->setText(QString("Sample: %1").arg(test_stats.current_sample));
     m_eta_label->setText(QString("ETA: %1").arg(test_stats.eta));
     m_status_bar->setProgress(static_cast<float>(test_stats.current_sample) / test_stats.total_samples);

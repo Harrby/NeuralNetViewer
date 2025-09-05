@@ -238,7 +238,6 @@ std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf
     }
     Eigen::VectorXf batch_losses = m_loss_function.forward(x, labels);
     m.loss = batch_losses.sum() / inputs.rows();
-
     for (int i=0; i < inputs.rows(); ++i){
         Eigen::Index predicted_class;
         Eigen::VectorXf row =  x.row(i);
@@ -247,11 +246,118 @@ std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf
         if (predicted_class == labels(i)){
             ++correct;
         }
+
+
+
     }
     qDebug() << "correct are: " << correct;
     m.correct = correct;
     return {m, x};
 }
+
+void NeuralNetwork::test(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) {
+    const int input_rows = inputs.rows();
+    const int batch_size = 1000;
+    const int total_batches = (input_rows + batch_size - 1) / batch_size;
+
+    Metrics m{0.f, 0};
+    int total_correct = 0;
+    float total_loss = 0.f;
+
+    QElapsedTimer timer;
+    timer.start();
+
+    for (int b = 0; b < total_batches; ++b) {
+        if (isCancelled()){
+            return;
+        }
+        const int start_idx = b * batch_size;
+        const int end_idx = std::min(start_idx + batch_size, input_rows);
+        const int current_batch_size = end_idx - start_idx;
+
+        // Slice inputs and labels for this batch
+        Eigen::MatrixXf x = inputs.middleRows(start_idx, current_batch_size);
+        Eigen::VectorXi y = labels.segment(start_idx, current_batch_size);
+
+        // Forward pass through all layers
+        for (int layer = 0; layer < m_network_parameters.getLenLayers(); ++layer) {
+            x = m_layers[layer]->forward(x);
+            x = m_activation_functions[layer]->forward(x);
+        }
+
+        // Compute losses
+        Eigen::VectorXf batch_losses = m_loss_function.forward(x, y);
+        float batch_loss = batch_losses.sum() / current_batch_size;
+        total_loss += batch_loss * current_batch_size;
+
+        // Evaluate predictions
+        int batch_correct = 0;
+        QVector<SampleLogMessageStats> samples_stats;
+        samples_stats.reserve(current_batch_size);
+
+        for (int i = 0; i < current_batch_size; ++i) {
+            Eigen::Index predicted_class;
+            Eigen::VectorXf row = x.row(i);
+            row.maxCoeff(&predicted_class);
+
+            if (predicted_class == y(i)) {
+                ++batch_correct;
+            }
+
+            SampleLogMessageStats sample_stats {
+                (start_idx + i),
+                static_cast<int>(predicted_class),
+                y(i)
+
+            };
+
+            samples_stats.push_back(sample_stats);
+        }
+
+        total_correct += batch_correct;
+
+        // Compute cumulative averages
+        float avg_loss = total_loss / float(end_idx);
+        float avg_accuracy = float(total_correct) / float(end_idx);
+
+        // ETA estimation
+        qint64 elapsed_ms = timer.elapsed();
+        float avg_time_per_batch = float(elapsed_ms) / float(b + 1);
+        float eta = (total_batches - (b + 1)) * avg_time_per_batch / 1000.0f; // seconds
+
+
+        qDebug() << "after testing, log stats is" << samples_stats.size();
+
+
+        TestStatusStats status {
+            end_idx,
+            input_rows,
+            eta
+        };
+
+        TestOutputStats stats {
+            avg_accuracy,
+            avg_loss,
+            samples_stats
+        };
+
+        TestingBatchResults results {
+            stats,
+            status
+        };
+
+
+        // Example debug output (can remove later)
+        qDebug() << "Batch" << (b + 1) << "/" << total_batches
+                 << "Cumulative loss:" << avg_loss
+                 << "Cumulative accuracy:" << avg_accuracy
+                 << "ETA (s):" << status.eta;
+
+        emit batchSamplesFinished(results);
+
+    }
+}
+
 
 void NeuralNetwork::requestCancel() {
     m_cancel_requested.store(true);

@@ -67,6 +67,7 @@ MNISTInputWidget::MNISTInputWidget(QWidget* parent):
     main_layout->addWidget(canvas_title_frame);
     main_layout->addWidget(draw_area_frame);
     main_layout->addLayout(button_layout);
+    main_layout->setContentsMargins(5, 5, 5, 11);
 
     setLayout(main_layout);
 

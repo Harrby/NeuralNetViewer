@@ -13,7 +13,7 @@ LayerScrollArea::LayerScrollArea(QWidget* parent)
     this->setWidgetResizable(true);
     container->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     this->setStyleSheet(".LayerScrollArea{"
-                        "background-color: rgb(105,108,109);"
+                        "background-color: #6D6D6D;"
                         "border 0px solid black;"
                         "}");
     container->setStyleSheet(".QFrame{"

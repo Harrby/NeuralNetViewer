@@ -73,6 +73,7 @@ set(PROJECT_SOURCES
 
 
         Widgets/TestWidgets/testwidget.h Widgets/TestWidgets/testwidget.cpp
+        Widgets/TestWidgets/testoutputwidget.h Widgets/TestWidgets/testoutputwidget.cpp
 
 
         Widgets/UserTestWidgets/mnistinputwidget.h Widgets/UserTestWidgets/mnistinputwidget.cpp
@@ -90,10 +91,14 @@ set(PROJECT_SOURCES
         metrics/epochstats.h
         metrics/epochstats.cpp
         metrics/predictionresults.h
-        metrics/teststats.h
+        metrics/teststatusstats.h
+        metrics/testoutputstats.h
+        metrics/testingbatchresults.h
+        metrics/samplelogmessagestats.h
 
         metrics/metrics.h
         threads/neuralnetworktrainer.h threads/neuralnetworktrainer.cpp
+        threads/neuralnetworktester.h threads/neuralnetworktester.cpp
 
 
 

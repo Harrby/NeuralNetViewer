@@ -9,7 +9,7 @@
 #include "valuecomboboxwidget.h"
 #include "iconbutton.h"
 #include "statusbar.h"
-#include "teststats.h"
+#include "teststatusstats.h"
 
 
 
@@ -19,7 +19,7 @@ class TestWidget : public QFrame
 public:
     TestWidget(QWidget* parent = nullptr);
 
-    void setStatusData(TestStats& test_stats);
+    void setStatusData(TestStatusStats& test_stats);
 
 
 private:

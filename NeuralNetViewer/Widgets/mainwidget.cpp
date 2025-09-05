@@ -2,11 +2,12 @@
 #include "mainwidget.h"
 MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent),
-    m_splitter(new QSplitter(Qt::Horizontal, this)),
-    m_network_config_widget(new NetworkConfigWidget(m_splitter)),
-    m_train_widget(new TrainWidget(m_splitter)),
+    m_network_config_widget(new NetworkConfigWidget),
+    m_train_widget(new TrainWidget),
     m_mnist_user_output_widget(new MNISTUserOutputWidget),
     m_mnist_user_input_widget(new MNISTInputWidget),
+    m_test_input_widget(new TestWidget),
+    m_test_output_widget(new TestOutputWidget),
     m_network_options(new NeuralNetOptionsData(this)),
     m_neural_network(new NeuralNetwork(*m_network_options, this)),
     m_dataset_container(new DataSetContainer())
@@ -22,11 +23,18 @@ MainWidget::MainWidget(QWidget *parent)
     mnist_user_layout->setSpacing(0);
     mnist_user_layout->setContentsMargins(0, 0, 0, 0);
 
+    QHBoxLayout* testing_layout = new QHBoxLayout;
+    testing_layout->addWidget(m_test_input_widget);
+    testing_layout->addWidget(m_test_output_widget);
+    testing_layout->setSpacing(0);
+    testing_layout->setContentsMargins(0, 0, 0, 0);
+
     QVBoxLayout* input_output_layout = new QVBoxLayout;
-    input_output_layout->addStretch(1);
+    input_output_layout->addLayout(testing_layout);
     input_output_layout->addLayout(mnist_user_layout);
     input_output_layout->setContentsMargins(0, 0, 0, 0);
     input_output_layout->setSpacing(0);
+
 
 
     QHBoxLayout* layout = new QHBoxLayout(this);
@@ -35,6 +43,8 @@ MainWidget::MainWidget(QWidget *parent)
     layout->addLayout(input_output_layout);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
+
+    m_neural_network->initialise_network();
 
     connect(m_network_config_widget, &NetworkConfigWidget::addLayerButtonClicked, this, &MainWidget::onAddLayerRequest);
     connect(m_network_config_widget, &NetworkConfigWidget::removeLayerButtonClicked, this, &MainWidget::onRemoveLayerRequest);
@@ -61,8 +71,12 @@ MainWidget::MainWidget(QWidget *parent)
 
     connect(m_mnist_user_input_widget, &MNISTInputWidget::PredictionRequest, m_neural_network, &NeuralNetwork::predict);
 
+    connect(m_test_input_widget, &TestWidget::testButtonClicked, this, &MainWidget::testNeuralNetwork);
+    connect(m_test_input_widget, &TestWidget::cancelButtonClicked, m_neural_network, &NeuralNetwork::requestCancel);
+
     connect(m_neural_network, &NeuralNetwork::epochDataChanged, m_train_widget, &TrainWidget::setEpochTrainingData);
     connect(m_neural_network, &NeuralNetwork::predictionFinished, m_mnist_user_output_widget, &MNISTUserOutputWidget::setAttributes);
+    connect(m_neural_network, &NeuralNetwork::batchSamplesFinished, this, &MainWidget::onTestBatchSamplesFinished);
 
 
 
@@ -79,6 +93,30 @@ void MainWidget::onRemoveLayerRequest(){
     m_network_options->removeLayer();
     m_network_config_widget->removeLayerWidget();
 }
+
+void MainWidget::onTestBatchSamplesFinished(TestingBatchResults results){
+    m_test_input_widget->setStatusData(results.status);
+    m_test_output_widget->setOutputStats(results.stats);
+
+}
+
+void MainWidget::testNeuralNetwork(){
+    m_test_output_widget->clear();
+
+    QThread* thread = new QThread(this);
+    NeuralNetworkTester* tester = new NeuralNetworkTester(m_neural_network, m_dataset_container->m_testing_features, m_dataset_container->m_testing_labels);
+    tester->moveToThread(thread);
+
+    connect(thread, &QThread::started, tester, &NeuralNetworkTester::run);
+    connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+    connect(tester, &NeuralNetworkTester::finished, thread, &QThread::quit);
+    connect(tester, &NeuralNetworkTester::finished, tester, &QObject::deleteLater);
+
+    thread->start();
+
+
+}
+
 
 void MainWidget::trainNeuralNetwork(){
     qDebug() << " started training";

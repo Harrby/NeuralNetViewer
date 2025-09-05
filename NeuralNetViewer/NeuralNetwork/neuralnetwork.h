@@ -13,6 +13,9 @@
 #include <utility>
 #include <chrono>
 #include "predictionresults.h"
+#include "testingbatchresults.h"
+#include "samplelogmessagestats.h"
+#include <QElapsedTimer>
 
 class NeuralNetwork : public QObject
 {
@@ -24,6 +27,7 @@ public:
     void train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels);
     int predict(const Eigen::VectorXf& inputs);
     std::pair<Metrics, Eigen::MatrixXf> forward(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const;
+    void test(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels);
 
     void requestCancel();
     bool isCancelled() const;
@@ -39,7 +43,10 @@ private:
 
 signals:
     void epochDataChanged(EpochStats);
-    void predictionFinished(PredictionResults&);
+    void predictionFinished(PredictionResults&); //pass by ref, because emitted in same thread.
+
+    void batchSamplesFinished(TestingBatchResults);
+
 
 
 };

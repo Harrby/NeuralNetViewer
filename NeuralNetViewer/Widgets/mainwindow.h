@@ -16,6 +16,8 @@ public:
 private:
     MainWidget* m_main_widget;
 
+    void toggleFullscreen();
+
 };
 
 #endif // MAINWINDOW_H

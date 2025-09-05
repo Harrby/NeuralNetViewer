@@ -5,6 +5,7 @@
 #include <QFrame>
 #include <QTextEdit>
 #include <Eigen/Dense>
+#include "samplelogmessagestats.h"
 
 
 class LogWidget : public QTextEdit
@@ -15,7 +16,7 @@ public:
     void add_log_message(QString message);
     void add_training_log_message(int epoch, int total_epochs, float training_loss, float validation_loss, float training_accuracy,
                                   float validation_accuracy, float eta);
-    void add_sample_log_message(int sample, int predicted, int actual);
+    void add_sample_log_message(const SampleLogMessageStats& log_stats);
     void add_probabilites_log_message(Eigen::VectorXf& probabilities);
 };
 

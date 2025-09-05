@@ -84,6 +84,7 @@ MNISTUserOutputWidget::MNISTUserOutputWidget(QWidget* parent)
     main_v_layout->addWidget(saliency_title_frame);
     main_v_layout->addLayout(saliency_hor_layout);
     main_v_layout->addWidget(map_stats_frame);
+    main_v_layout->setContentsMargins(5, 5, 5, 11);
 
     setLayout(main_v_layout);
 

@@ -28,6 +28,7 @@ TrainWidget::TrainWidget(QWidget* parent)
     main_v_layout->addWidget(m_options_widget);
     main_v_layout->addLayout(main_h_layout);
     main_v_layout->addWidget(m_status_widget);
+    main_v_layout->setContentsMargins(5, 11, 5, 11);
 
     connect(m_options_widget, &TrainOptionsWidget::batchSizeChanged, this, &TrainWidget::batchSizeChanged);
     connect(m_options_widget, &TrainOptionsWidget::shuffleDataChanged, this, &TrainWidget::shuffleDataChanged);

@@ -8,13 +8,13 @@ NetworkConfigWidget::NetworkConfigWidget(QWidget* parent)
     m_layer_scroll_area( new LayerScrollArea(this))
 {
 
-    setStyleSheet(".NetworkConfigWidget{background-color: rgb(105, 108, 109);}");
+    setStyleSheet(".NetworkConfigWidget{background-color: #6D6D6D;}");
 
     QVBoxLayout* main_layout = new QVBoxLayout(this);
     main_layout->addWidget(m_global_options_widget);
     main_layout->addWidget(m_buttons_frame);
     main_layout->addWidget(m_layer_scroll_area);
-    main_layout->setContentsMargins(0, 0, 0, 0);
+    main_layout->setContentsMargins(5, 11, 5, 5);
     main_layout->setSpacing(0);
 
     connect(m_buttons_frame, &ButtonsFrame::addButtonClicked, this, &NetworkConfigWidget::addLayerButtonClicked);

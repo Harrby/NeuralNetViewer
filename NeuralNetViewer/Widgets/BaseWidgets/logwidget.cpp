@@ -1,6 +1,7 @@
 
 #include "logwidget.h"
 
+
 LogWidget::LogWidget(QWidget* parent)
     :QTextEdit(parent)
 {
@@ -41,17 +42,18 @@ void LogWidget::add_training_log_message(int epoch, int total_epochs, float trai
     append(message);
 }
 
-void LogWidget::add_sample_log_message(int sample, int predicted, int actual){
+void LogWidget::add_sample_log_message(const SampleLogMessageStats& log_stats){
+    qDebug() << "added sample log message";
     QString correct_text;
-    if (predicted == actual){
-        correct_text = QString("yes");
+    if (log_stats.predicted == log_stats.actual){
+        correct_text = QString("Yes");
     } else{
-        correct_text = QString("no");
+        correct_text = QString("No");
     }
-    QString message = QString("sample: #%1 - predicted: %2 - actual: %3 - correct: %4")
-                          .arg(sample)
-                          .arg(predicted)
-                          .arg(actual)
+    QString message = QString("sample: #%1 - predicted: %2 - actual: %3 - correct: %4.")
+                          .arg(log_stats.sample)
+                          .arg(log_stats.predicted)
+                          .arg(log_stats.actual)
                           .arg(correct_text);
 
     append(message);
@@ -63,3 +65,5 @@ void LogWidget::add_probabilites_log_message(Eigen::VectorXf& probabilities){
         append(message);
     }
 }
+
+

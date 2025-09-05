@@ -11,8 +11,11 @@
 #include "neuralnetwork.h"
 #include "datasetcontainer.h"
 #include "neuralnetworktrainer.h"
+#include "neuralnetworktester.h"
 #include "mnistinputwidget.h"
 #include "mnistuseroutputwidget.h"
+#include "testoutputwidget.h"
+#include "testwidget.h"
 
 
 class MainWidget : public QWidget
@@ -22,11 +25,12 @@ public:
     explicit MainWidget(QWidget *parent = nullptr);
 
 private:
-    QSplitter* m_splitter;
     NetworkConfigWidget* m_network_config_widget;
     TrainWidget* m_train_widget;
     MNISTUserOutputWidget* m_mnist_user_output_widget;
     MNISTInputWidget* m_mnist_user_input_widget;
+    TestWidget* m_test_input_widget;
+    TestOutputWidget* m_test_output_widget;
 
 
     NeuralNetOptionsData* m_network_options;
@@ -35,6 +39,8 @@ private:
 
     void onAddLayerRequest();
     void onRemoveLayerRequest();
+    void onTestBatchSamplesFinished(TestingBatchResults results);
+    void testNeuralNetwork();
     void trainNeuralNetwork();
     void initialiseUI();
 
