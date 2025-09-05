@@ -10,22 +10,58 @@ Eigen::MatrixXf ReLU::forward(const Eigen::MatrixXf& x){
 }
 
 Eigen::MatrixXf ReLU::backward(const Eigen::MatrixXf& dvalues) {
-    //qDebug() << "dvalues shape:" << dvalues.rows() << "x" << dvalues.cols();
-    //qDebug() << "m_inputs shape:" << m_inputs.rows() << "x" << m_inputs.cols();
-
-    // Check if shapes match
-    if (dvalues.rows() != m_inputs.rows() || dvalues.cols() != m_inputs.cols()) {
-        //qDebug() << "Shape mismatch error!";
-        // Handle the error appropriately
-    }
-
     Eigen::MatrixXf dinputs = dvalues.array() * (m_inputs.array() > 0.0f).cast<float>();
+    return dinputs;
+}
+
+
+Eigen::MatrixXf LeakyReLU::forward(const Eigen::MatrixXf& x){
+    m_inputs = x;
+    Eigen::MatrixXf pos = x.cwiseMax(0.0f);
+    Eigen::MatrixXf neg = x.cwiseMin(0.0f);
+
+
+
+    m_outputs = pos + alpha * neg;
+    return m_outputs;
+}
+
+Eigen::MatrixXf LeakyReLU::backward(const Eigen::MatrixXf& dvalues){
+    Eigen::ArrayXXf mask = ((m_inputs.array() > 0.0f).cast<float>() + (m_inputs.array() < 0.0f).cast<float>() * alpha);
+    Eigen::MatrixXf dinputs = dvalues.array() * mask;
+    return dinputs;
+}
+
+
+Eigen::MatrixXf Sigmoid::forward(const Eigen::MatrixXf& x){
+    m_inputs = x;
+    m_outputs = 1.0f / (1.0f + (-x.array()).exp());
+    return m_outputs;
+
+};
+
+Eigen::MatrixXf Sigmoid::backward(const Eigen::MatrixXf& dvalues) {
+    Eigen::MatrixXf dsigma = m_outputs.array() * (1.0f - m_outputs.array());
+    Eigen::MatrixXf dinputs = dvalues.array() * dsigma.array();
+    return dinputs;
+}
+
+Eigen::MatrixXf Tanh::forward(const Eigen::MatrixXf& x) {
+    m_inputs = x;
+    m_outputs = x.array().tanh();
+    return m_outputs;
+}
+
+Eigen::MatrixXf Tanh::backward(const Eigen::MatrixXf& dvalues) {
+    Eigen::MatrixXf dtanh = 1.0f - m_outputs.array().square();
+    Eigen::MatrixXf dinputs = dvalues.array() * dtanh.array();
     return dinputs;
 }
 
 
 
 Eigen::MatrixXf Identity::forward(const Eigen::MatrixXf& input)  {
+    m_inputs = input;
     m_outputs = input.unaryExpr([](float x) { return x; });
     //qDebug() << "saved m outputs in identity as" << m_outputs.rows() << m_outputs.cols();
 
@@ -76,11 +112,11 @@ std::unique_ptr<ActivationFunction> get_activation(ActivationFunctionType type)
 {
     switch (type) {
     case ActivationFunctionType::ReLU:        return std::make_unique<ReLU>();
-    case ActivationFunctionType::LeakyReLU:   return std::make_unique<Identity>();
+    case ActivationFunctionType::LeakyReLU:   return std::make_unique<LeakyReLU>();
     case ActivationFunctionType::Identity:    return std::make_unique<Identity>();
-    case ActivationFunctionType::Sigmoid:     return std::make_unique<Identity>();
-    case ActivationFunctionType::Tanh:        return std::make_unique<Identity>();
-    case ActivationFunctionType::Softmax:     return std::make_unique<Identity>();
+    case ActivationFunctionType::Sigmoid:     return std::make_unique<Sigmoid>();
+    case ActivationFunctionType::Tanh:        return std::make_unique<Tanh>();
+    case ActivationFunctionType::Softmax:     return std::make_unique<Softmax>();
     default: throw std::runtime_error("Unsupported activation");
     }
 }

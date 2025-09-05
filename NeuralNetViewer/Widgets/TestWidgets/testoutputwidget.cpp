@@ -44,9 +44,7 @@ void TestOutputWidget::setOutputStats(TestOutputStats& stats){
     m_accuracy_label->setText(QString("Accuracy: %1").arg(stats.accuracy));
     m_loss_label->setText(QString("Loss: %1").arg(stats.loss));
     qDebug() << "log stats size is" << stats.log_stats.size();
-    for (int i=0; i < stats.log_stats.size(); i++){
-        m_log_widget->add_sample_log_message(stats.log_stats[i]);
-    }
+    m_log_widget->add_sample_log_message(stats.log_stats);
 
 };
 

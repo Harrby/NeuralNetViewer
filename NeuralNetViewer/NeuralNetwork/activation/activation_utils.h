@@ -43,6 +43,20 @@ inline ActivationFunctionType fromString(const QString& s)
     throw std::invalid_argument("Invalid activation function: " + s.toStdString());
 }
 
+inline QStringList allActivationFunctionStrings()
+{
+    using T = ActivationFunctionType;
+    static constexpr T allTypes[] = {
+        T::ReLU, T::LeakyReLU, T::Identity, T::Sigmoid, T::Tanh, T::Softmax
+    };
+
+    QStringList result;
+    for (T t : allTypes) {
+        result << ActivationFnUtils::toString(t);
+    }
+    return result;
+}
+
 }
 
 

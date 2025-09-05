@@ -85,12 +85,15 @@ TestWidget::TestWidget(QWidget* parent)
     main_layout->addWidget(status_frame);
     main_layout->setContentsMargins(5, 11, 5, 5);
 
+    onComboBoxValueChanged("MNIST");
+
     setLayout(main_layout);
 
     //connections
 
     connect(m_test_button, &QPushButton::clicked, this, &TestWidget::testButtonClicked);
     connect(m_cancel_button, &QPushButton::clicked, this, &TestWidget::cancelButtonClicked);
+    connect(m_dataset_selector, &ValueComboBoxWidget::valueChanged, this, &TestWidget::onComboBoxValueChanged);
 
 }
 
@@ -98,5 +101,32 @@ void TestWidget::setStatusData(TestStatusStats& test_stats){
     m_sample_label->setText(QString("Sample: %1").arg(test_stats.current_sample));
     m_eta_label->setText(QString("ETA: %1").arg(test_stats.eta));
     m_status_bar->setProgress(static_cast<float>(test_stats.current_sample) / test_stats.total_samples);
+    // force updates - so user can see ETA and sample number.
+    m_sample_label->repaint();
+    m_eta_label->repaint();
+    m_status_bar->repaint();
+}
+
+void TestWidget::onComboBoxValueChanged(QString value){
+    int samples;
+    int features;
+    int classes;
+
+
+    if (value == "MNIST"){
+        samples = 10000;
+        features = 784;
+        classes = 10;
+    } else{
+        samples = 0;
+        features = 0;
+        classes = 0;
+    }
+
+    m_samples_label->setText(QString("Samples: %1").arg(samples));
+    m_features_label->setText(QString("features: %1").arg(features));
+    m_classes_label->setText(QString("Classes: %1").arg(classes));
+
+
 }
 

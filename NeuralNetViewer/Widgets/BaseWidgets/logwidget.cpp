@@ -42,20 +42,25 @@ void LogWidget::add_training_log_message(int epoch, int total_epochs, float trai
     append(message);
 }
 
-void LogWidget::add_sample_log_message(const SampleLogMessageStats& log_stats){
+void LogWidget::add_sample_log_message(const QVector<SampleLogMessageStats>& log_stats){
     qDebug() << "added sample log message";
+    QString message = "";
     QString correct_text;
-    if (log_stats.predicted == log_stats.actual){
-        correct_text = QString("Yes");
-    } else{
-        correct_text = QString("No");
-    }
-    QString message = QString("sample: #%1 - predicted: %2 - actual: %3 - correct: %4.")
-                          .arg(log_stats.sample)
-                          .arg(log_stats.predicted)
-                          .arg(log_stats.actual)
-                          .arg(correct_text);
+    for (int i=0; i < log_stats.size(); i++){
+        if (log_stats[i].predicted == log_stats[i].actual){
+            correct_text = QString("Yes");
+        } else{
+            correct_text = QString("No");
+        }
+        message.append(QString("sample: #%1 - predicted: %2 - actual: %3 - correct: %4.\n")
+                              .arg(log_stats[i].sample)
+                              .arg(log_stats[i].predicted)
+                              .arg(log_stats[i].actual)
+                           .arg(correct_text));
 
+
+
+    }
     append(message);
 }
 

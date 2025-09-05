@@ -6,12 +6,12 @@ LayerOptions::LayerOptions(const NeuralNetLayerData& parameters, int id, QWidget
     m_id(id),
     m_title(new QLabel(QString("Layer %1").arg(id+1), this)),
     m_checkbox(new CheckBox(this)),
-    m_cb_activation_function(new ValueComboBoxWidget(QString("Activation Function"), QStringList{"ReLu", "Leaky ReLU", "Tanh", "Sigmoid"}, this)),
-    m_cb_weight_initialisation(new ValueComboBoxWidget(QString("Weight Initialisation"), QStringList{"He", "Xavier", "Normal"}, this)),
+    m_cb_activation_function(new ValueComboBoxWidget(QString("Activation Function"), ActivationFnUtils::allActivationFunctionStrings(), this)),
+    m_cb_weight_initialisation(new ValueComboBoxWidget(QString("Weight Initialisation"), WeightInitUtils::allWeightInitStrings(), this)),
     m_s_neurons(new ValueSliderWidget(QString("Neurons"), 2, 256, Slider::Linear, 254, this)),
     m_s_dropout_rate(new ValueSliderWidget(QString("Dropout Rate"), 0, 1, Slider::Linear, 1000, this)),
-    m_s_l1_regularisation(new ValueSliderWidget(QString("L1 Regularisation"), 1e-7, 0.01, Slider::Logarithmic, 1000, this)),
-    m_s_l2_regularisation(new ValueSliderWidget(QString("L2 Regularisation"), 1e-6, 0.1, Slider::Logarithmic, 1000, this))
+    m_s_l1_regularisation(new ValueSliderWidget(QString("L1 Regularisation"), 1e-7, 0.01, Slider::Logarithmic, 5000, this)),
+    m_s_l2_regularisation(new ValueSliderWidget(QString("L2 Regularisation"), 1e-6, 0.1, Slider::Logarithmic, 5000, this))
 {
     setAllParameters(parameters);
     setStyleSheet(".LayerOptions{background-color: #302B2B;"

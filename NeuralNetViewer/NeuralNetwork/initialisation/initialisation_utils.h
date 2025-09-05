@@ -4,6 +4,7 @@
 
 #include <QString>
 #include <stdexcept>
+#include <QList>
 
 enum class WeightInitialisationType{
     He,
@@ -34,6 +35,20 @@ inline WeightInitialisationType fromString(const QString& s){
     if (s == "Uniform")return WeightInitialisationType::Uniform;
     if (s == "Zero")   return WeightInitialisationType::Zero;
     throw std::invalid_argument("Invalid Weight Init: " + s.toStdString());
+}
+
+inline QStringList allWeightInitStrings()
+{
+    using T = WeightInitialisationType;
+    static constexpr T allTypes[] = {
+        T::He, T::Xavier, T::Normal, T::Uniform, T::Zero
+    };
+
+    QStringList result;
+    for (T t : allTypes) {
+        result << WeightInitUtils::toString(t);
+    }
+    return result;
 }
 }
 #endif // INITIALISATION_UTILS_H

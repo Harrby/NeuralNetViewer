@@ -36,6 +36,8 @@ private:
     QLabel* m_sample_label;
     QLabel* m_eta_label;
 
+    void onComboBoxValueChanged(QString value);
+
 signals:
     void testButtonClicked();
     void cancelButtonClicked();

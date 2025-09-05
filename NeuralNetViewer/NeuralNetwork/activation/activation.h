@@ -24,6 +24,28 @@ public:
     Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
 };
 
+class LeakyReLU : public ActivationFunction {
+private:
+    float alpha = 0.01f;
+
+public:
+    Eigen::MatrixXf forward(const Eigen::MatrixXf& input)  override;
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
+};
+
+class Sigmoid : public ActivationFunction {
+
+public:
+    Eigen::MatrixXf forward(const Eigen::MatrixXf& input)  override;
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
+};
+
+class Tanh : public ActivationFunction {
+public:
+    Eigen::MatrixXf forward(const Eigen::MatrixXf& input)  override;
+    Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
+};
+
 
 class Identity : public ActivationFunction {
 public:
@@ -36,6 +58,9 @@ public:
     Eigen::MatrixXf forward(const Eigen::MatrixXf& input)  override;
     Eigen::MatrixXf backward(const Eigen::MatrixXf& dvalues)  override;
 };
+
+
+
 
 
 // OTHERS NOT IMPLEMENTED YET
