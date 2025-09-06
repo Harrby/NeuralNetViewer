@@ -16,6 +16,7 @@
 #include "testingbatchresults.h"
 #include "samplelogmessagestats.h"
 #include <QElapsedTimer>
+#include "dropout.h"
 
 class NeuralNetwork : public QObject
 {
@@ -26,7 +27,7 @@ public:
     void initialise_network();
     void train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels);
     int predict(const Eigen::VectorXf& inputs);
-    std::pair<Metrics, Eigen::MatrixXf> forward(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const;
+    std::pair<Metrics, Eigen::MatrixXf> forward(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels, bool training=false) const;
     void test(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels);
 
     void requestCancel();
@@ -37,6 +38,7 @@ private:
     NeuralNetOptionsData& m_network_parameters;
     std::vector<std::unique_ptr<Layer>> m_layers;
     std::vector<std::unique_ptr<ActivationFunction>> m_activation_functions;
+    std::vector<std::unique_ptr<Dropout>> m_dropout_layers;
     const LossFunction& m_loss_function;
     const Optimiser& m_optimiser;
     std::atomic<bool> m_cancel_requested { false };

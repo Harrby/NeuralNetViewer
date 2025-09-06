@@ -70,6 +70,7 @@ set(PROJECT_SOURCES
         NeuralNetwork/optimiser/optimiser_utils.h
         NeuralNetwork/initialisation/initialisation_utils.h
         NeuralNetwork/initialisation/initialisation.h NeuralNetwork/initialisation/initialisation.cpp
+        NeuralNetwork/dropout/dropout.h NeuralNetwork/dropout/dropout.cpp
 
 
         Widgets/TestWidgets/testwidget.h Widgets/TestWidgets/testwidget.cpp
@@ -125,6 +126,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/initialisation)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/loss)
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/optimiser)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/NeuralNetwork/dropout)
 
 
     target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Widgets/TrainWidgets)

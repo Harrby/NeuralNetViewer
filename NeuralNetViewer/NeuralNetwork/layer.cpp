@@ -14,9 +14,6 @@ Layer::Layer(int input_size, const NeuralNetLayerData& parameters)
 }
 
 Eigen::MatrixXf Layer::initialise_weights(){
-
-    qDebug() << "weight init of layer with input size" << m_input_size << "is:" << WeightInitUtils::toString(m_parameters.weight_initialisation);
-
    return get_weight_init(m_parameters.weight_initialisation,
                            m_input_size,
                            m_parameters.neurons);
@@ -27,7 +24,6 @@ Eigen::VectorXf Layer::initialise_biases(){
     }
 
 Eigen::MatrixXf Layer::initialise_grad_weights(){
-    qDebug() << "initialised grad weights as" << m_parameters.neurons << m_input_size;
     return Eigen::MatrixXf::Zero(m_parameters.neurons, m_input_size);
 }
 
@@ -43,16 +39,12 @@ Eigen::MatrixXf Layer::forward(const Eigen::MatrixXf& batch_inputs){
     m_outputs = batch_inputs * m_weights.transpose();
 
     m_outputs += broadcasted_biases;
-    //qDebug() << "size of forward output :" << m_outputs.rows() << m_outputs.cols();
     return m_outputs;
 }
 
 Eigen::MatrixXf Layer::backward(const Eigen::MatrixXf& grad_output, bool accumulate){
     Eigen::MatrixXf grad_W = grad_output.transpose() * m_inputs;
     Eigen::VectorXf grad_b = grad_output.colwise().sum().transpose();
-    //qDebug() << "m_dweights shape is " << m_dweights.rows() << m_dweights.cols();
-    //qDebug() << "grad w shape is" << grad_W.rows() << grad_W.cols();
-
     if (accumulate){
         m_dweights += grad_W;
         m_dbiases += grad_b;
@@ -60,8 +52,6 @@ Eigen::MatrixXf Layer::backward(const Eigen::MatrixXf& grad_output, bool accumul
     m_dweights = grad_W;
     m_dbiases = grad_b;
     }
-    //qDebug() << "grad outpus shape" << grad_output.rows() << grad_output.cols();
-    //qDebug() << "mweights shape" << m_weights.rows() << m_weights.cols();
     Eigen::MatrixXf grad_input = grad_output * m_weights;
     return grad_input;
 }

@@ -24,13 +24,16 @@ void NeuralNetwork::initialise_network(){
             std::make_unique<Layer>(input_size, m_network_parameters.getLayerData(i))
             );
 
-
-
         m_activation_functions.push_back(
             get_activation(m_network_parameters.getLayerActivationFunction(i))
             );
 
-        qDebug() << "For layer: " << i << "activation is: " << ActivationFnUtils::toString(m_network_parameters.getLayerActivationFunction(i));
+        m_dropout_layers.push_back(
+            std::make_unique<Dropout>(m_network_parameters.getLayerDropoutRate(i))
+            );
+
+        qDebug() << "layer" << i <<"has dropout rate of" << m_network_parameters.getLayerDropoutRate(i);
+
     }
 
 }
@@ -41,6 +44,7 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
     qDebug() << "inputs.rows() =" << inputs.rows();
     qDebug() << "labels.size() =" << labels.size();
     std::chrono::duration<double> elapsed{0};
+    bool is_training = true;
     int num_samples = inputs.rows();
     std::vector<int> perm(num_samples);
     std::iota(perm.begin(), perm.end(), 0);           // 0,1,2,…,N-1
@@ -108,7 +112,8 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
             Eigen::VectorXi true_classes = train_y.segment(i, actual_batch_size);
             // forward pass + loss +correct_preds calculation
             //qDebug() << "x size is" << x.rows() << x.cols();
-            auto result = forward(x, true_classes);
+
+            auto result = forward(x, true_classes, is_training);
             Metrics training_metrics = result.first;
             x = result.second;
 
@@ -227,7 +232,7 @@ int NeuralNetwork::predict(const Eigen::VectorXf& inputs){
 
 
 
-std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels) const{
+std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& labels, bool training) const{
     Metrics m{0.f, 0};
     int correct = 0;
 
@@ -237,6 +242,7 @@ std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf
     for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer) {
         x = m_layers[layer]->forward(x);
         x = m_activation_functions[layer]->forward(x);
+        x = m_dropout_layers[layer]->apply(x, training);
         // pass is inference-mode safe
     }
     Eigen::VectorXf batch_losses = m_loss_function.forward(x, labels);
@@ -253,7 +259,6 @@ std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf
 
 
     }
-    qDebug() << "correct are: " << correct;
     m.correct = correct;
     return {m, x};
 }
