@@ -156,6 +156,7 @@ void NeuralNetOptionsData::setLayerNeurons(int index, int neurons){
 }
 
 void NeuralNetOptionsData::setLayerActivationFunction(int index, ActivationFunctionType activation_function){
+    activation_functions[index] = activation_function;
     layers[index]->activation_function = activation_function;
 }
 

@@ -101,7 +101,7 @@ void TestWidget::setStatusData(TestStatusStats& test_stats){
     m_sample_label->setText(QString("Sample: %1").arg(test_stats.current_sample));
     m_eta_label->setText(QString("ETA: %1").arg(test_stats.eta));
     m_status_bar->setProgress(static_cast<float>(test_stats.current_sample) / test_stats.total_samples);
-    // force updates - so user can see ETA and sample number.
+    // force updates - so user can see ETA and sample number live.
     m_sample_label->repaint();
     m_eta_label->repaint();
     m_status_bar->repaint();

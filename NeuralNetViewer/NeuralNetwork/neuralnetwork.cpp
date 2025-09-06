@@ -29,7 +29,10 @@ void NeuralNetwork::initialise_network(){
         m_activation_functions.push_back(
             get_activation(m_network_parameters.getLayerActivationFunction(i))
             );
+
+        qDebug() << "For layer: " << i << "activation is: " << ActivationFnUtils::toString(m_network_parameters.getLayerActivationFunction(i));
     }
+
 }
 
 

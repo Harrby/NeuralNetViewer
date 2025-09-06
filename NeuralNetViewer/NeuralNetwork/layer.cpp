@@ -15,6 +15,8 @@ Layer::Layer(int input_size, const NeuralNetLayerData& parameters)
 
 Eigen::MatrixXf Layer::initialise_weights(){
 
+    qDebug() << "weight init of layer with input size" << m_input_size << "is:" << WeightInitUtils::toString(m_parameters.weight_initialisation);
+
    return get_weight_init(m_parameters.weight_initialisation,
                            m_input_size,
                            m_parameters.neurons);
