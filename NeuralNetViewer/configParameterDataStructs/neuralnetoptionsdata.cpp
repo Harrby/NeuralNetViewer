@@ -13,7 +13,7 @@ NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     momentum(0.9f),
     beta1(0.9f),
     beta2(0.9f),
-    epsilon(0.9f),
+    epsilon(1e-8f),
     epochs(200),
     activation_functions {
             ActivationFunctionType::ReLU,

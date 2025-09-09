@@ -43,6 +43,22 @@ private:
 };
 
 
+class RMSProp : public Optimiser {
+public:
+    RMSProp(float learning_rate, float beta2, float epsilon);
+    void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad)  override;
+    void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad)  override;
+    void setParams(OptimiserParams optimiser_params) override;
+
+private:
+    float learning_rate;
+    float beta2;
+    float epsilon;
+    std::unordered_map<const void*, Eigen::MatrixXf> squared_grad_avg_weights;
+    std::unordered_map<const void*, Eigen::VectorXf> squared_grad_avg_biases;
+
+};
+
 std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type, float learning_rate, float momentum, float beta1, float beta2, float epsilon);
 
 
