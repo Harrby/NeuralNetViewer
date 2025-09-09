@@ -40,7 +40,7 @@ private:
     std::vector<std::unique_ptr<ActivationFunction>> m_activation_functions;
     std::vector<std::unique_ptr<Dropout>> m_dropout_layers;
     const LossFunction& m_loss_function;
-    const Optimiser& m_optimiser;
+    std::unique_ptr<Optimiser> m_optimiser;
     std::atomic<bool> m_cancel_requested { false };
 
 signals:

@@ -5,7 +5,9 @@ NeuralNetwork::NeuralNetwork(NeuralNetOptionsData& network_parameters,  QObject*
     : QObject(parent),
     m_network_parameters(network_parameters),
     m_loss_function(get_loss_function(network_parameters.getLossFunction())),
-    m_optimiser(get_optimiser_function(network_parameters.getOptimiser()))
+    m_optimiser(get_optimiser_function(network_parameters.getOptimiser(), network_parameters.getLearningRate(),
+                                       network_parameters.getMomentum(), network_parameters.getBeta1(), network_parameters.getBeta2(),
+                                       network_parameters.getEpsilon()))
 {
 
 }
@@ -31,6 +33,10 @@ void NeuralNetwork::initialise_network(){
         m_dropout_layers.push_back(
             std::make_unique<Dropout>(m_network_parameters.getLayerDropoutRate(i))
             );
+
+        m_optimiser = get_optimiser_function(m_network_parameters.getOptimiser(), m_network_parameters.getLearningRate(),
+                                       m_network_parameters.getMomentum(), m_network_parameters.getBeta1(),
+                                       m_network_parameters.getBeta2(), m_network_parameters.getEpsilon());
 
         qDebug() << "layer" << i <<"has dropout rate of" << m_network_parameters.getLayerDropoutRate(i);
 
@@ -137,8 +143,13 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
             }
 
             for (std::unique_ptr<Layer>& layer: m_layers){
-                m_optimiser.update(layer->getWeights(), layer->getWeightGradients(), lr);
-                m_optimiser.update(layer->getBiases(), layer->getBiasGradients(), lr);
+                OptimiserParams params = OptimiserParams{m_network_parameters.getLearningRate(),
+                                                         m_network_parameters.getMomentum(), m_network_parameters.getBeta1(),
+                                                         m_network_parameters.getBeta2(), m_network_parameters.getEpsilon()};
+
+                m_optimiser->setParams(params);
+                m_optimiser->update(layer->getWeights(), layer->getWeightGradients());
+                m_optimiser->update(layer->getBiases(), layer->getBiasGradients());
             }
 
 

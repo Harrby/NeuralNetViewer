@@ -3,23 +3,47 @@
 #define OPTIMISER_H
 #include <Eigen/Dense>
 #include "optimiser_utils.h"
+#include "optimiser_params.h"
+#include <QDebug>
 
 class Optimiser
 {
 public:
     Optimiser() = default;
-    virtual void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad, float learning_rate) const = 0;
-    virtual void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad, float learning_rate) const = 0;
-
+    virtual void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad) = 0;
+    virtual void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad) = 0;
+    virtual void setParams(OptimiserParams optimiser_params) = 0;
 };
 
 class SGD : public Optimiser {
-    void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad, float learning_rate) const override;
-    void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad, float learning_rate) const override;
+public:
+    SGD(float learning_rate);
+    void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad)  override;
+    void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad)  override;
+    void setParams(OptimiserParams optimiser_params) override;
+
+private:
+    float learning_rate;
+};
+
+class MomentumSGD : public Optimiser {
+public:
+    MomentumSGD(float learning_rate, float momentum);
+
+    void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad)  override;
+    void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad)  override;
+    void setParams(OptimiserParams optimiser_params) override;
+
+private:
+    float learning_rate;
+    float momentum;
+    std::unordered_map<const void*, Eigen::MatrixXf> velocity_matrices;
+    std::unordered_map<const void*, Eigen::VectorXf> velocity_vectors;
+
 };
 
 
-const Optimiser& get_optimiser_function(OptimiserType type);
+std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type, float learning_rate, float momentum, float beta1, float beta2, float epsilon);
 
 
 

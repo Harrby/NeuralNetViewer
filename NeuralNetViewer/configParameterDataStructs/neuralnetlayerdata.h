@@ -16,9 +16,9 @@ public:
     int neurons = 32;
     ActivationFunctionType activation_function = ActivationFunctionType::ReLU;
     WeightInitialisationType weight_initialisation = WeightInitialisationType::He;
-    double dropout_rate = 0.0;
-    double l1_regularisation = 0.0;
-    double l2_regularisation = 0.0;
+    float dropout_rate = 0.0f;
+    float l1_regularisation = 0.0f;
+    float l2_regularisation = 0.0f;
 
 };
 

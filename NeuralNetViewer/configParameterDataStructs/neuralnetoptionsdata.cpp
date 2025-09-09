@@ -6,10 +6,14 @@ NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     batch_size(10),
     shuffle_data(true),
     use_validation_set(true),
-    validation_split(0.2),
+    validation_split(0.2f),
     optimiser(OptimiserType::SGD),
     loss_function(LossFunctionType::CategoricalCrossEntropy),
-    learning_rate(0.1),
+    learning_rate(0.1f),
+    momentum(0.9f),
+    beta1(0.9f),
+    beta2(0.9f),
+    epsilon(0.9f),
     epochs(200),
     activation_functions {
             ActivationFunctionType::ReLU,
@@ -52,7 +56,7 @@ bool NeuralNetOptionsData::isShuffleEnabled() const{
 bool NeuralNetOptionsData::isValidationEnabled() const{
     return use_validation_set;
 }
-double NeuralNetOptionsData::getValidationSplit() const{
+float NeuralNetOptionsData::getValidationSplit() const{
     return validation_split;
 }
 
@@ -69,8 +73,22 @@ OptimiserType NeuralNetOptionsData::getOptimiser() const{
     return optimiser;
 }
 
-double NeuralNetOptionsData::getLearningRate() const{
+float NeuralNetOptionsData::getLearningRate() const{
     return learning_rate;
+}
+
+float NeuralNetOptionsData::getMomentum() const{
+    return momentum;
+};
+float NeuralNetOptionsData::getBeta1() const{
+    return beta1;
+}
+float NeuralNetOptionsData::getBeta2() const{
+    return beta2;
+}
+
+float NeuralNetOptionsData::getEpsilon() const{
+    return epsilon;
 }
 
 int NeuralNetOptionsData::getEpochs() const{
@@ -101,15 +119,15 @@ ActivationFunctionType NeuralNetOptionsData::getLayerActivationFunction(int inde
 }
 
 
-double NeuralNetOptionsData::getLayerDropoutRate(int index){
+float NeuralNetOptionsData::getLayerDropoutRate(int index){
     return layers.at(index)->dropout_rate;
 };
 
-double NeuralNetOptionsData::getLayerL1Regularisation(int index){
+float NeuralNetOptionsData::getLayerL1Regularisation(int index){
     return layers.at(index)->l1_regularisation;
 };
 
-double NeuralNetOptionsData::getLayerL2Regularisation(int index){
+float NeuralNetOptionsData::getLayerL2Regularisation(int index){
     return layers.at(index)->l2_regularisation;
 };
 
@@ -123,7 +141,7 @@ void NeuralNetOptionsData::setShuffleEnabled(bool shuffle){
 void NeuralNetOptionsData::setValidationEnabled(bool validation){
     use_validation_set = validation;
 }
-void NeuralNetOptionsData::setValidationSplit(double validation_split){
+void NeuralNetOptionsData::setValidationSplit(float validation_split){
     this->validation_split = validation_split;
 }
 
@@ -139,12 +157,25 @@ void NeuralNetOptionsData::setOptimiser(OptimiserType new_optimiser){
     optimiser = new_optimiser;
 }
 
-void NeuralNetOptionsData::setLearningRate(double new_learning_rate){
-    learning_rate = new_learning_rate;
+void NeuralNetOptionsData::setLearningRate(float learning_rate){
+    this->learning_rate = learning_rate;
 }
 
-void NeuralNetOptionsData:: setEpochs(int new_epochs){
-    this->epochs = new_epochs;
+void NeuralNetOptionsData::setMomentum(float momentum){
+    this->momentum = momentum;
+}
+void NeuralNetOptionsData::setBeta1(float beta1){
+    this->beta1 = beta1;
+}
+void NeuralNetOptionsData::setBeta2(float beta2){
+    this->beta2 = beta2;
+}
+void NeuralNetOptionsData::setEpsilon(float epsilon){
+    this->epsilon = epsilon;
+}
+
+void NeuralNetOptionsData:: setEpochs(int epochs){
+    this->epochs = epochs;
 }
 
 //SETTER METHODS - PER LAYER
@@ -163,13 +194,13 @@ void NeuralNetOptionsData::setLayerActivationFunction(int index, ActivationFunct
 void NeuralNetOptionsData::setLayerWeightInit(int index, WeightInitialisationType weight_init){
     layers[index]->weight_initialisation = weight_init;
 }
-void NeuralNetOptionsData::setLayerDropoutRate(int index, double dropout_rate){
+void NeuralNetOptionsData::setLayerDropoutRate(int index, float dropout_rate){
     layers[index]->dropout_rate = dropout_rate;
 }
 
-void NeuralNetOptionsData::setLayerL1Regularisation(int index, double l1_regularisation){
+void NeuralNetOptionsData::setLayerL1Regularisation(int index, float l1_regularisation){
     layers[index]->l1_regularisation = l1_regularisation;
 }
-void NeuralNetOptionsData::setLayerL2Regularisation(int index, double l2_regularisation){
+void NeuralNetOptionsData::setLayerL2Regularisation(int index, float l2_regularisation){
     layers[index]->l2_regularisation = l2_regularisation;
 }

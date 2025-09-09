@@ -8,7 +8,7 @@ StatusBar::StatusBar(QWidget* parent)
 {
     setStyleSheet(".StatusBar{background-color: #f9f9f9; border: 0px solid black; border-radius: 4px;}");
 
-    m_progress_indicator->setStyleSheet("background-color: #1FA1E3; border-top-left-radius: 4px; border-bottom-right-radius: 4px; ");
+    m_progress_indicator->setStyleSheet("background-color: #1FA1E3; border-top-left-radius: 4px; border-bottom-left-radius: 4px; ");
 
     m_main_layout->addWidget(m_progress_indicator);
     m_main_layout->setContentsMargins(0, 0, 0, 0);
@@ -18,5 +18,9 @@ StatusBar::StatusBar(QWidget* parent)
 void StatusBar::setProgress(float percentage){
 
     m_progress_indicator->setFixedWidth(static_cast<int>(width() * percentage));
+
+    if (percentage == 1.0f){
+        m_progress_indicator->setStyleSheet("background-color: #1FA1E3; border-radius:4px;");
+    }
 }
 

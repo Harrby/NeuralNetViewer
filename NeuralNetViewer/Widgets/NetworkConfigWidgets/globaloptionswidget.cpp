@@ -4,7 +4,7 @@
 
 GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
     : QFrame(parent),
-    m_cb_optimiser(new ValueComboBoxWidget("Optimiser", QStringList{"SGD", "Adam", "RMSProp"}, this)),
+    m_cb_optimiser(new ValueComboBoxWidget("Optimiser", OptimiserUtils::allOptimiserStrings(), this)),
     m_cb_loss_function(new ValueComboBoxWidget("Loss Function", QStringList{"CCE"}, this)),
     m_s_learning_rate(new ValueSliderWidget("Learning Rate", 1e-6, 1.0, Slider::Logarithmic, 1000, this)),
     m_s_epochs(new ValueSliderWidget("Epochs", 0, 1000, Slider::Linear, 1000, this)),

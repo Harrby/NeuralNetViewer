@@ -68,6 +68,7 @@ set(PROJECT_SOURCES
 
         NeuralNetwork/optimiser/optimiser.h NeuralNetwork/optimiser/optimiser.cpp
         NeuralNetwork/optimiser/optimiser_utils.h
+        NeuralNetwork/optimiser/optimiser_params.h
         NeuralNetwork/initialisation/initialisation_utils.h
         NeuralNetwork/initialisation/initialisation.h NeuralNetwork/initialisation/initialisation.cpp
         NeuralNetwork/dropout/dropout.h NeuralNetwork/dropout/dropout.cpp
