@@ -11,6 +11,8 @@ Dropout::Dropout(double dropout_rate)
 }
 
 Eigen::MatrixXf Dropout::apply(const Eigen::MatrixXf& activations, bool training){
+
+
     if (!training || m_dropout_rate <=0){
         return activations;
     }

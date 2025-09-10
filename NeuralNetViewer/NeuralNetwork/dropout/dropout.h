@@ -4,6 +4,7 @@
 
 #include <Eigen/Dense>
 #include <random>
+#include <QDebug>
 
 class Dropout
 {

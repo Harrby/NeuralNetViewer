@@ -15,6 +15,7 @@ NeuralNetwork::NeuralNetwork(NeuralNetOptionsData& network_parameters,  QObject*
 void NeuralNetwork::initialise_network(){
     m_layers.clear();
     m_activation_functions.clear();
+    m_dropout_layers.clear();
 
     for (int i=0; i < m_network_parameters.getLenLayers(); i++){
         int input_size = (i == 0) ? m_network_parameters.getInputSize() : m_network_parameters.getLayerData(i-1).neurons;
@@ -29,7 +30,6 @@ void NeuralNetwork::initialise_network(){
         m_activation_functions.push_back(
             get_activation(m_network_parameters.getLayerActivationFunction(i))
             );
-
         m_dropout_layers.push_back(
             std::make_unique<Dropout>(m_network_parameters.getLayerDropoutRate(i))
             );
@@ -38,7 +38,6 @@ void NeuralNetwork::initialise_network(){
                                        m_network_parameters.getMomentum(), m_network_parameters.getBeta1(),
                                        m_network_parameters.getBeta2(), m_network_parameters.getEpsilon());
 
-        qDebug() << "layer" << i <<"has dropout rate of" << m_network_parameters.getLayerDropoutRate(i);
 
     }
 
@@ -91,7 +90,6 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
     num_samples = train_X.rows();
 
     int batch_size = m_network_parameters.getBatchSize();
-    float lr = m_network_parameters.getLearningRate();
 
     for (int epoch=0; epoch < m_network_parameters.getEpochs(); ++epoch){
         auto start  = std::chrono::high_resolution_clock::now();
@@ -134,13 +132,16 @@ void NeuralNetwork::train(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& 
                 constexpr bool Accumulate = true;
                 gradients = m_activation_functions.at(layer)->backward(gradients);
                 gradients = m_layers.at(layer)->backward(gradients, Accumulate);
-            }
 
+            }
             ++num_batches;
 
             for (std::unique_ptr<Layer>& layer: m_layers){
                 layer->scaleGradients(1.0f / actual_batch_size);
             }
+
+            apply_l1_l2_regularisation(actual_batch_size);
+
 
             for (std::unique_ptr<Layer>& layer: m_layers){
                 OptimiserParams params = OptimiserParams{m_network_parameters.getLearningRate(),
@@ -229,6 +230,8 @@ int NeuralNetwork::predict(const Eigen::VectorXf& inputs){
         x = m_activation_functions.at(layer)->backward(x);
         x = m_layers.at(layer)->backward(x, /*accumulate*/ false);
     }
+
+
     saliency = x;
 
     PredictionResults prediction_results{static_cast<int>(predicted_class), confidence, normalised_entropy, probabilities, saliency};
@@ -258,6 +261,7 @@ std::pair<Metrics, Eigen::MatrixXf> NeuralNetwork::forward(const Eigen::MatrixXf
     }
     Eigen::VectorXf batch_losses = m_loss_function.forward(x, labels);
     m.loss = batch_losses.sum() / inputs.rows();
+    m.loss += regularisation_loss(inputs.rows());
     for (int i=0; i < inputs.rows(); ++i){
         Eigen::Index predicted_class;
         Eigen::VectorXf row =  x.row(i);
@@ -374,6 +378,50 @@ void NeuralNetwork::test(const Eigen::MatrixXf& inputs, const Eigen::VectorXi& l
 
         emit batchSamplesFinished(results);
 
+    }
+}
+
+double NeuralNetwork::regularisation_loss(const int batch_size) const{
+    float reg_loss = 0.0f;
+
+    for (int layer=0; layer < m_network_parameters.getLenLayers(); ++layer) {
+        const Eigen::MatrixXf& weights = m_layers[layer]->getWeights();
+        if (weights.size() !=0){
+            float l1 = m_network_parameters.getLayerL1Regularisation(layer);
+            float l2 = m_network_parameters.getLayerL2Regularisation(layer);
+
+            // l1
+            reg_loss += (l1 / (2.0f * batch_size)) * weights.array().square().sum();
+            // l2
+            reg_loss += (l2 / batch_size) * weights.array().abs().sum();
+        }
+    }
+    return reg_loss;
+}
+
+inline float signf(float v) {
+    // sign function
+    if (v > 0.f) return 1.f;
+    if (v < 0.f) return -1.f;
+    return 0.f;
+}
+
+void NeuralNetwork::apply_l1_l2_regularisation(const int batch_size){
+    for (int i=0 ; i < m_network_parameters.getLenLayers(); ++i){
+
+        float l1 = m_network_parameters.getLayerL1Regularisation(i);
+        float l2 = m_network_parameters.getLayerL2Regularisation(i);
+
+        qDebug() << "l1 and l2 " << l1 << l2;
+
+        Eigen::MatrixXf& W = m_layers[i]->getWeights();
+        Eigen::MatrixXf& dW = m_layers[i]->getWeightGradients();
+
+        // L2 (weight decay)
+        dW += (l2 / static_cast<float>(batch_size)) * W;
+
+        // L1
+        dW += (l1 / static_cast<float>(batch_size)) * W.unaryExpr([](float v) { return signf(v); });
     }
 }
 

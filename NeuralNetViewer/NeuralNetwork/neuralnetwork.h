@@ -43,6 +43,10 @@ private:
     std::unique_ptr<Optimiser> m_optimiser;
     std::atomic<bool> m_cancel_requested { false };
 
+    double regularisation_loss(const int batch_size) const;
+    void apply_l1_l2_regularisation(const int batch_size);
+
+
 signals:
     void epochDataChanged(EpochStats);
     void predictionFinished(PredictionResults&); //pass by ref, because emitted in same thread.

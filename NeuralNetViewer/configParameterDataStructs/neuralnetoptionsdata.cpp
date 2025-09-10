@@ -40,7 +40,7 @@ int NeuralNetOptionsData::addLayer(){
 
 void NeuralNetOptionsData::removeLayer(){
     if (layers.size() > 1){
-        layers.pop_back();
+        layers.erase(layers.end() - 2);
     }
 }
 
