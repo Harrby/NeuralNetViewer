@@ -7,7 +7,7 @@ GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
     m_cb_optimiser(new ValueComboBoxWidget("Optimiser", OptimiserUtils::allOptimiserStrings(), this)),
     m_cb_loss_function(new ValueComboBoxWidget("Loss Function", QStringList{"CCE"}, this)),
     m_s_learning_rate(new ValueSliderWidget("Learning Rate", 1e-6, 1.0, Slider::Logarithmic, 1000, this)),
-    m_s_epochs(new ValueSliderWidget("Epochs", 0, 1000, Slider::Linear, 1000, this)),
+    m_s_epochs(new ValueSliderWidget("Epochs", 0, 400, Slider::Linear, 400, this)),
     m_title(new QLabel("Global Options", this))
 {
     setStyleSheet(".GlobalOptionsWidget{background-color: #302B2B;"

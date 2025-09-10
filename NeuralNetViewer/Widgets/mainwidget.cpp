@@ -16,7 +16,7 @@ MainWidget::MainWidget(QWidget *parent)
     initialiseUI();
 
     m_network_config_widget->setMinimumWidth(500);
-    m_train_widget->setFixedWidth(560);
+    m_train_widget->setFixedWidth(600);
 
     QHBoxLayout* mnist_user_layout = new QHBoxLayout;
     mnist_user_layout->addWidget(m_mnist_user_input_widget);

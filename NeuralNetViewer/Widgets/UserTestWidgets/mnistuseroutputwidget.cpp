@@ -15,7 +15,7 @@ MNISTUserOutputWidget::MNISTUserOutputWidget(QWidget* parent)
 {
     setStyleSheet(".MNISTUserOutputWidget{background-color: #4E4E4E;} QLabel{color: #ffffff;}");
     setFixedHeight(640);
-    setMinimumWidth(500);
+    setMinimumWidth(360);
 
 
     QLabel* title_label = new QLabel(QString("User Output"));
@@ -26,22 +26,18 @@ MNISTUserOutputWidget::MNISTUserOutputWidget(QWidget* parent)
 
     QHBoxLayout* upper_stats_layout = new QHBoxLayout;
     upper_stats_layout->addWidget(m_prediction_label);
-    upper_stats_layout->addWidget(m_entropy_label);
     upper_stats_layout->addWidget(m_confidence_label);
     upper_stats_layout->setSpacing(10);
 
-    QLabel* probabilities_label = new QLabel(QString("Probabilities"));
-    QHBoxLayout* probabilities_title_layout = new QHBoxLayout;
-    probabilities_title_layout->addStretch(1);
-    probabilities_title_layout->addWidget(probabilities_label);
-    probabilities_title_layout->addStretch(1);
+    QHBoxLayout* lower_stats_layout = new QHBoxLayout;
+    lower_stats_layout->addWidget(m_entropy_label);
 
     QFrame* output_stats_frame = new QFrame;
     output_stats_frame->setStyleSheet("background-color: #302B2B; border: 0px solid black; border-radius: 4px;");
     QVBoxLayout* output_stats_frame_layout = new QVBoxLayout;
     output_stats_frame_layout->addLayout(title_layout);
     output_stats_frame_layout->addLayout(upper_stats_layout);
-    output_stats_frame_layout->addLayout(probabilities_title_layout);
+    output_stats_frame_layout->addLayout(lower_stats_layout);
     output_stats_frame_layout->addWidget(m_probabilities_log);
     output_stats_frame->setLayout(output_stats_frame_layout);
 
