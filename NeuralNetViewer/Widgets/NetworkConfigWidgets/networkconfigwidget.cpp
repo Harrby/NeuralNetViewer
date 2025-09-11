@@ -24,6 +24,9 @@ NetworkConfigWidget::NetworkConfigWidget(QWidget* parent)
     connect(m_global_options_widget, &GlobalOptionsWidget::lossFunctionChanged, this, &NetworkConfigWidget::lossFunctionChanged);
     connect(m_global_options_widget, &GlobalOptionsWidget::learningRateChanged, this, &NetworkConfigWidget::learningRateChanged);
     connect(m_global_options_widget, &GlobalOptionsWidget::epochsChanged, this, &NetworkConfigWidget::epochsChanged);
+    connect(m_global_options_widget, &GlobalOptionsWidget::momentumChanged, this, &NetworkConfigWidget::momentumChanged);
+    connect(m_global_options_widget, &GlobalOptionsWidget::beta1Changed, this, &NetworkConfigWidget::beta1Changed);
+    connect(m_global_options_widget, &GlobalOptionsWidget::beta2Changed, this, &NetworkConfigWidget::beta2Changed);
 
     connect(m_layer_scroll_area, &LayerScrollArea::activeChanged, this, &NetworkConfigWidget::activeChanged);
     connect(m_layer_scroll_area, &LayerScrollArea::neuronsChanged, this, &NetworkConfigWidget::neuronsChanged);
@@ -46,7 +49,7 @@ void NetworkConfigWidget::removeLayerWidget(){
 }
 
 void NetworkConfigWidget::initialiseUI(const NeuralNetOptionsData& parameters){
-    m_global_options_widget->initialiseUIParameters(parameters.getOptimiser(), parameters.getLossFunction(), parameters.getLearningRate(), parameters.getEpochs());
+    m_global_options_widget->initialiseUIParameters(parameters);
     m_layer_scroll_area->initialiseLayerOptionsWidgets(parameters);
 };
 

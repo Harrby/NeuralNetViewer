@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
 
         Widgets/BaseWidgets/valuesliderwidget.h Widgets/BaseWidgets/valuesliderwidget.cpp
         Widgets/BaseWidgets/valuecomboboxwidget.h Widgets/BaseWidgets/valuecomboboxwidget.cpp
+        Widgets/BaseWidgets/valuecomboboxbuttonwidget.h Widgets/BaseWidgets/valuecomboboxbuttonwidget.cpp
         Widgets/BaseWidgets/slider.h Widgets/BaseWidgets/slider.cpp
         Widgets/BaseWidgets/checkbox.h Widgets/BaseWidgets/checkbox.cpp
         Widgets/BaseWidgets/lineedit.h Widgets/BaseWidgets/lineedit.cpp
@@ -47,6 +48,7 @@ set(PROJECT_SOURCES
         Widgets/NetworkConfigWidgets/buttonsframe.cpp
         Widgets/NetworkConfigWidgets/networkconfigwidget.h
         Widgets/NetworkConfigWidgets/networkconfigwidget.cpp
+        Widgets/NetworkConfigWidgets/optimiseradvancedcontrolswidget.h Widgets/NetworkConfigWidgets/optimiseradvancedcontrolswidget.cpp
 
 
 

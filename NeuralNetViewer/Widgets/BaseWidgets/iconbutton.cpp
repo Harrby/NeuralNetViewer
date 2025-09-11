@@ -5,6 +5,8 @@ IconButton::IconButton(QString content, std::array<QString, 3> background_colors
     : QPushButton(parent),
     background_colors(background_colors)
 {
+    setAttribute(Qt::WA_Hover, true);
+    setMouseTracking(true);
     setMinimumSize(QSize(20, 20));
 
     if (QFile::exists(content)){

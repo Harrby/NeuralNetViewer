@@ -34,6 +34,11 @@ signals:
     void learningRateChanged(float learning_rate);
     void epochsChanged(int epochs);
 
+    void momentumChanged(double);
+    void beta1Changed(double);
+    void beta2Changed(double);
+
+
     void activeChanged(int, bool);
     void neuronsChanged(int, int);
     void dropoutRateChanged(int, double);
