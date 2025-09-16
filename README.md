@@ -2,6 +2,14 @@
 **a C++ QT desktop application where you can create your own FNN, tune hyperparameters, train it with live feedback, and test it against a dataset or your own input.**
 ### Demo Video: [Neural Network Viewer Demo - Youtube](https://www.youtube.com/watch?v=B_80S-gMQDM&t=2s&ab_channel=Graphica3D)
 
+### Features Include:
+- 5 Optimisers (SGD, Momentum, RMS Prop, Adam, AdaGrad)
+- per layer customization of neurons, dropout, L1 & L2 regularisation, activation and weight init. (currently only supports dense layers.)
+- 6 Activation Functions (ReLU, Leaky ReLU, Identity, Sigmoid, Tanh, Softmax)
+- 5 Weight initialisation methods (He, Xavier, Normal, Uniform, Zero)
+- live training feedback.
+- testing against the dataset or your own input. (only has MNIST 28*28 digits currently)
+
 
 ## Installation
 # Requirements:
