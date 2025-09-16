@@ -96,6 +96,59 @@ void RMSProp::setParams(OptimiserParams optimiser_params)  {
     epsilon = optimiser_params.epsilon;
 }
 
+Adamax::Adamax(float learning_rate, float beta1, float beta2, float epsilon)
+    : learning_rate(learning_rate),
+    beta1(beta1),
+    beta2(beta2),
+    beta1_pow_t(1.0f),
+    epsilon(epsilon){}
+
+void Adamax::update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad){
+    auto key = static_cast<const void*>(param.data());
+    Eigen::MatrixXf& M1 = first_moment_estimate_matrix[key];
+    Eigen::MatrixXf& M2 = infinity_norm_matrix[key];
+
+    if (M1.size() == 0){
+        M1 = Eigen::MatrixXf::Zero(param.rows(), param.cols());
+    }
+    if (M2.size() == 0){
+        M2 = Eigen::MatrixXf::Zero(param.rows(), param.cols());
+    }
+
+    M1 = beta1 * M1 + (1 - beta1)*grad;
+    M2 = (beta2 * M2).cwiseMax(grad.cwiseAbs());
+
+    beta1_pow_t *= beta1;
+    param -= (learning_rate/ (1 - beta1_pow_t)) * (M1.array() / (M2.array() + epsilon)).matrix();
+
+}
+void Adamax::update(Eigen::VectorXf& param, const Eigen::VectorXf& grad){
+    auto key = static_cast<const void*>(param.data());
+    Eigen::VectorXf& V1 = first_moment_estimate_vector[key];
+    Eigen::VectorXf& V2 = infinity_norm_vector[key];
+
+    if (V1.size() == 0){
+        V1 = Eigen::VectorXf::Zero(param.size());
+    }
+    if (V2.size() == 0){
+        V2 = Eigen::VectorXf::Zero(param.size());
+    }
+
+    V1 = beta1 * V1 + (1 - beta1)*grad;
+    V2 = (beta2 * V2).cwiseMax(grad.cwiseAbs());
+
+    //beta1_pow_t *= beta1;
+    param -= (learning_rate/ (1 - beta1_pow_t)) * (V1.array() / (V2.array() + epsilon)).matrix();
+
+
+}
+
+void Adamax::setParams(OptimiserParams params){
+    learning_rate = params.learning_rate;
+    beta1 = params.beta1;
+    beta2 = params.beta2;
+    epsilon = params.epsilon;
+}
 
 Adam::Adam(float learing_rate, float beta1, float beta2, float epsilon)
     : learning_rate(learing_rate),
@@ -148,8 +201,8 @@ void Adam::update(Eigen::VectorXf& param, const Eigen::VectorXf& grad){
     M1 = beta1 * M1 + (1 - beta1) * grad;
     M2 = beta2 * M2 + (1 - beta2) * grad.array().square().matrix();
 
-    beta1_pow_t *= beta1;
-    beta2_pow_t *= beta2;
+    //beta1_pow_t *= beta1;
+    //beta2_pow_t *= beta2;
 
     Eigen::VectorXf M1_corrected = M1 / (1 - beta1_pow_t);
     Eigen::VectorXf M2_corrected = M2 / (1 - beta2_pow_t);
@@ -170,6 +223,7 @@ std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type,  float lea
     case OptimiserType::SGD:         return std::make_unique<SGD>(learning_rate);
     case OptimiserType::MomentumSGD: return std::make_unique<MomentumSGD>(learning_rate, momentum);
     case OptimiserType::RMSProp:     return std::make_unique<RMSProp>(learning_rate, beta2, epsilon);
+    case OptimiserType::Adamax:      return std::make_unique<Adamax>(learning_rate, beta1, beta2, epsilon);
     case OptimiserType::Adam:        return std::make_unique<Adam>(learning_rate, beta1, beta2, epsilon);
 
     default: throw std::runtime_error("Unsupported optimiser");

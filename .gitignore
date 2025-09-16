@@ -3,6 +3,10 @@
 /bin/
 /obj/
 
+.vs/
+
+/NeuralNetViewer/.vs/
+
 
 /build-NeuralNetViewer-Desktop_Qt_6_9_1_MSVC2022_64bit-Release/
 

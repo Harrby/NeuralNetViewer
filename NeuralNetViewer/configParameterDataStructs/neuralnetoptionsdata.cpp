@@ -12,7 +12,7 @@ NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     learning_rate(0.1f),
     momentum(0.9f),
     beta1(0.9f),
-    beta2(0.9f),
+    beta2(0.999f),
     epsilon(1e-8f),
     epochs(200),
     activation_functions {

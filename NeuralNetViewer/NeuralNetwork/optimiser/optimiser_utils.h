@@ -9,6 +9,7 @@ enum class OptimiserType{
     SGD,
     MomentumSGD,
     RMSProp,
+    Adamax,
     Adam
 };
 
@@ -21,6 +22,7 @@ inline QString toString(OptimiserType t)
     case OptimiserType::SGD:         return "SGD";
     case OptimiserType::MomentumSGD: return "MomentumSGD";
     case OptimiserType::RMSProp:     return "RMSProp";
+    case OptimiserType::Adamax:      return "Adamax";
     case OptimiserType::Adam:        return "Adam";
     }
     return "Unknown";
@@ -32,6 +34,7 @@ inline OptimiserType fromString(const QString& s)
     if (s == "SGD")         return OptimiserType::SGD;
     if (s == "MomentumSGD") return OptimiserType::MomentumSGD;
     if (s == "RMSProp")     return OptimiserType::RMSProp;
+    if (s == "Adamax")      return OptimiserType::Adamax;
     if (s == "Adam")        return OptimiserType::Adam;
     throw std::invalid_argument("Invalid activation function: " + s.toStdString());
 }
@@ -40,7 +43,7 @@ inline QStringList allOptimiserStrings()
 {
     using T = OptimiserType;
     static constexpr T allTypes[] = {
-        T::SGD, T::MomentumSGD, T::RMSProp, T::Adam
+        T::SGD, T::MomentumSGD, T::RMSProp, T::Adamax, T::Adam
     };
 
     QStringList result;

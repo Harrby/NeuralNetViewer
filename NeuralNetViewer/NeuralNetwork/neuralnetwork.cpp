@@ -412,8 +412,6 @@ void NeuralNetwork::apply_l1_l2_regularisation(const int batch_size){
         float l1 = m_network_parameters.getLayerL1Regularisation(i);
         float l2 = m_network_parameters.getLayerL2Regularisation(i);
 
-        qDebug() << "l1 and l2 " << l1 << l2;
-
         Eigen::MatrixXf& W = m_layers[i]->getWeights();
         Eigen::MatrixXf& dW = m_layers[i]->getWeightGradients();
 

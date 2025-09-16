@@ -70,7 +70,9 @@ void OptimiserAdvancedControlsWidget::setOptimiserOptions(OptimiserType optimise
     case OptimiserType::SGD: setSGDOptimiserOptions(); break;
     case OptimiserType::MomentumSGD: m_stacked_widget->setCurrentIndex(0); break;
     case OptimiserType::RMSProp: m_stacked_widget->setCurrentIndex(1); break;
+    case OptimiserType::Adamax:  m_stacked_widget->setCurrentIndex(2); break;
     case OptimiserType::Adam: m_stacked_widget->setCurrentIndex(2); break;
+
 
 
     }

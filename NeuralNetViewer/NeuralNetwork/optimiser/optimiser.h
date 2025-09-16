@@ -60,6 +60,27 @@ private:
 
 };
 
+class Adamax : public Optimiser{
+public:
+    Adamax(float learning_rate, float beta1, float beta2, float epsilon);
+    void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad)  override;
+    void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad)  override;
+    void setParams(OptimiserParams optimiser_params) override;
+
+private:
+    float learning_rate;
+    float beta1;
+    float beta2;
+    float beta1_pow_t;
+    float epsilon;
+
+    std::unordered_map<const void*, Eigen::MatrixXf> first_moment_estimate_matrix;
+    std::unordered_map<const void*, Eigen::VectorXf> first_moment_estimate_vector;
+    std::unordered_map<const void*, Eigen::MatrixXf> infinity_norm_matrix;
+    std::unordered_map<const void*, Eigen::VectorXf> infinity_norm_vector;
+};
+
+
 
 class Adam : public Optimiser {
 public:
