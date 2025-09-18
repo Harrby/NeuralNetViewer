@@ -5,8 +5,8 @@
 #include <QFrame>
 #include <QScrollArea>
 #include <QVector>
-#include "layeroptions.h"
 #include "neuralnetoptionsdata.h"
+#include "denselayeroptions.h"
 
 class LayerScrollArea : public QScrollArea
 {

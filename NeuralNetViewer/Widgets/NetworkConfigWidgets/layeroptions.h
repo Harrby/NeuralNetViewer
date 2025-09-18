@@ -15,26 +15,23 @@ class LayerOptions : public QFrame
     Q_OBJECT
 public:
     LayerOptions(const NeuralNetLayerData& parameters, int id=1, QWidget *parent=nullptr);
+    virtual ~LayerOptions() = default;
 
-    void setAllParameters(const NeuralNetLayerData& parameters);
+    virtual void setAllParameters(const NeuralNetLayerData& parameters);
 
     void setActive(bool active);
-    void setNeurons(int neurons);
-    void setDropoutRate(double dropout_rate);
     void setActivationFunction(ActivationFunctionType activation_function);
     void setWeightInit(WeightInitialisationType weight_init);
     void setL1Regularisation(double l1_regularisation);
     void setL2Regularisation(double l2_regularisation);
-    void setAsFinalLayer(bool final);
+    virtual void setAsFinalLayer(bool) {}
 
-private:
+protected:
     int m_id;
     QLabel* m_title;
     CheckBox* m_checkbox;
     ValueComboBoxWidget* m_cb_activation_function;
     ValueComboBoxWidget* m_cb_weight_initialisation;
-    ValueSliderWidget* m_s_neurons;
-    ValueSliderWidget* m_s_dropout_rate;
     ValueSliderWidget* m_s_l1_regularisation;
     ValueSliderWidget* m_s_l2_regularisation;
 

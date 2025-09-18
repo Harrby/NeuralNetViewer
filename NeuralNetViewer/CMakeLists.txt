@@ -49,6 +49,7 @@ set(PROJECT_SOURCES
         Widgets/NetworkConfigWidgets/networkconfigwidget.h
         Widgets/NetworkConfigWidgets/networkconfigwidget.cpp
         Widgets/NetworkConfigWidgets/optimiseradvancedcontrolswidget.h Widgets/NetworkConfigWidgets/optimiseradvancedcontrolswidget.cpp
+        Widgets/NetworkConfigWidgets/denselayeroptions.h Widgets/NetworkConfigWidgets/denselayeroptions.cpp
 
 
 

@@ -137,7 +137,6 @@ void Adamax::update(Eigen::VectorXf& param, const Eigen::VectorXf& grad){
     V1 = beta1 * V1 + (1 - beta1)*grad;
     V2 = (beta2 * V2).cwiseMax(grad.cwiseAbs());
 
-    //beta1_pow_t *= beta1;
     param -= (learning_rate/ (1 - beta1_pow_t)) * (V1.array() / (V2.array() + epsilon)).matrix();
 
 
@@ -201,9 +200,6 @@ void Adam::update(Eigen::VectorXf& param, const Eigen::VectorXf& grad){
     M1 = beta1 * M1 + (1 - beta1) * grad;
     M2 = beta2 * M2 + (1 - beta2) * grad.array().square().matrix();
 
-    //beta1_pow_t *= beta1;
-    //beta2_pow_t *= beta2;
-
     Eigen::VectorXf M1_corrected = M1 / (1 - beta1_pow_t);
     Eigen::VectorXf M2_corrected = M2 / (1 - beta2_pow_t);
 
@@ -225,6 +221,7 @@ std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type,  float lea
     case OptimiserType::RMSProp:     return std::make_unique<RMSProp>(learning_rate, beta2, epsilon);
     case OptimiserType::Adamax:      return std::make_unique<Adamax>(learning_rate, beta1, beta2, epsilon);
     case OptimiserType::Adam:        return std::make_unique<Adam>(learning_rate, beta1, beta2, epsilon);
+
 
     default: throw std::runtime_error("Unsupported optimiser");
     }

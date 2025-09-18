@@ -42,7 +42,7 @@ void LayerScrollArea::initialiseLayerOptionsWidgets(const NeuralNetOptionsData& 
 
 
 void LayerScrollArea::addLayerOptionsWidget(const NeuralNetLayerData& parameters){
-    LayerOptions* w = new LayerOptions(parameters, next_free_index, container);
+    DenseLayerOptions* w = new DenseLayerOptions(parameters, next_free_index, container);
     w->setVisible(false);
     layer_option_widgets.insert(next_free_index, w);
     main_layout->insertWidget(next_free_index, w);

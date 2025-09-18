@@ -7,6 +7,13 @@
 
 /NeuralNetViewer/.vs/
 
+.vs/
+NeuralNetViewer/out/build/x64-Debug/
+
+/out/build/x64-Debug/
+
+NeuralNetViewer/CMakeLists.txt.user
+
 
 /build-NeuralNetViewer-Desktop_Qt_6_9_1_MSVC2022_64bit-Release/
 
