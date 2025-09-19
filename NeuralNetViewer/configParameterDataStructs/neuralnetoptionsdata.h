@@ -45,6 +45,7 @@ public:
     float getMomentum() const;
     float getBeta1() const;
     float getBeta2() const;
+    int getK() const;
     float getEpsilon() const;
 
     int getEpochs() const;
@@ -68,6 +69,7 @@ public:
     void setMomentum(float momentum);
     void setBeta1(float beta1);
     void setBeta2(float beta2);
+    void setK(int k);
     void setEpsilon(float epsilon);
 
     void setEpochs(int epochs);
@@ -86,6 +88,7 @@ private:
     float momentum;
     float beta1;
     float beta2;
+    int k;
     float epsilon;
 
     int epochs;

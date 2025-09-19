@@ -7,6 +7,7 @@ struct OptimiserParams {
     float momentum;
     float beta1;
     float beta2;
+    int k;
     float epsilon;
 };
 

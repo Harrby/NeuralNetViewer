@@ -13,6 +13,7 @@ NeuralNetOptionsData::NeuralNetOptionsData(QObject *parent)
     momentum(0.9f),
     beta1(0.9f),
     beta2(0.999f),
+    k(4),
     epsilon(1e-8f),
     epochs(200),
     activation_functions {
@@ -85,6 +86,10 @@ float NeuralNetOptionsData::getBeta1() const{
 }
 float NeuralNetOptionsData::getBeta2() const{
     return beta2;
+}
+
+int NeuralNetOptionsData::getK() const{
+    return k;
 }
 
 float NeuralNetOptionsData::getEpsilon() const{
@@ -170,6 +175,10 @@ void NeuralNetOptionsData::setBeta1(float beta1){
 void NeuralNetOptionsData::setBeta2(float beta2){
     this->beta2 = beta2;
 }
+void NeuralNetOptionsData::setK(int k){
+    this->k = k;
+}
+
 void NeuralNetOptionsData::setEpsilon(float epsilon){
     this->epsilon = epsilon;
 }

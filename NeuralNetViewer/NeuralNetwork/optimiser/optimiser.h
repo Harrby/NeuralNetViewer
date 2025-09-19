@@ -80,6 +80,28 @@ private:
     std::unordered_map<const void*, Eigen::VectorXf> infinity_norm_vector;
 };
 
+class HAdam : public Optimiser {
+public:
+    HAdam(float learning_rate, float beta1, float beta2, int k, float epsilon);
+    void update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad)  override;
+    void update(Eigen::VectorXf& param, const Eigen::VectorXf& grad)  override;
+    void setParams(OptimiserParams optimiser_params) override;
+
+private:
+    float learning_rate;
+    float beta1;
+    float beta2;
+    float beta1_pow_t;
+    float beta2_pow_t;
+    int k;
+    float epsilon;
+
+    std::unordered_map<const void*, Eigen::MatrixXf> first_moment_estimate_matrix;
+    std::unordered_map<const void*, Eigen::MatrixXf> kth_moment_estimate_matrix;
+    std::unordered_map<const void*, Eigen::VectorXf> first_moment_estimate_vector;
+    std::unordered_map<const void*, Eigen::VectorXf> kth_moment_estimate_vector;
+};
+
 
 
 class Adam : public Optimiser {
@@ -103,7 +125,7 @@ private:
     std::unordered_map<const void*, Eigen::VectorXf> second_moment_estimate_vector;
 };
 
-std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type, float learning_rate, float momentum, float beta1, float beta2, float epsilon);
+std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type, float learning_rate, float momentum, float beta1, float beta2, int k, float epsilon);
 
 
 
