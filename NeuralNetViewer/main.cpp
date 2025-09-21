@@ -20,6 +20,12 @@ int main(int argc, char *argv[])
     app.setFont(inter);
 
 
+    unsigned int threads = std::thread::hardware_concurrency();
+    if (threads > 8) {
+        threads /= 2;
+    }
+    Eigen::setNbThreads(threads);
+
     //ValueSliderWidget *slider = new ValueSliderWidget("neurons", 0.00001, 1000, Slider::Logarithmic, 1000, nullptr);
     //IconButton *vcbw = new IconButton(QString(":/images/images/plus.png"),{"rgba(48, 43, 43, 255)", "rgba(48, 43, 43, 150)", "rgba(48, 43, 43, 70)"}, 500, 500);
 

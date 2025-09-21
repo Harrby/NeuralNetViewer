@@ -144,6 +144,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     include_directories(${CMAKE_SOURCE_DIR}/eigen-3.4.0)
     include_directories(${CMAKE_SOURCE_DIR}/qcustomplot)
     target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::PrintSupport)
+    find_package(OpenMP REQUIRED)
+    if(OpenMP_CXX_FOUND)
+        target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
+    endif()
     set_source_files_properties(
       ${CMAKE_SOURCE_DIR}/qcustomplot/qcustomplot.cpp
       PROPERTIES
