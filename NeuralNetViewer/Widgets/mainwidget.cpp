@@ -57,6 +57,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(m_network_config_widget, &NetworkConfigWidget::momentumChanged, m_network_options, &NeuralNetOptionsData::setMomentum);
     connect(m_network_config_widget, &NetworkConfigWidget::beta1Changed, m_network_options, &NeuralNetOptionsData::setBeta1);
     connect(m_network_config_widget, &NetworkConfigWidget::beta2Changed, m_network_options, &NeuralNetOptionsData::setBeta2);
+    connect(m_network_config_widget, &NetworkConfigWidget::kChanged, m_network_options, &NeuralNetOptionsData::setK);
 
     connect(m_network_config_widget, &NetworkConfigWidget::activeChanged, m_network_options, &NeuralNetOptionsData::setLayerActive);
     connect(m_network_config_widget, &NetworkConfigWidget::neuronsChanged, m_network_options, &NeuralNetOptionsData::setLayerNeurons);

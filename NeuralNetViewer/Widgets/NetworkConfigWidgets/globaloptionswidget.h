@@ -36,6 +36,7 @@ signals:
     void momentumChanged(double);
     void beta1Changed(double);
     void beta2Changed(double);
+    void kChanged(int);
 
 
 };
