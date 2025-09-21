@@ -149,6 +149,82 @@ void Adamax::setParams(OptimiserParams params){
     epsilon = params.epsilon;
 }
 
+namespace {
+
+inline float nthRoot(float x, int k) {
+    switch (k) {
+    case 2: return std::sqrt(std::sqrt(x));
+    case 3: return std::cbrt(std::sqrt(x));
+    case 4: return std::sqrt(std::sqrt(std::sqrt(x)));
+    default: return std::pow(x, 1.0f / (2.0f * k));
+    }
+}
+
+}
+
+HAdam::HAdam(float learning_rate, float beta1, float beta2, int k, float epsilon)
+    : learning_rate(learning_rate),
+    beta1(beta1),
+    beta2(beta2),
+    beta1_pow_t(1.0f),
+    beta2_pow_t(1.0f),
+    k(k),
+    epsilon(epsilon)
+{}
+
+void HAdam::update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad){
+    auto key = static_cast<const void*>(param.data());
+    Eigen::MatrixXf& M1 = first_moment_estimate_matrix[key];
+    Eigen::MatrixXf& Mk = kth_moment_estimate_matrix[key];
+
+    if (M1.size() == 0){
+        M1 = Eigen::MatrixXf::Zero(param.rows(), param.cols());
+    }
+    if (Mk.size() == 0){
+        Mk = Eigen::MatrixXf::Zero(param.rows(), param.cols());
+    }
+
+    M1 = beta1 * M1 + (1 - beta1) * grad;
+    Mk = beta2 * Mk + (1 - beta2) * grad.array().pow( k).matrix();
+
+    beta1_pow_t *= beta1;
+    beta2_pow_t *= beta2;
+
+
+    param -= learning_rate * nthRoot((1.0f-beta2_pow_t), k)/(1.0f-beta1_pow_t) * (M1.array() / (Mk.array().unaryExpr([&](float x) { return nthRoot(x, k); }) + epsilon)).matrix();
+}
+
+
+void HAdam::update(Eigen::VectorXf& param, const Eigen::VectorXf& grad){
+    auto key = static_cast<const void*>(param.data());
+    Eigen::VectorXf& V1 = first_moment_estimate_vector[key];
+    Eigen::VectorXf& Vk = kth_moment_estimate_vector[key];
+
+    if (V1.size() == 0){
+        V1 = Eigen::VectorXf::Zero(param.size());
+    }
+    if (Vk.size() == 0){
+        Vk = Eigen::VectorXf::Zero(param.size());
+    }
+
+    V1 = beta1 * V1 + (1 - beta1) * grad;
+
+    Vk *= beta2;
+    Vk += ((1 - beta2) * grad.array().pow(k)).matrix();
+
+    param -= learning_rate * nthRoot((1-beta2_pow_t), k)/(1-beta1_pow_t) * (V1.array() / (Vk.array().unaryExpr([&](float x) { return nthRoot(x, k); }) + epsilon)).matrix();
+}
+
+void HAdam::setParams(OptimiserParams params){
+    learning_rate = params.learning_rate;
+    beta1 = params.beta1;
+    beta2 = params.beta2;
+    epsilon = params.epsilon;
+}
+
+
+
+
 Adam::Adam(float learing_rate, float beta1, float beta2, float epsilon)
     : learning_rate(learing_rate),
     beta1(beta1),
@@ -157,7 +233,6 @@ Adam::Adam(float learing_rate, float beta1, float beta2, float epsilon)
     beta2_pow_t(1.0f),
     epsilon(epsilon),
     t(1)
-
 {}
 
 void Adam::update(Eigen::MatrixXf& param, const Eigen::MatrixXf& grad){
@@ -213,14 +288,16 @@ void Adam::setParams(OptimiserParams params){
     epsilon = params.epsilon;
 }
 
-std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type,  float learning_rate,  float momentum,  float beta1, float beta2, float epsilon)
+std::unique_ptr<Optimiser> get_optimiser_function(OptimiserType type,  float learning_rate,  float momentum,  float beta1, float beta2, int k, float epsilon)
 {
     switch (type) {
     case OptimiserType::SGD:         return std::make_unique<SGD>(learning_rate);
     case OptimiserType::MomentumSGD: return std::make_unique<MomentumSGD>(learning_rate, momentum);
     case OptimiserType::RMSProp:     return std::make_unique<RMSProp>(learning_rate, beta2, epsilon);
     case OptimiserType::Adamax:      return std::make_unique<Adamax>(learning_rate, beta1, beta2, epsilon);
+    case OptimiserType::HAdam:       return std::make_unique<HAdam>(learning_rate, beta1, beta2, k, epsilon);
     case OptimiserType::Adam:        return std::make_unique<Adam>(learning_rate, beta1, beta2, epsilon);
+
 
 
     default: throw std::runtime_error("Unsupported optimiser");

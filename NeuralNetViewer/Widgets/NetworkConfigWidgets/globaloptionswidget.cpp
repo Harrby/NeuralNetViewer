@@ -11,7 +11,7 @@ GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
     m_title(new QLabel("Global Options", this)),
     m_optimiser_advanced_controls_widget(new OptimiserAdvancedControlsWidget(this))
 {
-    setMaximumHeight(275);
+    //setMaximumHeight(275);
 
     m_cb_optimiser->toggle_enable_button(false);
 
@@ -22,6 +22,7 @@ GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
 
                   );
     m_title->setStyleSheet("color: white;");
+    m_title->setFixedHeight(40);
 
 
     QGridLayout *grid_layout = new QGridLayout;
@@ -33,8 +34,8 @@ GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
 
     QVBoxLayout *main_layout = new QVBoxLayout(this);
     main_layout->addWidget(m_title);
-    main_layout->addLayout(grid_layout);
-    main_layout->addWidget(m_optimiser_advanced_controls_widget);
+    main_layout->addLayout(grid_layout, 1);
+    main_layout->addWidget(m_optimiser_advanced_controls_widget, 1);
 
     connect(m_cb_optimiser, &ValueComboBoxButtonWidget::valueChanged, this,
             [this](const QString& optimiser_txt){
@@ -63,6 +64,7 @@ GlobalOptionsWidget::GlobalOptionsWidget(QWidget *parent)
     connect(m_optimiser_advanced_controls_widget, &OptimiserAdvancedControlsWidget::momentumChanged, this, &GlobalOptionsWidget::momentumChanged);
     connect(m_optimiser_advanced_controls_widget, &OptimiserAdvancedControlsWidget::beta1Changed, this, &GlobalOptionsWidget::beta1Changed);
     connect(m_optimiser_advanced_controls_widget, &OptimiserAdvancedControlsWidget::beta2Changed, this, &GlobalOptionsWidget::beta2Changed);
+    connect(m_optimiser_advanced_controls_widget, &OptimiserAdvancedControlsWidget::kChanged, this, &GlobalOptionsWidget::kChanged);
 
 
 }
@@ -72,7 +74,7 @@ void GlobalOptionsWidget::initialiseUIParameters(const NeuralNetOptionsData& par
     m_cb_loss_function->setValue(LossFnUtils::toString(parameters.getLossFunction()));
     m_s_learning_rate->setValue(parameters.getLearningRate());
     m_s_epochs->setValue(parameters.getEpochs());
-    m_optimiser_advanced_controls_widget->initialise_sliders(parameters.getMomentum(), parameters.getBeta1(), parameters.getBeta2());
+    m_optimiser_advanced_controls_widget->initialise_sliders(parameters.getMomentum(), parameters.getBeta1(), parameters.getBeta2(), parameters.getK());
 };
 
 

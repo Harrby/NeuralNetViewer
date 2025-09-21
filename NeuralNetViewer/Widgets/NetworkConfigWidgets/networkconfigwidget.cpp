@@ -13,7 +13,7 @@ NetworkConfigWidget::NetworkConfigWidget(QWidget* parent)
     QVBoxLayout* main_layout = new QVBoxLayout(this);
     main_layout->addWidget(m_global_options_widget);
     main_layout->addWidget(m_buttons_frame);
-    main_layout->addWidget(m_layer_scroll_area);
+    main_layout->addWidget(m_layer_scroll_area, 1);
     main_layout->setContentsMargins(5, 11, 5, 5);
     main_layout->setSpacing(0);
 
@@ -27,6 +27,7 @@ NetworkConfigWidget::NetworkConfigWidget(QWidget* parent)
     connect(m_global_options_widget, &GlobalOptionsWidget::momentumChanged, this, &NetworkConfigWidget::momentumChanged);
     connect(m_global_options_widget, &GlobalOptionsWidget::beta1Changed, this, &NetworkConfigWidget::beta1Changed);
     connect(m_global_options_widget, &GlobalOptionsWidget::beta2Changed, this, &NetworkConfigWidget::beta2Changed);
+    connect(m_global_options_widget, &GlobalOptionsWidget::kChanged, this, &NetworkConfigWidget::kChanged);
 
     connect(m_layer_scroll_area, &LayerScrollArea::activeChanged, this, &NetworkConfigWidget::activeChanged);
     connect(m_layer_scroll_area, &LayerScrollArea::neuronsChanged, this, &NetworkConfigWidget::neuronsChanged);
